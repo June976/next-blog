@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+<link rel="preconnect" href="null//null" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"next.jun997.xyz","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#09E614","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="POTCAR是VASP计算的四大输入文件之一（INCAR、POSCAR、POTCAR、KPOINTS)，官方一般会随着新版本的VASP软件包发布的同时提供相应的各个元素的POTCAR库，一般计算时直接根据元素类型组合一下使用就行了，使用并没有什么难度。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VASP中POTCAR使用指南">
+<meta property="og:url" content="https://next.jun997.xyz/2022/04/14/456c7cc4063e.html">
+<meta property="og:site_name" content="Jun&#39;s Blog">
+<meta property="og:description" content="POTCAR是VASP计算的四大输入文件之一（INCAR、POSCAR、POTCAR、KPOINTS)，官方一般会随着新版本的VASP软件包发布的同时提供相应的各个元素的POTCAR库，一般计算时直接根据元素类型组合一下使用就行了，使用并没有什么难度。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://next.jun997.xyz/images/vasp-potcar/jacob-ladder.png">
+<meta property="article:published_time" content="2022-04-14T02:21:55.000Z">
+<meta property="article:modified_time" content="2022-05-27T11:52:41.078Z">
+<meta property="article:author" content="Jun">
+<meta property="article:tag" content="DFT">
+<meta property="article:tag" content="VASP">
+<meta property="article:tag" content="提示">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://next.jun997.xyz/images/vasp-potcar/jacob-ladder.png">
+
+
+<link rel="canonical" href="https://next.jun997.xyz/2022/04/14/456c7cc4063e.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://next.jun997.xyz/2022/04/14/456c7cc4063e.html","path":"2022/04/14/456c7cc4063e.html","title":"VASP中POTCAR使用指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VASP中POTCAR使用指南 | Jun's Blog</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?186341237944a73cf31cb41b84605669"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jun's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Share knowledges, Tell stories and Show something interesting!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">3</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">26</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">41</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>links</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1potcar%E7%AE%80%E4%BB%8B"><span class="nav-text"> 1.POTCAR简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E6%8F%90%E4%BE%9B%E7%9A%84paw%E8%B5%9D%E5%8A%BF"><span class="nav-text"> 2.提供的PAW赝势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3dft%E8%AE%A1%E7%AE%97%E4%B8%AD%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8%E7%9A%84%E5%8A%BFpbe%E8%AE%A1%E7%AE%97"><span class="nav-text"> 3.DFT计算中推荐使用的势（PBE计算）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#adft%E8%AE%A1%E7%AE%97%E6%8E%A8%E8%8D%90%E7%9A%84%E5%8A%BF%E6%96%87%E4%BB%B6paw"><span class="nav-text"> a.DFT计算推荐的势文件（PAW)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bgwrpa%E8%AE%A1%E7%AE%97%E6%8E%A8%E8%8D%90%E7%9A%84%E5%8A%BF%E6%96%87%E4%BB%B6"><span class="nav-text"> b.GW&#x2F;RPA计算推荐的势文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c%E5%85%B3%E4%BA%8Epaw%E5%8A%BF%E7%9A%84%E8%BF%9B%E4%B8%80%E6%AD%A5%E5%BB%BA%E8%AE%AE"><span class="nav-text"> c.关于PAW势的进一步建议</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%A1%8C%E5%85%83%E7%B4%A0"><span class="nav-text"> 第一行元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A2%B1%E5%92%8C%E7%A2%B1%E5%9C%9F%E9%87%91%E5%B1%9E%E7%AE%80%E5%8D%95%E9%87%91%E5%B1%9E"><span class="nav-text"> 碱和碱土金属（简单金属）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#d%E5%8C%BA%E5%85%83%E7%B4%A0"><span class="nav-text"> d区元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#p%E5%8C%BA%E5%85%83%E7%B4%A0%E5%8C%85%E5%90%AB%E7%AC%AC%E4%B8%80%E8%A1%8C"><span class="nav-text"> p区元素（包含第一行）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#f%E5%8C%BA%E5%85%83%E7%B4%A0"><span class="nav-text"> f区元素</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jun"
+      src="/images/profile.jpg">
+  <p class="site-author-name" itemprop="name">Jun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/June976" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;June976" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/HelloWorldTM" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;HelloWorldTM" rel="noopener" target="_blank"><i class="fa fa-c fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/billboard" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;billboard" rel="noopener" target="_blank"><i class="fa fa-z fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://s.weibo.com/top/summary" title="Weibo → https:&#x2F;&#x2F;s.weibo.com&#x2F;top&#x2F;summary" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@jun997.xyz" title="E-Mail → mailto:admin@jun997.xyz" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mailchi.mp/78fbe8b89a13/juns-blog-subscribe" title="Subscribe → https:&#x2F;&#x2F;mailchi.mp&#x2F;78fbe8b89a13&#x2F;juns-blog-subscribe" rel="noopener" target="_blank"><i class="fab fa-mailchimp fa-fw"></i>Subscribe</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/June976" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/14/456c7cc4063e.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpg">
+      <meta itemprop="name" content="Jun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VASP中POTCAR使用指南 | Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VASP中POTCAR使用指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-14 10:21:55" itemprop="dateCreated datePublished" datetime="2022-04-14T10:21:55+08:00">2022-04-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-05-27 19:52:41" itemprop="dateModified" datetime="2022-05-27T19:52:41+08:00">2022-05-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Tell-stories/" itemprop="url" rel="index"><span itemprop="name">Tell stories</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>5.1k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>POTCAR是VASP计算的四大输入文件之一（INCAR、POSCAR、POTCAR、KPOINTS)，官方一般会随着新版本的VASP软件包发布的同时提供相应的各个元素的POTCAR库，一般计算时直接根据元素类型组合一下使用就行了，使用并没有什么难度。<span id="more"></span>但是，觉得有必要写一下这篇文章主要是基于以下几点考虑的：</p>
+<ul>
+<li>使用POTCAR的好坏对于计算结果的好坏影响<strong>很大</strong>，远比INCAR，KPOINTS中参数设置的好坏影响大</li>
+<li>对于计算不同的体系和不同的性质，选取何种类型的POTCAR也有讲究，需要仔细斟酌</li>
+<li>基于GGA近似后来发展出来的meta-GGA和HSE方法，计算某些性质时精度更高，但同时更加耗时，平衡好计算时间和计算精度是必须要考虑的问题（如果你的超算资源非常充足当我没说）</li>
+</ul>
+<hr />
+<p><a target="_blank" rel="noopener" href="https://doi.org/10.1063/1.1390175">Jacob的天梯</a>说明了交换关联能不同近似方法的精度高低，<a target="_blank" rel="noopener" href="https://iopscience.iop.org/article/10.1088/2515-7655/abc07b">下图</a>形象说明了这一问题：<img src="/images/vasp-potcar/jacob-ladder.png" alt="Jacob-Ladder" /></p>
+<h3 id="1potcar简介"><a class="markdownIt-Anchor" href="#1potcar简介"></a> 1.POTCAR简介</h3>
+<p>这部分内容主要是来自<a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/POTCAR">VAPS官方手册</a>。</p>
+<p>POTCAR文件包含计算中每种类型原子的赝势，如果原子类型数量大于1，需要将它们连接起来，Linux系统中使用如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> ~/pot/Al/POTCAR ~/pot/C/POTCAR ~/pot/H/POTCAR &gt; POTCAR</span><br></pre></td></tr></table></figure>
+<p>来连接POTCAR文件，第一个文件对应POSCAR第一个出现的原子类型。</p>
+<p><mark>注意：如果POTCAR文件的连接顺序与POSCAR中不一致，VASP会按照赝势文件中给出的顺序来识别不同元素，因此计算结果是错误的</mark></p>
+<p>对于3.2以上版本的VASP，POTCAR文件包含这些元素的信息，例如：它们的质量<a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/POMASS">POMASS</a>，它们的价电子数<a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/ZVAL">ZVAL</a>，创建赝势时相应参考构型的能量等。如果在INCAR文件中又重新指定了质量和价电子数，则VASP会根据POTCAR文件中的参数检查它们，并且输出相应的错误信息。POTCAR文件中也包含默认的截断能(<a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/ENCUT">ENMAX和ENMIN</a>)。因此在INCAR文件中指定ENCUT是非必须的。在INCAR文件中ENCUT的设定值会覆盖POTCAR中的默认值。对于包含多个元素类型的POTCAR文件，将会使用最大ENCUT值用于计算。</p>
+<blockquote>
+<p>重要：POTCAR文件旨在以只读的方式提供给用户使用，VASP没有需要修改POTCAR文件的标准用法，尤其是不要修改POTCAR文件中的<strong>LEXCH</strong>标签：它是VASP使用INCAR中指定的函数重新计算PAW球内交换-相关能量的原子校正能量。<mark>为了使VASP正常工作，POTCAR文件中的原始LEXCH标签值不允许被修改</mark>。</p>
+</blockquote>
+<h3 id="2提供的paw赝势"><a class="markdownIt-Anchor" href="#2提供的paw赝势"></a> 2.提供的PAW赝势</h3>
+<p>这部分内容主要来自<a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/Available_PAW_potentials">这里</a>。</p>
+<p>从VASP官网可以获得周期表中所有元素的投影缀加波(PAW)势文件，这些是PAW方法的赝势，存储在POTCAR文件中，G.Kresse按照<a target="_blank" rel="noopener" href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.59.1758">文章</a>中的方法生成了分布式PAW势文件，而Peter Bloch首先提出了<a target="_blank" rel="noopener" href="https://journals.aps.org/prb/abstract/10.1103/PhysRevB.50.17953">PAW方法</a>。因此如果你使用任何提供的PAW势文件，你应该引用这两篇文献。</p>
+<p>除了周期表中第一行元素，所有的PAW势都被设计成在大约250eV截断能左右能够可靠和精确地运行。这是使计算成本降低的关键层面，默认的截断能是通过POTCAR文件中的ENMAX标签设置的，PAW势相较于超软赝势（US-PP）更加精确，有两个原因：第一，相较于US-PP，PAW势使用的截止半径（芯电子半径）更小，第二，PAW势重构了芯电子区域的所有节点的精确波函数。由于PAW势的芯半径更小，因此所需要的基组和截断能更大，如果这么高的精度没有必要，原则上旧的US-PP势是可以使用，但是并不鼓励，这是因为对于C、N和O，截断能并没有明显减小，同时，基组通常增加得很少，因此使用PAW势计算包含这些元素的化合物不会比使用US-PP更昂贵。</p>
+<p>对于一些元素，存在多个版本的PAW势文件，标准赝势文件名称没有扩展，对于含有其它不同扩展的版本，相应的含义如下：</p>
+<ul>
+<li><strong>_h扩展</strong>：表明当前势文件相较于标准势文件更硬，因此需要更大的截断能</li>
+<li><strong>_s扩展</strong>：表明当前势文件相较于标准势文件更软</li>
+<li><strong>_pv扩展</strong>：半芯态p电子被当作价电子处理</li>
+<li><strong>_sv扩展</strong>：半芯态s电子和p电子（如果有）被当作价电子处理</li>
+<li><strong>_d扩展</strong>：半芯态d电子被当作价电子处理</li>
+</ul>
+<p>每个PAW势中采用的价电子构型可以通过POTCAR中的<a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/ZVAL">ZVAL</a>标签和Atomic configuration下的表格推测出来。这一表格首先列出来了芯电子态，然后是价电子态。因此，这些占据态的最后一行加起来正好是ZVAL,组成了价电子构型。注意，这可能与真空中的基态构型不同，并且这些行不是按能量排序的，例如，尽管Gd的强定域化、半芯态3f电子能量比其它价态电子能量更高，但是仍然被当作芯电子处理。</p>
+<p>接下来，我们将展示可以获得的PAW势。所有的这些分散的势文件都已经通过标准的DFT-&quot;benchmark&quot;运行测试过。具体可以参阅公布的tar文件中的data_base文件，我们强烈建议使用可在VASP官网上下载的5.4版的POTCAR文件，目前分散的5.4版本的POTCAR文件都有一个独一无二的SHA哈希值，5.2版本的POTCAR文件也很流行并且已被Materials Project使用。5.4版本和5.2版本的之间的差别很小，并且只限于少量的元素。目前可以从官网获得的5.2版本的每个POTCAR文件同样有一个独一无二的哈希值，并且它们在标题的文本部分被编辑过，但这与VASP计算无关。</p>
+<h3 id="3dft计算中推荐使用的势pbe计算"><a class="markdownIt-Anchor" href="#3dft计算中推荐使用的势pbe计算"></a> 3.DFT计算中推荐使用的势（PBE计算）</h3>
+<h4 id="adft计算推荐的势文件paw"><a class="markdownIt-Anchor" href="#adft计算推荐的势文件paw"></a> a.DFT计算推荐的势文件（PAW)</h4>
+<blockquote>
+<p>如果化合物中包含短键的二聚体(O2, CO, N2, F2, P2, S2, Cl2)，我们建议使用_h势文件，即C_h, O_h, N_h, F_h, P_h, S_h, Cl_h。</p>
+</blockquote>
+<blockquote>
+<p>在5.4版本，W_sv代替了W_pv，并且At_d的POTCAR文件不再提供，因为这一势会导致计算的晶格参数出现很大的错误。</p>
+</blockquote>
+<blockquote>
+<p>类氢提供了价电子数从0.25到1.75的势文件，注意POTCAR文件限制了价电子数的位数（有些是2位，大部分3位），也就是说，用三个H.33势不会产生0.99或是1.0个价电子，这可能会产生无法预料到电子-空穴态，解决办法是稍微调整INCAR文件中的NELECT标签。</p>
+</blockquote>
+<h4 id="bgwrpa计算推荐的势文件"><a class="markdownIt-Anchor" href="#bgwrpa计算推荐的势文件"></a> <a target="_blank" rel="noopener" href="http://b.GW/RPA%E8%AE%A1%E7%AE%97%E6%8E%A8%E8%8D%90%E7%9A%84%E5%8A%BF%E6%96%87%E4%BB%B6">b.GW/RPA计算推荐的势文件</a></h4>
+<blockquote>
+<p>GW势计算结果与上述DFT计算结果几乎相同,因此使用GW势计算并不会使得上面DFT的计算结果恶化，事实上，通过对比我们已经证明在全电子计算中，GW势相比于上面DFT计算更有优越性。它们对于激发态特性、GW计算、随机相位近似计算（RPA）、以及任何显式相关的波函数计算（MP2, 耦合簇）通常更有优势。</p>
+</blockquote>
+<blockquote>
+<p>通常，GW势在远高于费米能级的高能量区间能产生更好的散射特性，尤其是比真空能级高10-20Ry的能量区间。</p>
+</blockquote>
+<blockquote>
+<p>重要提醒：如果是化合物中包含短键的二聚体(O2, CO, N2, F2, P2, S2, Cl2)，我们建议使用_h势文件。</p>
+</blockquote>
+<blockquote>
+<p>C_GW_new、N_GW_new、O_GW_new和F_GW_new势文件使用f-赝势作为局部势并且拥有d-投影，相反，C_GW、N_GW、O_GW和F_GW势文件使用d-赝势作为局部势，不包含d-投影，在使用ENMAX作为截断能的情况下，使用C_GW、N_GW、O_GW和G_GW势通常收敛更快，相较于旧的势文件，新的势文件是否在精确性上更有优势还没有完全搞清楚。理论上，它们在相关波函数的计算上应该更精确，然而，实践中发现，提升似乎不明显，通常并不能证明更大的计算负载是合理的。</p>
+</blockquote>
+<h4 id="c关于paw势的进一步建议"><a class="markdownIt-Anchor" href="#c关于paw势的进一步建议"></a> c.关于PAW势的进一步建议</h4>
+<h5 id="第一行元素"><a class="markdownIt-Anchor" href="#第一行元素"></a> 第一行元素</h5>
+<blockquote>
+<p>对于第一行元素，存在三个PAW版本的势文件，对于大多数目标，标准版本的PAW势是合适的。在截断能范围为325-400eV时，它们能够得到可靠的结果，要预测精确的振动性质需要截断能范围在370-400eV。结合结构和能量差异在325eV处就可以很好地重现。与更精确的DFT计算相比，第一行二聚体(N2,CO,O2)预测的典型键长误差约为1%。_h硬赝势给出的结果与目前可用的最佳DFT计算软件（FLAPW,或具有非常大基组的高斯）基本相同。软赝势在截断能250-280eV区间使用，对于大部分氧化物它们能得到可靠的描述，例如VxOy、TiO2、CeO2，但是在描述沸石的某些结构细节上失败了，如晶胞参数，体积。</p>
+</blockquote>
+<blockquote>
+<p>对于Hartree-Fock(HF)和杂化泛函计算，我们严格建议使用标准、标准GW或硬赝势计算，例如，在过渡金属氧化物计算中，O_s赝势可能造成不可接受的巨大误差。一般来说，软势不太可能从一个交换相关函数转移到另一个函数，并且在需要计算精确交换时经常失败。</p>
+</blockquote>
+<h5 id="碱和碱土金属简单金属"><a class="markdownIt-Anchor" href="#碱和碱土金属简单金属"></a> 碱和碱土金属（简单金属）</h5>
+<blockquote>
+<p>对于锂(和铍)，提供了标准势和把1s壳看作价电子的势(Li_sv, Be_sv),在应用中应该使用_sv势因为它们比标准势的可移植性更好。</p>
+</blockquote>
+<blockquote>
+<p>对于其它碱和碱土元素，半芯s和p态也应该被当作价态处理。对于更轻的元素（Na-Ca），将2p态或3p态分别当作价态处理通常还不够。对于Rb-Sr，4s、4p、5s和5p态都必须被当作价态处理(_sv)。</p>
+</blockquote>
+<blockquote>
+<p>与普遍看法不同的是，这些元素在与强电负性元素如F结合时，非常难赝化，误差可能比平时大。</p>
+</blockquote>
+<blockquote>
+<p>目前提供的赝势非常精确，应该提供非常可靠的描述。对于X_pv赝势，半芯态p电子被看作价电子，例如：Na和Mg的2p电子，K和Ca的3p电子等。对于X_sv势，半芯态s电子被看作价电子，如Li和Be的1s电子，Na的2s电子。</p>
+</blockquote>
+<h5 id="d区元素"><a class="markdownIt-Anchor" href="#d区元素"></a> d区元素</h5>
+<blockquote>
+<p>与碱和碱土元素一样：半芯态p和半芯态s同样也应该被当作价态。在大部分情况下，然而，即使冻住半芯态，也能得到可靠的结果。根据经验，当p态的本征能量ε高于3Ry时，它应该被看作价态。</p>
+</blockquote>
+<blockquote>
+<p>对于早期的过渡金属，需要使用X_pv势，但是后期的过渡金属，可以冻住半芯态p，尤其是贵金属。何时从X_pv势切换到X势取决于所需的精度和3d元素所处的行，即使是Ti、V和Cr的标准势能给出合理的结果，也应该极其小心地使用。4d元素的问题最大，我建议直到Tc都一直使用X_pv势。对于5p元素，5p态定域化非常强（低于3Ry），因为4f层被填充了，从Hf开始可以使用标准势，但是我们建议先测试一下。对于有些元素，X_sv势也是可以使用的(如Nb_sv, Mo_sv, Hf_sv)。这些赝势的截断能通常与_pv赝势相似。对于HF-型和杂化泛函计算，我们强烈建议尽可能使用_sv或_pv赝势。</p>
+</blockquote>
+<h5 id="p区元素包含第一行"><a class="markdownIt-Anchor" href="#p区元素包含第一行"></a> p区元素（包含第一行）</h5>
+<blockquote>
+<p>对于Ga, Ge, In, Sn, Tl-At,d态应该被看作价态(_d势)。</p>
+</blockquote>
+<blockquote>
+<p>对于这些元素，将d态看作芯态的势文件也可以使用，但要特别小心。</p>
+</blockquote>
+<h5 id="f区元素"><a class="markdownIt-Anchor" href="#f区元素"></a> f区元素</h5>
+<blockquote>
+<p>由于本身相互作用的误差，目前密度泛函方法还不能很好地处理f电子。尤其是，不能正确描述部分填充的f态，例如所有的f态都固定在费米能级处，导致Pr—Eu和Tb-Yb之间存在较大的过度束缚，在f电子处于四分之一或四分之三填充时误差最大，例如，Gd得到了很好的处理，因为7个电子占据了大部分的f壳层。这些误差是DFT本身的原因，而不是VASP的。特别有问题的是描述在每个阶段开始观察到的巡游行为到阶段结束时的定域态。对于4f元素，这种转变已经发生在La和Ce中，而对于5f元素，转变发生在Pu和Am中。解决当前DFT无法描述4f定域化电子的常规方法是将4f电子置于芯电子中，这些势是可用的，但是它们在描述f轨道的磁性上会失败。此外，将f态当作价态处理的PAW势也是可以使用的，但是当f电子是定域化时，它们在描述电子性质上会失败。在这种情况下，可能需要更加小心地处理电子的相关效应，例如，通过使用杂化泛函或者引入原位库伦相互作用(+U)</p>
+</blockquote>
+<blockquote>
+<p>对于一些元素，也提供了更软版本的势文件。半芯态p经常被看作价电子，而半芯态s只有在标准势文件中才被当作价态。对于大部分应用（氧化物，硫化物），应该使用标准版的因为更软版本势文件可能在靠近费米能级处产生s幽灵态（例如Ce_s）。对于计算金属间的化合物，更软的赝势版本可以达到足够的精度。</p>
+</blockquote>
+<blockquote>
+<p>此外，还为Ce到Lu提供了特殊的GGA势，其中部分f电子被冻在芯电子中，这是一种处理f电子定域化的尝试。芯中的电子数等于总的价电子数减去形式化合价。例如：根据元素周期表，Sm总共有8个价电子，即6个f电子和2个s电子。在大部分计算中，Sm采用3价，因此在产生赝势文件时5个f电子被放入芯中，对应的赝势文件可以在Sm_3目录中找到，化合价n通过_n来标记，这里n可以是2或3。例如，对于Ce_3，是三价Ce对应的赝势文件(对于四价Ce，应该使用标准赝势文件)。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>￥打赏我￥</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/PayQRCode/wechat.png" alt="Jun WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/PayQRCode/alipay.jpg" alt="Jun Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/DFT/" rel="tag"># DFT</a>
+              <a href="/tags/VASP/" rel="tag"># VASP</a>
+              <a href="/tags/%E6%8F%90%E7%A4%BA/" rel="tag"># 提示</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/10/b438dad131c8.html" rel="prev" title="新版和老版Materials Project API使用指南">
+                  <i class="fa fa-chevron-left"></i> 新版和老版Materials Project API使用指南
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/04/18/4ea3d8ef74d8.html" rel="next" title="使用Python脚本获取VASP能带计算数据">
+                  使用Python脚本获取VASP能带计算数据 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jun All Rights Reserved</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">151k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">2:17</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-629063e32c2b3670" async="async"></script>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha256-TThEtR+XalhWKkfF383YLOrI50NGNeIqrzS+q08afrY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.css" integrity="sha256-Wk20U9mS/kHGcSgkjSiRezW5exqT6wAOKwySOaLotXM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.js","integrity":"sha256-etSqbSVF4+Lwe8MGk/Vanc1sR+mWv+qOG73fxWw9p94="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

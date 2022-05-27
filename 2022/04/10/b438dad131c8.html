@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+<link rel="preconnect" href="null//null" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"next.jun997.xyz","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#09E614","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="介绍 Materials Project是一个开放的材料数据库，她提供了很多理论预测和实验上观察到的材料的计算性质，并且以网页的形式提供了查询的接口。最近Materials Project官方网站消息显示即将迎来新版本，同时也推出了新版本的预览版。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="新版和老版Materials Project API使用指南">
+<meta property="og:url" content="https://next.jun997.xyz/2022/04/10/b438dad131c8.html">
+<meta property="og:site_name" content="Jun&#39;s Blog">
+<meta property="og:description" content="介绍 Materials Project是一个开放的材料数据库，她提供了很多理论预测和实验上观察到的材料的计算性质，并且以网页的形式提供了查询的接口。最近Materials Project官方网站消息显示即将迎来新版本，同时也推出了新版本的预览版。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://next.jun997.xyz/images/matproj/old-homepage.png">
+<meta property="og:image" content="https://next.jun997.xyz/images/matproj/new-homepage.png">
+<meta property="og:image" content="https://next.jun997.xyz/images/matproj/old-key.png">
+<meta property="og:image" content="https://next.jun997.xyz/images/matproj/new-key.png">
+<meta property="og:image" content="https://next.jun997.xyz/images/matproj/old-result.png">
+<meta property="og:image" content="https://next.jun997.xyz/images/matproj/difference.png">
+<meta property="og:image" content="https://next.jun997.xyz/images/matproj/new-result.png">
+<meta property="article:published_time" content="2022-04-10T09:42:47.000Z">
+<meta property="article:modified_time" content="2022-05-27T11:59:32.740Z">
+<meta property="article:author" content="Jun">
+<meta property="article:tag" content="DFT">
+<meta property="article:tag" content="python3">
+<meta property="article:tag" content="Materials Project">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://next.jun997.xyz/images/matproj/old-homepage.png">
+
+
+<link rel="canonical" href="https://next.jun997.xyz/2022/04/10/b438dad131c8.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://next.jun997.xyz/2022/04/10/b438dad131c8.html","path":"2022/04/10/b438dad131c8.html","title":"新版和老版Materials Project API使用指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>新版和老版Materials Project API使用指南 | Jun's Blog</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?186341237944a73cf31cb41b84605669"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jun's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Share knowledges, Tell stories and Show something interesting!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">3</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">26</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">41</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>links</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-text"> 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text"> 前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-text"> 前期准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%80%81%E7%89%88api%E8%B0%83%E7%94%A8"><span class="nav-text"> 老版API调用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1mprester%E7%B1%BB%E7%AE%80%E4%BB%8B"><span class="nav-text"> 1.MPRester类简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2mprester%E7%B1%BB%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E7%AE%80%E4%BB%8B"><span class="nav-text"> 2.MPRester类的一些常用函数简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3mprester%E7%B1%BB%E7%9A%84%E4%B8%A4%E4%B8%AA%E9%87%8D%E8%A6%81%E5%87%BD%E6%95%B0"><span class="nav-text"> 3.MPRester类的两个重要函数：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#get_materials_idschemsys_formula"><span class="nav-text"> get_materials_ids(chemsys_formula)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#get_datachemsys_formula_id-data_typevasp-prop"><span class="nav-text"> get_data(chemsys_formula_id, data_type&#x3D;‘vasp’, prop&#x3D;’’)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4%E4%BB%A3%E7%A0%81%E5%AE%9E%E6%88%98"><span class="nav-text"> 4.代码实战</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E7%89%88api%E8%B0%83%E7%94%A8"><span class="nav-text"> 新版API调用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1%E5%AE%89%E8%A3%85mp-api%E5%8C%85"><span class="nav-text"> 1.安装mp-api包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2mprester%E7%B1%BB%E7%9A%84%E6%A1%86%E6%9E%B6"><span class="nav-text"> 2.MPRester类的框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3%E5%AD%90%E7%B1%BB%E7%9A%84%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8"><span class="nav-text"> 3.子类的相关函数调用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#summary%E5%AD%90%E7%B1%BB"><span class="nav-text"> summary子类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#materials%E5%AD%90%E7%B1%BB"><span class="nav-text"> materials子类</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4note"><span class="nav-text"> 4.note</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5%E4%BB%A3%E7%A0%81%E5%AE%9E%E6%88%98"><span class="nav-text"> 5.代码实战</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jun"
+      src="/images/profile.jpg">
+  <p class="site-author-name" itemprop="name">Jun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/June976" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;June976" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/HelloWorldTM" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;HelloWorldTM" rel="noopener" target="_blank"><i class="fa fa-c fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/billboard" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;billboard" rel="noopener" target="_blank"><i class="fa fa-z fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://s.weibo.com/top/summary" title="Weibo → https:&#x2F;&#x2F;s.weibo.com&#x2F;top&#x2F;summary" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@jun997.xyz" title="E-Mail → mailto:admin@jun997.xyz" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mailchi.mp/78fbe8b89a13/juns-blog-subscribe" title="Subscribe → https:&#x2F;&#x2F;mailchi.mp&#x2F;78fbe8b89a13&#x2F;juns-blog-subscribe" rel="noopener" target="_blank"><i class="fab fa-mailchimp fa-fw"></i>Subscribe</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/June976" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/10/b438dad131c8.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpg">
+      <meta itemprop="name" content="Jun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="新版和老版Materials Project API使用指南 | Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          新版和老版Materials Project API使用指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-04-10 17:42:47" itemprop="dateCreated datePublished" datetime="2022-04-10T17:42:47+08:00">2022-04-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-05-27 19:59:32" itemprop="dateModified" datetime="2022-05-27T19:59:32+08:00">2022-05-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Share-knowledges/" itemprop="url" rel="index"><span itemprop="name">Share knowledges</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>7.2k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="介绍"><a class="markdownIt-Anchor" href="#介绍"></a> 介绍</h3>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Materials_Project">Materials Project</a>是一个开放的材料数据库，她提供了很多理论预测和实验上观察到的材料的<strong>计算性质</strong>，并且以网页的形式提供了查询的接口。最近Materials Project官方网站消息显示即将迎来新版本，同时也推出了新版本的预览版。<span id="more"></span>以下分别是老版和新版（预览）的地址和首页：</p>
+<ul>
+<li>老版：<a target="_blank" rel="noopener" href="https://materialsproject.org/">https://materialsproject.org/</a><br />
+<img src="/images/matproj/old-homepage.png" alt="old-homepage" /></li>
+<li>新版：<a target="_blank" rel="noopener" href="https://next-gen.materialsproject.org/">https://next-gen.materialsproject.org/</a><br />
+<img src="/images/matproj/new-homepage.png" alt="new-homepage" /></li>
+</ul>
+<h3 id="前言"><a class="markdownIt-Anchor" href="#前言"></a> 前言</h3>
+<p>最近闲来无事，又捣鼓起来了Materials Project，主要是想要利用Materials Project提供的API来批量获取某些材料的某些性质，然后训练和测试一些简单的模型。由于之前使用过老版的API，所以对于老版的API调用还是比较熟悉的，但是新版之前没有使用过，花了一天时间探索之后，发现新版和老版的API调用上既有相同的地方，也有不同的地方，所以这里打算写一篇文章来简单地探讨一下，同时也可以作为入门的快速指南。当然值得一提的是，Materials Project本身博大精深，包含材料各个方面的数据，这篇文章的内容只是<strong>初窥一隅</strong>。</p>
+<h3 id="前期准备"><a class="markdownIt-Anchor" href="#前期准备"></a> 前期准备</h3>
+<p>不管是新版还是老版的Materials Project，要调用首先需要获取API Key,获取方式大同小异，首先用账号登录网站，然后在Dashboard页面生成API Key，如下图：</p>
+<table>
+<thead>
+<tr>
+<th><img src="/images/matproj/old-key.png" alt="old-key" /></th>
+<th><img src="/images/matproj/new-key.png" alt="new-key" /></th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+<h3 id="老版api调用"><a class="markdownIt-Anchor" href="#老版api调用"></a> 老版API调用</h3>
+<h4 id="1mprester类简介"><a class="markdownIt-Anchor" href="#1mprester类简介"></a> 1.MPRester类简介</h4>
+<p>老版API调用方法已经加入到了<a target="_blank" rel="noopener" href="https://pymatgen.org/index.html">Pymatgen</a>的模块之中，Pymatgen是一个高通量计算的Python模块，几乎所有的API调用过程都是通过<a target="_blank" rel="noopener" href="https://pymatgen.org/pymatgen.ext.matproj.html">pymatgen.ext.matproj</a>模块下的<strong>MPRester类</strong>来实现的。<strong>MPRester类</strong>有四个参数：</p>
+<ul>
+<li><strong>api_key</strong>：字符串类型，传入之前获得的API Key</li>
+<li><strong>endpoint</strong>：字符串类型，传入访问数据库的入口url</li>
+<li><strong>notify_db_version</strong>：布尔类型，决定是否将访问时获得的数据库版本信息记录在本地文件中</li>
+<li><strong>include_user_agent</strong>：布尔类型，决定在发送HTTP请求时是否发送pymatgen版本信息和访问设备信息</li>
+</ul>
+<h4 id="2mprester类的一些常用函数简介"><a class="markdownIt-Anchor" href="#2mprester类的一些常用函数简介"></a> 2.MPRester类的一些常用函数简介</h4>
+<p>MPRester类封装了几乎所有调用数据库的函数，以下对一些比较常用的函数做一些说明：</p>
+<ul>
+<li><strong>get_bandstructure_by_material_id(material_id, line_mode=True)</strong>：根据material_id获取能带结构</li>
+</ul>
+<blockquote>
+<p>note：Materials Project中每个材料都对应一个唯一的id，相当于材料的身份证号码，知道了material id就能通过调用函数来获取材料的所有数据</p>
+</blockquote>
+<ul>
+<li><strong>get_doc(materials_id)</strong>：根据mp-id获取材料<strong>所有的数据</strong>的文档，json格式的文档</li>
+<li><strong>get_dos_by_material_id(material_id)</strong>：根据mp-id获取材料的态密度</li>
+<li><strong>get_phonon_bandstructure_by_material_id(material_id)</strong>：根据mp-id获取材料的声子谱</li>
+<li><strong>get_phonon_dos_by_material_id(material_id)</strong>：根据mp-id获取材料的声子态密度</li>
+<li><strong>get_entries(chemsys_formula_id_criteria, compatible_only=True, inc_structure=None, property_data=None, conventional_unit_cell=False, sort_by_e_above_hull=False)</strong>：根据化学系统、化学式、mp-id或所有的标准获取相应材料的<a target="_blank" rel="noopener" href="https://pymatgen.org/pymatgen.entries.computed_entries.html">计算数据</a>列表</li>
+<li><strong>get_entries_in_chemsys(elements, compatible_only=True, inc_structure=None, property_data=None, conventional_unit_cell=False)</strong>：衍生自get_entries函数，获取化学系统的的计算数据</li>
+<li><strong>get_entry_by_material_id(material_id, compatible_only=True, inc_structure=None, property_data=None, conventional_unit_cell=False)</strong>：同上</li>
+<li><strong>get_structure_by_material_id(material_id, final=True, conventional_unit_cell=False)</strong>：根据mp-id获取材料的结构</li>
+<li><strong>get_structures(chemsys_formula_id, final=True)</strong>：根据化学组成获取结构列表</li>
+</ul>
+<h4 id="3mprester类的两个重要函数"><a class="markdownIt-Anchor" href="#3mprester类的两个重要函数"></a> 3.MPRester类的两个重要函数：</h4>
+<h5 id="get_materials_idschemsys_formula"><a class="markdownIt-Anchor" href="#get_materials_idschemsys_formula"></a> get_materials_ids(chemsys_formula)</h5>
+<p>该函数提供了根据对应化学式获取相应的mp-id的功能，可以用于搜索特定组成或化学式的材料在Materials Project中的mp-id，<strong>chemsys_formula</strong>参数为字符串类型，可以是指定元素类别，如&quot;Fe-Li-O&quot;表示获取所有包含Li、Fe、O三种元素的材料的mp-id；也可以是指定化学式，如&quot;Fe2O3&quot;表示获取所有化学式为Fe2O3的材料的mp-id，该函数返回列表类型，列表中包含了所有的mp-id。</p>
+<h5 id="get_datachemsys_formula_id-data_typevasp-prop"><a class="markdownIt-Anchor" href="#get_datachemsys_formula_id-data_typevasp-prop"></a> get_data(chemsys_formula_id, data_type=‘vasp’, prop=’’)</h5>
+<p>不同于之前一次性获取材料的所有数据，该函数能够灵活地获得某一材料地某个（些）特定数据，其有三个关键参数：</p>
+<ul>
+<li><strong>chemsys_formula_id</strong>：字符串类型，传入对应材料的元素组成，化学式或者mp-id</li>
+<li><strong>data_type</strong>：返回的数据类型，可以传入&quot;vasp&quot;或&quot;exp&quot;</li>
+<li><strong>prop</strong>：需要获取的数据，字符串类型，可以填入的参数为(‘energy’, ‘energy_per_atom’, ‘volume’, ‘formation_energy_per_atom’, ‘nsites’, ‘unit_cell_formula’, ‘pretty_formula’, ‘is_hubbard’, ‘elements’, ‘nelements’, ‘e_above_hull’, ‘hubbards’, ‘is_compatible’, ‘spacegroup’, ‘band_gap’, ‘density’, ‘icsd_id’, ‘cif’)，如果为空即为获取部分常用的性质数据。</li>
+</ul>
+<h4 id="4代码实战"><a class="markdownIt-Anchor" href="#4代码实战"></a> 4.代码实战</h4>
+<p>下面为实际调用的python代码，完成的是获取所有不同结构的Si单质对应的mp-id，然后根据mp-id获取对应材料的一些性质。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pymatgen.ext.matproj <span class="keyword">import</span> MPRester</span><br><span class="line"></span><br><span class="line">my_api_key = <span class="string">&quot;your api key&quot;</span></span><br><span class="line"><span class="keyword">with</span> MPRester(api_key=my_api_key) <span class="keyword">as</span> mpr:</span><br><span class="line">    ls_mat_ids = mpr.get_materials_ids(chemsys_formula=<span class="string">&quot;Si&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> mat_id <span class="keyword">in</span> ls_mat_ids:</span><br><span class="line">        mat_info = []</span><br><span class="line">        mat_formula = mpr.get_data(chemsys_formula_id=mat_id, prop=<span class="string">&quot;pretty_formula&quot;</span>)</span><br><span class="line">        mat_spacegroup = mpr.get_data(chemsys_formula_id=mat_id, prop=<span class="string">&quot;spacegroup&quot;</span>)</span><br><span class="line">        mat_band_gap = mpr.get_data(chemsys_formula_id=mat_id, prop=<span class="string">&quot;band_gap&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(mat_id, mat_formula[<span class="number">0</span>][<span class="string">&#x27;pretty_formula&#x27;</span>], mat_spacegroup[<span class="number">0</span>][<span class="string">&#x27;spacegroup&#x27;</span>][<span class="string">&#x27;symbol&#x27;</span>], mat_band_gap[<span class="number">0</span>][<span class="string">&#x27;band_gap&#x27;</span>])</span><br></pre></td></tr></table></figure>
+<p>以下为运行结果：<br />
+<img src="/images/matproj/old-result.png" alt="old-result" /></p>
+<h3 id="新版api调用"><a class="markdownIt-Anchor" href="#新版api调用"></a> 新版API调用</h3>
+<p>新版本Materials Project在API调用上与老版本既有相同的地方，也有不同的地方。<a target="_blank" rel="noopener" href="https://next-gen.materialsproject.org/api">官网手册</a>上对二者作了对比：<img src="/images/matproj/difference.png" alt="difference" /></p>
+<h4 id="1安装mp-api包"><a class="markdownIt-Anchor" href="#1安装mp-api包"></a> 1.安装mp-api包</h4>
+<p>首先一个显著不同的是，新版本Materials Project在调用上使用的是Python的mp-api模块，这一模块并不包含在pymatgen中（官网补充说明：可能之后会并入pymatgen），而是作为独立的模块，需要重新安装，安装非常容易，使用pip工具就可以：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install mp-api</span><br></pre></td></tr></table></figure>
+<h4 id="2mprester类的框架"><a class="markdownIt-Anchor" href="#2mprester类的框架"></a> 2.MPRester类的框架</h4>
+<p>与老版本一样，具体的调用函数是封装在MPRester类中的。不同的是，新版中将材料的各个性质分别封装在各个子类中，做了进一步的归档，需要查询某个性质时可以通过这些子类提供的函数来做进一步的查询，具体有：</p>
+<ul>
+<li><strong>bonds</strong>：包含根据pymatgen中定义的近邻策略计算的化学键信息</li>
+<li><strong>charge_density</strong>：包含材料的电荷密度信息</li>
+<li><strong>dielectric</strong>：包含材料的介电性质</li>
+<li><strong>doi</strong>：特定材料的参考文献的doi</li>
+<li><strong>elasticity</strong>：包含材料的弹性数据</li>
+<li><strong>electronic_structure</strong>：包含材料的核心电子结构信息</li>
+<li><strong>eos</strong>：能量-体积状态的拟合方程</li>
+<li><strong>fermi</strong>：材料的费米面信息</li>
+<li><strong>grain_boundary</strong>：包含晶界能，解离能</li>
+<li><strong>insertion_electrodes</strong>：插入的电极</li>
+<li><strong>magnetism</strong>：从计算结果中得到的磁性数据</li>
+<li><strong>materials</strong>：包含材料的一些核心信息</li>
+<li><strong>molecules</strong>：与电池电解质相关的分子</li>
+<li><strong>oxidation_states</strong>：根据结构计算的氧化态</li>
+<li><strong>phonon</strong>：声子谱和声子态密度数据</li>
+<li><strong>piezoelectric</strong>：材料的介电信息</li>
+<li><strong>provenance</strong>：提供材料的证明材料，主要包括材料是否是理论预测的，相关的ICSD id，所在的参考文献</li>
+<li><strong>robocrys</strong>：提供材料的机器人晶体学家(???)描述信息</li>
+<li><strong>similarity</strong>：包含相似结构的信息数据</li>
+<li><strong>substrates</strong>：给定材料的可能生长基底的信息</li>
+<li><strong>summary</strong>：有关材料及其属性的摘要信息，较为常用</li>
+<li><strong>surface_properties</strong>：包含材料的表面性质相关的信息</li>
+<li><strong>synthesis</strong>：包含材料的合成配方数据和附加关键字的搜索结果信息</li>
+<li><strong>tasks</strong>：为Materials Project提供数据的相关VASP计算的详细信息</li>
+<li><strong>thermo</strong>：与热相关的性质</li>
+<li><strong>xas</strong>：包含XAS谱的相关信息</li>
+</ul>
+<h4 id="3子类的相关函数调用"><a class="markdownIt-Anchor" href="#3子类的相关函数调用"></a> 3.子类的相关函数调用</h4>
+<p>这些子类提供的调用方法又各有不同，传入的参数也有所差别，具体使用时需要参考<a target="_blank" rel="noopener" href="https://api.materialsproject.org/docs#/">官方文档</a>。由于我在使用时只用到了这两个子类：<strong>summary</strong>和<strong>materials</strong>，所以以下详细介绍这两个子类。</p>
+<h5 id="summary子类"><a class="markdownIt-Anchor" href="#summary子类"></a> summary子类</h5>
+<p>以下引自官网：summary提供了某一材料的合并数据，整合了很多其它子类包含的性质，当材料的性质空间包含很多时，使用summary非常有效，<strong>注意Materials Project中每个材料都有一份独一无二的summary文档</strong>。summary子类中常用的函数有两个，即：get_data_by_id和search_summary_docs,下面分别介绍：</p>
+<ul>
+<li>get_data_by_id：包含三个参数，material_id(必要)、fields和all_fields，其中fields是一串以逗号分隔的字符串，说明需要获取的summary文档中需要包含的性质，具体的字段有：<strong>builder_meta nsites elements nelements composition composition_reduced formula_pretty formula_anonymous chemsys volume density density_atomic symmetry property_name material_id deprecated deprecation_reasons last_updated origins warnings structure task_ids uncorrected_energy_per_atom energy_per_atom formation_energy_per_atom energy_above_hull is_stable equilibrium_reaction_energy_per_atom decomposes_to xas grain_boundaries band_gap cbm vbm efermi is_gap_direct is_metal es_source_calc_id bandstructure dos dos_energy_up dos_energy_down is_magnetic ordering total_magnetization total_magnetization_normalized_vol total_magnetization_normalized_formula_units num_magnetic_sites num_unique_magnetic_sites types_of_magnetic_species k_voigt k_reuss k_vrh g_voigt g_reuss g_vrh universal_anisotropy homogeneous_poisson e_total e_ionic e_electronic n e_ij_max weighted_surface_energy_EV_PER_ANG2 weighted_surface_energy weighted_work_function surface_anisotropy shape_factor has_reconstructed possible_species has_props theoretical</strong>，具体含义可以参考英文意义和网站上展示的数据来理解，这里需要特别说明的一点是：<mark>相比于老版，新版Materials Project对材料作了是否实验上观察到的划分，并且设置了一个变量来指示，因此可以非常容易知道哪些是实验上已经合成出来的，这个变量就是以上fields中的theoretical字段，是布尔值，True表示材料是理论预测的，False表示材料已经实验观察到了</mark>。最后一个参数是布尔类型，如果设置为True，那么请求的summary文档会包含以上所有性质。</li>
+<li>search_summary_docs：其包含的参数非常多，具体参考<a target="_blank" rel="noopener" href="https://api.materialsproject.org/docs#/Summary/search_summary__get">官网</a>,其中一些常用的参数formula、chemsys、crystal_system分别为指定化学式、化学成分和晶系来搜索对应的文档，其它参数用到可以再具体查询。</li>
+</ul>
+<h5 id="materials子类"><a class="markdownIt-Anchor" href="#materials子类"></a> materials子类</h5>
+<p>以下引自官网：materials提供了材料在Materials Project数据库中的核心信息，其中mp-id是材料的唯一标识符，这里核心信息指：晶体结构、密度、化学式以及与计算相关的task_id,不包含形成能和带隙等信息。和summary子类一样，其较为核心的同样是以上提到的两个函数，并且传入的参数也类似，这里不再赘述，值得一提的是，这里的fields参数包含的字段相对于summary中更少，具体是：<strong>builder_meta nsites elements nelements composition composition_reduced formula_pretty formula_anonymous chemsys volume density density_atomic symmetry material_id structure deprecated deprecation_reasons initial_structures task_ids deprecated_tasks calc_types last_updated created_at origins warnings</strong>。</p>
+<h4 id="4note"><a class="markdownIt-Anchor" href="#4note"></a> 4.note</h4>
+<p>当然，新版的MPRester类中也提供了一些不需要通过子类来调用的函数，这些函数的用法大都与老版的相应同名函数的用法相同，如get_materials_ids函数、get_data函数等。</p>
+<h4 id="5代码实战"><a class="markdownIt-Anchor" href="#5代码实战"></a> 5.代码实战</h4>
+<p>这里的代码完成的同样是获取不同结构Si单质的相应数据，同时添加了新版的一个新的特性，即判断材料是否实验上观察到。以下为代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mp_api <span class="keyword">import</span> MPRester</span><br><span class="line"></span><br><span class="line">my_api_key = <span class="string">&quot;your api key&quot;</span></span><br><span class="line"><span class="keyword">with</span> MPRester(api_key=my_api_key) <span class="keyword">as</span> mpr:</span><br><span class="line">    ls_mat_ids = mpr.get_materials_ids(chemsys_formula=<span class="string">&quot;Si&quot;</span>)</span><br><span class="line">    <span class="keyword">for</span> mat_id <span class="keyword">in</span> ls_mat_ids:</span><br><span class="line">        mat_summary = mpr.summary.get_data_by_id(mat_id,fields=<span class="string">&quot;formula_pretty,symmetry,band_gap,theoretical&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(mat_id, mat_summary.formula_pretty, mat_summary.symmetry.symbol, mat_summary.band_gap, mat_summary.theoretical)</span><br></pre></td></tr></table></figure>
+<p>以下为代码的运行结果：<img src="/images/matproj/new-result.png" alt="new-result" /></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>￥打赏我￥</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/PayQRCode/wechat.png" alt="Jun WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/PayQRCode/alipay.jpg" alt="Jun Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/DFT/" rel="tag"># DFT</a>
+              <a href="/tags/python3/" rel="tag"># python3</a>
+              <a href="/tags/Materials-Project/" rel="tag"># Materials Project</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/05/5a4e29b6e47f.html" rel="prev" title="庆祝本站从Github Page绑定到新的域名">
+                  <i class="fa fa-chevron-left"></i> 庆祝本站从Github Page绑定到新的域名
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/04/14/456c7cc4063e.html" rel="next" title="VASP中POTCAR使用指南">
+                  VASP中POTCAR使用指南 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jun All Rights Reserved</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">151k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">2:17</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-629063e32c2b3670" async="async"></script>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha256-TThEtR+XalhWKkfF383YLOrI50NGNeIqrzS+q08afrY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.css" integrity="sha256-Wk20U9mS/kHGcSgkjSiRezW5exqT6wAOKwySOaLotXM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.js","integrity":"sha256-etSqbSVF4+Lwe8MGk/Vanc1sR+mWv+qOG73fxWw9p94="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>
