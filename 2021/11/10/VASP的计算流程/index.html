@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+<link rel="preconnect" href="null//null" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#09E614","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="分享一下VASP的计算流程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VASP的计算流程">
+<meta property="og:url" content="http://example.com/2021/11/10/VASP%E7%9A%84%E8%AE%A1%E7%AE%97%E6%B5%81%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Jun的博客">
+<meta property="og:description" content="分享一下VASP的计算流程">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-11-10T05:26:55.000Z">
+<meta property="article:modified_time" content="2022-04-04T14:05:55.673Z">
+<meta property="article:author" content="Jun">
+<meta property="article:tag" content="DFT">
+<meta property="article:tag" content="VASP">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2021/11/10/VASP%E7%9A%84%E8%AE%A1%E7%AE%97%E6%B5%81%E7%A8%8B/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/11/10/VASP%E7%9A%84%E8%AE%A1%E7%AE%97%E6%B5%81%E7%A8%8B/","path":"2021/11/10/VASP的计算流程/","title":"VASP的计算流程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VASP的计算流程 | Jun的博客</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jun的博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">26</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">41</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E4%BA%AB%E4%B8%80%E4%B8%8Bvasp%E7%9A%84%E8%AE%A1%E7%AE%97%E6%B5%81%E7%A8%8B"><span class="nav-text"> 分享一下VASP的计算流程</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jun"
+      src="/images/profile.jpg">
+  <p class="site-author-name" itemprop="name">Jun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/June976" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;June976" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/HelloWorldTM" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;HelloWorldTM" rel="noopener" target="_blank"><i class="fa fa-c fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/billboard" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;billboard" rel="noopener" target="_blank"><i class="fa fa-z fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://s.weibo.com/top/summary" title="Weibo → https:&#x2F;&#x2F;s.weibo.com&#x2F;top&#x2F;summary" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@jun997.xyz" title="E-Mail → mailto:admin@jun997.xyz" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mailchi.mp/78fbe8b89a13/juns-blog-subscribe" title="Subscribe → https:&#x2F;&#x2F;mailchi.mp&#x2F;78fbe8b89a13&#x2F;juns-blog-subscribe" rel="noopener" target="_blank"><i class="fab fa-mailchimp fa-fw"></i>Subscribe</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/June976" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/10/VASP%E7%9A%84%E8%AE%A1%E7%AE%97%E6%B5%81%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpg">
+      <meta itemprop="name" content="Jun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jun的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VASP的计算流程 | Jun的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VASP的计算流程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-11-10 13:26:55" itemprop="dateCreated datePublished" datetime="2021-11-10T13:26:55+08:00">2021-11-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-04-04 22:05:55" itemprop="dateModified" datetime="2022-04-04T22:05:55+08:00">2022-04-04</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>5.7k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="分享一下vasp的计算流程"><a class="markdownIt-Anchor" href="#分享一下vasp的计算流程"></a> 分享一下VASP的计算流程</h3>
+<span id="more"></span>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>   !  open Files</span><br><span class="line"><span class="number">2</span>   !  read header of POSCAR file</span><br><span class="line"><span class="number">3</span>   !  read pseudopotentials</span><br><span class="line"><span class="number">4</span>   !  read INCAR</span><br><span class="line"><span class="number">5</span>   !  core level shift related items (parses INCAR)</span><br><span class="line"><span class="number">6</span>   !  loop over different smearing parameters</span><br><span class="line"><span class="number">7</span>   !  now read <span class="keyword">in</span> Pseudopotential</span><br><span class="line"><span class="number">8</span>   !  LDA+U initialisation (parses INCAR)</span><br><span class="line"><span class="number">10</span>  !  optics initialisation (parses INCAR)</span><br><span class="line"><span class="number">11</span>  !  Read  POSCAR Startjob and Continuation<span class="literal">-job</span></span><br><span class="line"><span class="number">12</span>  !  diverse INCAR readers</span><br><span class="line"><span class="number">13</span>  !  exchange correlation table</span><br><span class="line"><span class="number">14</span>  !  init all chains (INCAR reader)</span><br><span class="line"><span class="number">15</span>  !  xml finish copying parameters from INCAR to xml file</span><br><span class="line"><span class="number">16</span>  !  <span class="keyword">for</span> <span class="keyword">static</span> calculations or relaxation jobs DYN%VEL is meaningless</span><br><span class="line"><span class="number">17</span>  !  initialize the symmetry stuff</span><br><span class="line"><span class="number">18</span>  !  Read  KPOINTS</span><br><span class="line"><span class="number">19</span>  !  at this point we have enough information to create a param.inc file</span><br><span class="line"><span class="number">20</span>  !  <span class="built_in">set</span> the basic quantities <span class="keyword">in</span> WDES and <span class="built_in">set</span> the grids</span><br><span class="line"><span class="number">21</span>  !  <span class="built_in">Write</span> all important information</span><br><span class="line"><span class="number">22</span>  !  <span class="built_in">write</span> out the lattice parameters</span><br><span class="line"><span class="number">23</span>  !  <span class="built_in">write</span> out k<span class="literal">-points</span>,weights,size &amp; positions</span><br><span class="line"><span class="number">24</span>  !  <span class="built_in">write</span> out initial header <span class="keyword">for</span> PCDAT, XDATCAR</span><br><span class="line"><span class="number">25</span>  !  <span class="built_in">write</span> out initial header <span class="keyword">for</span> DOS</span><br><span class="line"><span class="number">26</span>  !  <span class="built_in">write</span> out initial header <span class="keyword">for</span> EIGENvalueS</span><br><span class="line"><span class="number">27</span>  ! initialize the required grid structures</span><br><span class="line"><span class="number">28</span>  !  allocate work arrays</span><br><span class="line"><span class="number">29</span>  ! allocate wavefunctions</span><br><span class="line"><span class="number">30</span>  ! now read <span class="keyword">in</span> wavefunctions</span><br><span class="line"><span class="number">31</span>  ! At this very point everything has been read <span class="keyword">in</span> and we are ready to <span class="built_in">write</span> all important information to the xml file</span><br><span class="line"><span class="number">32</span>  ! initialize index tables <span class="keyword">for</span> broyden mixing</span><br><span class="line"><span class="number">33</span>  ! Use a reduced mesh but only <span class="keyword">if</span> <span class="keyword">using</span> preconditioning ... :calculate the structure-factor, initialize some arrays</span><br><span class="line"><span class="number">34</span>  ! <span class="built_in">set</span> the coefficients of the plane wave basis states to zero before initialising the wavefunctions by calling WFINIT (usually random)</span><br><span class="line"><span class="number">35</span>  !  read Fermi<span class="literal">-weigths</span> from INCAR <span class="keyword">if</span> supplied</span><br><span class="line"><span class="number">36</span>  ! calculate the projections of the wavefunctions onto the projection operators <span class="keyword">using</span> real-space projection scheme or reciprocal scheme then perform an orthogonalisation of the wavefunctions</span><br><span class="line"><span class="number">37</span>  ! partial band decomposed chargedensities PARDENS</span><br><span class="line"><span class="number">38</span>  ! calculate initial chargedensity <span class="keyword">if</span></span><br><span class="line">    ! ) we <span class="keyword">do</span> not have any chargedensity</span><br><span class="line">    ! ) we use a selfconsistent minimization scheme and <span class="keyword">do</span> not have a delay</span><br><span class="line"><span class="number">39</span>  !======================== SUBROUTINE FEWALD ============================</span><br><span class="line">    ! calculate ewald energy forces, and stress</span><br><span class="line"><span class="number">40</span>  ! <span class="built_in">Set</span> INFO%LPOTOK to false: this requires  a recalculation of the</span><br><span class="line">    ! total lokal potential</span><br><span class="line"><span class="number">41</span>  ! some special calculation routines such as GW, MP2</span><br><span class="line"><span class="number">42</span>  ! ++++++++++++ <span class="keyword">do</span> <span class="number">1000</span> n=<span class="number">1</span>,required number of timesteps ++++++++++++++++</span><br><span class="line">    ! this is the main loop of the program during which one complete step of</span><br><span class="line">    ! the electron dynamics and ionic movements is performed.</span><br><span class="line"><span class="number">43</span>  !  reset broyden mixing</span><br><span class="line">    !  last energy</span><br><span class="line"><span class="number">44</span>  ! initialize pair<span class="literal">-correlation</span> funtion to zero</span><br><span class="line">    ! also <span class="built_in">set</span> TMEAN und SMEAN to zero</span><br><span class="line">    ! TMEAN/SMEAN  is the mean temperature</span><br><span class="line"><span class="number">45</span>  ! this part performs the total energy minimisation</span><br><span class="line">   ! INFO%NELM loops are made, <span class="keyword">if</span> the difference between two steps</span><br><span class="line">   ! is less then INFO%EDIFF the loop is aborted</span><br><span class="line"><span class="number">46</span>  ! <span class="keyword">do</span> some check <span class="keyword">for</span> occupation numbers (<span class="keyword">do</span> we have enough bands]:</span><br><span class="line"><span class="number">47</span>  ! Now perform the ion movements:</span><br><span class="line"><span class="number">48</span>  !====================== FORCES+STRESS ==================================</span><br><span class="line">     ! no forces <span class="keyword">for</span> OEP methods (EXXOEP/=<span class="number">0</span>)</span><br><span class="line">     ! no forces <span class="keyword">for</span> IALGO=<span class="number">1</span><span class="literal">-4</span></span><br><span class="line">     ! no forces <span class="keyword">if</span> potential was read <span class="keyword">in</span> INFO%INICHG==<span class="number">4</span></span><br><span class="line">     ! no forces <span class="keyword">if</span> inner eigenvalue solver are used</span><br><span class="line">     ! check the consistency of forces and total energy</span><br><span class="line"><span class="number">49</span>   ! we have maybe to update CVTOT here (which might have been destroyed)</span><br><span class="line"><span class="number">50</span>   !  electronic polarisation</span><br><span class="line"><span class="number">51</span>   ! add chain forces and constrain forces</span><br><span class="line"><span class="number">52</span>   !     CYCLE ion ! <span class="keyword">if</span> uncommented VASP iterates forever without ionic upd</span><br><span class="line"><span class="number">53</span>   ! common <span class="built_in">write</span> statment applying <span class="keyword">for</span> most cases</span><br><span class="line"><span class="number">54</span>   !  <span class="keyword">do</span> relaxations <span class="keyword">using</span> diverse algorithms</span><br><span class="line"><span class="number">55</span>  !  update of ionic positions performed</span><br><span class="line">    !  <span class="keyword">in</span> any case POSION should now hold the new positions and</span><br><span class="line">    !  POSIOC the old one</span><br><span class="line"><span class="number">56</span>  !   reached required number of time steps</span><br><span class="line">    !   soft stop or hard stop</span><br><span class="line">    !   <span class="keyword">if</span> we need to pull the brake, then POSION is reset to POSIOC</span><br><span class="line">    !   except <span class="keyword">for</span> molecular dynamics, <span class="built_in">where</span> the next electronic</span><br><span class="line">    !   step should indeed correspond to POSIOC</span><br><span class="line"><span class="number">57</span>  !  update mean temperature mean energy</span><br><span class="line"><span class="number">58</span>  !  SMEAR_LOOP%ISMCNT != <span class="number">0</span> Loop over several KPOINTS%SIGMA<span class="literal">-values</span></span><br><span class="line">    !  <span class="built_in">set</span> new smearing parameters and <span class="keyword">continue</span> main loop</span><br><span class="line"><span class="number">59</span>  ! tasks which are done all DYN%NBLOCK   steps:</span><br><span class="line"><span class="number">60</span>  !  <span class="built_in">write</span> out the position of the IONS to XDATCAR</span><br><span class="line"><span class="number">61</span>   ! acummulate dos</span><br><span class="line"><span class="number">62</span>  ! evaluate the pair<span class="literal">-correlation</span> <span class="function"><span class="keyword">function</span>  <span class="title">using</span> <span class="title">the</span> <span class="title">exact</span> <span class="title">places</span></span></span><br><span class="line">   ! also sum up mean temperatur</span><br><span class="line"><span class="number">63</span>  ! <span class="built_in">write</span>  pair<span class="literal">-correlation</span> and density of states</span><br><span class="line">   ! quantities are initialized to <span class="number">0</span> at the beginning of the main<span class="literal">-loop</span></span><br><span class="line"><span class="number">64</span>  !  update file CONTCAR</span><br><span class="line"><span class="number">65</span>  !<span class="literal">-----write</span> out positions (only done on IONODE)</span><br><span class="line"><span class="number">66</span>  !  append new chargedensity to file CHG</span><br><span class="line"><span class="number">67</span>  ! <span class="keyword">if</span> ions were moved recalculate some quantities</span><br><span class="line"><span class="number">68</span>  ! WAVPRE prediction of the new wavefunctions and charge<span class="literal">-density</span></span><br><span class="line">   ! <span class="keyword">if</span> charge<span class="literal">-density</span> constant during ELM recalculate the charge<span class="literal">-density</span></span><br><span class="line">   ! according to overlapping atoms</span><br><span class="line">   ! <span class="keyword">for</span> relaxation jobs <span class="keyword">do</span> not predict <span class="keyword">in</span> the last step</span><br><span class="line"><span class="number">69</span>  ! call the ewald program to get the energy of the new ionic</span><br><span class="line">   ! configuration</span><br><span class="line"><span class="number">70</span>  ! volume might have changed restet IRDMAX</span><br><span class="line"><span class="number">71</span>  ! <span class="keyword">if</span> basis cell changed recalculate kinetic<span class="literal">-energy</span> array and tables</span><br><span class="line"><span class="number">72</span>  !  recalculate the real<span class="literal">-space</span> projection operators</span><br><span class="line">   !  <span class="keyword">if</span> volume changed also recalculate reciprocal projection operators</span><br><span class="line">   !  and reset the cache <span class="keyword">for</span> the phase<span class="literal">-factor</span></span><br><span class="line"><span class="number">73</span>  ! recalculate projections and perform Gramm<span class="literal">-Schmidt</span> orthogonalization</span><br><span class="line"><span class="number">74</span>  !   wavefunctions are not diagonal, so <span class="keyword">if</span> they are written to the file</span><br><span class="line">   !   or <span class="keyword">if</span> we <span class="keyword">do</span> not diagonalize before the optimization</span><br><span class="line">   !   rotate them now</span><br><span class="line">    ! <span class="keyword">for</span> the selfconsistent update <span class="built_in">set</span> TOTEN now</span><br><span class="line">   ! <span class="keyword">in</span> any case we have to call RSPHER at this point even <span class="keyword">if</span> the ions <span class="keyword">do</span> not <span class="built_in">move</span></span><br><span class="line">   ! since the force routine overwrites the required arrays</span><br><span class="line"><span class="number">75</span>  !  update file WAVECAR <span class="keyword">if</span> INFO%LSTOP = .TRUE.</span><br><span class="line">   !  or <span class="keyword">if</span> wavefunctions on file TMPCAR are rotated</span><br><span class="line"><span class="number">76</span>  ! after <span class="number">10</span> steps rotate the wavefunctions on the file</span><br><span class="line"><span class="number">77</span>  ! rotate wavefunctions on file (gives a better prediction)</span><br><span class="line">   ! and read <span class="keyword">in</span> wavefunctions  (destroyed by WAVPRE)</span><br><span class="line"><span class="number">78</span>  ! next electronic energy minimisation</span><br><span class="line"><span class="number">79</span>  ! here we are at the <span class="keyword">end</span> of the required number of timesteps</span><br><span class="line"><span class="number">80</span>  !  <span class="built_in">write</span> out some additional information</span><br><span class="line">   !  create the File CHGCAR</span><br><span class="line"><span class="number">81</span>  !  <span class="built_in">Write</span> out the Eigenvalues</span><br><span class="line"><span class="number">82</span>  !  get current density and <span class="built_in">write</span> output</span><br><span class="line"><span class="number">83</span>  !  calculate optical matrix elements</span><br><span class="line"><span class="number">84</span>  !  calculate four orbital integrals</span><br><span class="line"><span class="number">85</span> ! MM: Stuff <span class="keyword">for</span> Janos Angyan: <span class="built_in">write</span> the AE<span class="literal">-charge</span> density to AECCAR2</span><br><span class="line"><span class="number">86</span> !  calculate ELF</span><br><span class="line"><span class="number">87</span> ! <span class="built_in">write</span> ELF to file ELFCAR</span><br><span class="line"><span class="number">88</span> !  STM calculation</span><br><span class="line"><span class="number">89</span> !  total DOS, calculate ion and lm decomposed occupancies and dos</span><br><span class="line"><span class="number">90</span> ! breath a sigh of relief - you have finished</span><br><span class="line">  ! this jump is just a jump to the <span class="keyword">END</span> statement</span><br><span class="line"><span class="number">91</span> !  here we have sum code to test performance</span><br><span class="line">  !  Output is written to IUT</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>￥打赏我￥</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/PayQRCode/wechat.png" alt="Jun WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/PayQRCode/alipay.jpg" alt="Jun Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/DFT/" rel="tag"># DFT</a>
+              <a href="/tags/VASP/" rel="tag"># VASP</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/11/01/%E5%88%86%E4%BA%AB%E4%B8%80%E4%BA%9B%E6%B1%AA%E6%98%9F%E4%BA%BA%E7%85%A7%E7%89%87/" rel="prev" title="分享一些汪星人照片">
+                  <i class="fa fa-chevron-left"></i> 分享一些汪星人照片
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/11/23/%E7%94%B5%E5%AD%90%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90-%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/" rel="next" title="电子结构分析----文献翻译">
+                  电子结构分析----文献翻译 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jun All Rights Reserved</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">151k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">2:17</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha256-TThEtR+XalhWKkfF383YLOrI50NGNeIqrzS+q08afrY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.css" integrity="sha256-Wk20U9mS/kHGcSgkjSiRezW5exqT6wAOKwySOaLotXM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.js","integrity":"sha256-etSqbSVF4+Lwe8MGk/Vanc1sR+mWv+qOG73fxWw9p94="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

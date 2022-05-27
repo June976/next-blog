@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+<link rel="preconnect" href="null//null" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#09E614","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="一、kd树简介 kd树是一种树形结构，树的每个节点存放一个k维数据，某一节点的子节点可以看作是由过该节点一个平面切割后产生的（想象一下切蛋糕的过程），如此反复产生切割平面，就能为每个数据在空间中建立索引。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python实现kd树以及最近邻查找算法">
+<meta property="og:url" content="http://example.com/2022/05/03/python%E5%AE%9E%E7%8E%B0kd%E6%A0%91%E4%BB%A5%E5%8F%8A%E6%9C%80%E8%BF%91%E9%82%BB%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Jun的博客">
+<meta property="og:description" content="一、kd树简介 kd树是一种树形结构，树的每个节点存放一个k维数据，某一节点的子节点可以看作是由过该节点一个平面切割后产生的（想象一下切蛋糕的过程），如此反复产生切割平面，就能为每个数据在空间中建立索引。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/16c6b8d388074066bc69438e60187380.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/171987314e9b4f1f907af4686b507664.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/cfe767c596b04900b9494285edfb58c0.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/f12a49e12c0a4422a948c480c0fc44f7.png#pic_center">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/8906f4ac24864a5d9ffcb7eba582c79a.png#pic_center">
+<meta property="article:published_time" content="2022-05-03T02:37:53.000Z">
+<meta property="article:modified_time" content="2022-05-03T02:40:20.652Z">
+<meta property="article:author" content="Jun">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="python3">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/16c6b8d388074066bc69438e60187380.png">
+
+
+<link rel="canonical" href="http://example.com/2022/05/03/python%E5%AE%9E%E7%8E%B0kd%E6%A0%91%E4%BB%A5%E5%8F%8A%E6%9C%80%E8%BF%91%E9%82%BB%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/05/03/python%E5%AE%9E%E7%8E%B0kd%E6%A0%91%E4%BB%A5%E5%8F%8A%E6%9C%80%E8%BF%91%E9%82%BB%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/","path":"2022/05/03/python实现kd树以及最近邻查找算法/","title":"python实现kd树以及最近邻查找算法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>python实现kd树以及最近邻查找算法 | Jun的博客</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jun的博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">26</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">41</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-kd%E6%A0%91%E7%AE%80%E4%BB%8B"><span class="nav-text"> 一、kd树简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-kd%E6%A0%91%E7%94%9F%E6%88%90"><span class="nav-text"> 二、kd树生成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E7%A1%AE%E5%AE%9A%E5%88%87%E5%88%86%E5%9F%9F"><span class="nav-text"> 1.确定切分域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E7%A1%AE%E5%AE%9A%E6%95%B0%E6%8D%AE%E5%9F%9F"><span class="nav-text"> 2.确定数据域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E7%90%86%E8%A7%A3%E9%80%92%E5%BD%92%E6%A0%91"><span class="nav-text"> 3.理解递归树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4python%E5%AE%9E%E7%8E%B0%E9%80%92%E5%BD%92%E6%A0%91%E4%BB%A3%E7%A0%81"><span class="nav-text"> 4.python实现递归树代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-kd%E6%A0%91%E4%B8%8A%E7%9A%84%E6%9C%80%E8%BF%91%E9%82%BB%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95"><span class="nav-text"> 三、kd树上的最近邻查找算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E7%94%9F%E6%88%90%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84"><span class="nav-text"> 1.生成搜索路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E6%90%9C%E7%B4%A2%E8%B7%AF%E5%BE%84%E5%9B%9E%E6%BA%AF"><span class="nav-text"> 2.搜索路径回溯</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3%E6%9C%80%E8%BF%91%E9%82%BB%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95%E4%BB%A3%E7%A0%81"><span class="nav-text"> 3.最近邻查找算法代码</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jun"
+      src="/images/profile.jpg">
+  <p class="site-author-name" itemprop="name">Jun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/June976" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;June976" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/HelloWorldTM" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;HelloWorldTM" rel="noopener" target="_blank"><i class="fa fa-c fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/billboard" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;billboard" rel="noopener" target="_blank"><i class="fa fa-z fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://s.weibo.com/top/summary" title="Weibo → https:&#x2F;&#x2F;s.weibo.com&#x2F;top&#x2F;summary" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@jun997.xyz" title="E-Mail → mailto:admin@jun997.xyz" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mailchi.mp/78fbe8b89a13/juns-blog-subscribe" title="Subscribe → https:&#x2F;&#x2F;mailchi.mp&#x2F;78fbe8b89a13&#x2F;juns-blog-subscribe" rel="noopener" target="_blank"><i class="fab fa-mailchimp fa-fw"></i>Subscribe</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/June976" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/03/python%E5%AE%9E%E7%8E%B0kd%E6%A0%91%E4%BB%A5%E5%8F%8A%E6%9C%80%E8%BF%91%E9%82%BB%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpg">
+      <meta itemprop="name" content="Jun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jun的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="python实现kd树以及最近邻查找算法 | Jun的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python实现kd树以及最近邻查找算法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-05-03 10:37:53 / Modified: 10:40:20" itemprop="dateCreated datePublished" datetime="2022-05-03T10:37:53+08:00">2022-05-03</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>9k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h1 id="一-kd树简介"><a class="markdownIt-Anchor" href="#一-kd树简介"></a> 一、kd树简介</h1>
+<p>kd树是一种<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7d45078b5cec">树形结构</a>，树的每个节点存放一个k维数据，某一节点的子节点可以看作是由<strong>过该节点</strong>一个平面切割后产生的（<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/53826008">想象一下切蛋糕的过程</a>），如此反复产生切割平面，就能为每个数据在空间中建立索引。<span id="more"></span>如下图所示：<br />
+<img src="https://img-blog.csdnimg.cn/16c6b8d388074066bc69438e60187380.png" alt="在这里插入图片描述" /><br />
+由于采用这种特殊的分割方式，使得在利用kd树做最近邻查找时，可以避开一些距离很远的点，查找速度得到了较大的提升，对于空间中<em>N</em>个<em>k</em>维数据，穷举法的算法复杂度为<em>O(Nk)</em>，而使用kd树查找的算法复杂度只有<em>O(klog(N))</em>。kd树是一种典型的<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/335274497">空间换时间</a>的方式，即花费存储空间为数据建立索引，这样使得后续查找时速度更快，花费时间更少。</p>
+<h1 id="二-kd树生成"><a class="markdownIt-Anchor" href="#二-kd树生成"></a> 二、kd树生成</h1>
+<p>具体的算法实现主要参考的是这篇文章：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/eyeszjwang/articles/2429382.html">https://www.cnblogs.com/eyeszjwang/articles/2429382.html</a>，实现时有少量改动。生成kd树有两个关键的中间过程，即：</p>
+<h2 id="1确定切分域"><a class="markdownIt-Anchor" href="#1确定切分域"></a> 1.确定切分域</h2>
+<blockquote>
+<p>（1）确定split域：对于所有描述子数据（特征矢量），统计它们在每个维上的数据方差。以SURF特征为例，描述子为64维，可计算64个方差。挑选出最大值，对应的维就是split域的值。数据方差大表明沿该坐标轴方向上的数据分散得比较开，在这个方向上进行数据分割有较好的分辨率；</p>
+</blockquote>
+<p>这段文字用通俗一点的语言来说就是：对于二维的情况，每一次做数据切分的时候，沿着x轴还是y轴做切分是一个问题，那么我们要怎么确定呢？我们可以统计这些二维数据的x值和y值的方差，方差越大说明数据在这一方向上越<strong>离散</strong>，而数据越离散说明沿着这一方向上数据之间的距离区分度越大，简单点来说就是<strong>相互之间隔得更远</strong>，我们就用这个方向做切分。<br />
+确定了切分域之后，我们就需要来对数据做切分了。</p>
+<h2 id="2确定数据域"><a class="markdownIt-Anchor" href="#2确定数据域"></a> 2.确定数据域</h2>
+<blockquote>
+<p>（2）确定Node-data域：数据点集Data-set按其第split域的值排序。位于正中间的那个数据点被选为Node-data。此时新的Data-set’ = Data-set\Node-data（除去其中Node-data这一点）。</p>
+</blockquote>
+<p>简单来说，这句话的意思是：现在我们已经确定了沿着x轴做切分，那么我们要怎么决定在x轴哪里做切分呢？我们可以将所有数据根据x值的大小做一个排序，然后选取<strong>正中间</strong>那个数据的x值作为切分的位置。<mark>注意，这里有一个关键的问题是：如果我们有偶数个数据，怎么确定中间那个数据？难道我们选取中间两个数做一下平均？？？如果没有记错的话这应该是中位数的定义。。。如果这样完全就是自找麻烦！因为我们要确保至少有一个数据的x值落在切分点上，但是取平均之后并不能保证！！！所以更好的办法是，在有两个中间数据的情况下，随便选取一个数据的x值就行了。</mark><br />
+决定了在x轴哪里做切分之后，我们就需要把数据做切分了，这里根据数据的x值相对于切分位置的大小，可以归为左节点和右节点，同时不要忘了：<strong>当前主节点也要保存一个数据</strong>，选取一个x值大小和切分位置相等的数据保存就行（如果有多个随便选一个就行，<strong>关键之处在于这个数据的x值落在切割线上</strong>。）</p>
+<h2 id="3理解递归树"><a class="markdownIt-Anchor" href="#3理解递归树"></a> 3.理解递归树</h2>
+<p>前面提到过，kd树是一种树形结构，因此可以<strong>递归</strong>生成，这是<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%80%92%E5%BD%92%E6%A0%91/24188823?fr=aladdin">树形结构的共性</a>，用程序语言来说，<strong>递归就是函数自己调用自己</strong>，在理解上也是很自然的。对于一组数据，我们通过找到的一个切分线把数据一分为二，而这个切分线的确定只和这组数据有关，左边的数据归为左节点，右边的数据归为右节点，更进一步，对于左边或者右边的这组数据，我们又可以将其看作一个整体，找到一个切分线把它一分为二，这样将一组数据一分为二的过程反复进行，相当于这个过程函数不断地调用自身，最终生成二叉树，将所有的数据分开。</p>
+<h2 id="4python实现递归树代码"><a class="markdownIt-Anchor" href="#4python实现递归树代码"></a> 4.python实现递归树代码</h2>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">###建立kd树和实现查询功能</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">kdTree</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, parent_node</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        节点初始化</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        self.nodedata = <span class="literal">None</span>   <span class="comment">###当前节点的数据值，二维数据</span></span><br><span class="line">        self.split = <span class="literal">None</span> <span class="comment">###分割平面的方向轴序号,0代表沿着x轴分割，1代表沿着y轴分割</span></span><br><span class="line">        self.<span class="built_in">range</span> = <span class="literal">None</span>  <span class="comment">###分割临界值</span></span><br><span class="line">        self.left = <span class="literal">None</span>    <span class="comment">###左子树节点</span></span><br><span class="line">        self.right = <span class="literal">None</span>   <span class="comment">###右子树节点</span></span><br><span class="line">        self.parent = parent_node  <span class="comment">###父节点</span></span><br><span class="line">        self.leftdata = <span class="literal">None</span>  <span class="comment">###保留左边节点的所有数据</span></span><br><span class="line">        self.rightdata = <span class="literal">None</span> <span class="comment">###保留右边节点的所有数据</span></span><br><span class="line">        self.isinvted = <span class="literal">False</span> <span class="comment">###记录当前节点是否被访问过</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">print</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        打印当前节点信息</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="built_in">print</span>(self.nodedata, self.split, self.<span class="built_in">range</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getSplitAxis</span>(<span class="params">self, all_data</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        根据方差决定分割轴</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        var_all_data = np.var(all_data, axis=<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">if</span> var_all_data[<span class="number">0</span>] &gt; var_all_data[<span class="number">1</span>]:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getRange</span>(<span class="params">self, split_axis, all_data</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        获取对应分割轴上的中位数据值大小</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        split_all_data = all_data[:, split_axis]</span><br><span class="line">        data_count = split_all_data.shape[<span class="number">0</span>]</span><br><span class="line">        med_index = <span class="built_in">int</span>(data_count/<span class="number">2</span>)</span><br><span class="line">        sort_split_all_data = np.sort(split_all_data)</span><br><span class="line">        range_data = sort_split_all_data[med_index]</span><br><span class="line">        <span class="keyword">return</span> range_data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getNodeLeftRigthData</span>(<span class="params">self, all_data</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        将数据划分到左子树，右子树以及得到当前节点</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        data_count = all_data.shape[<span class="number">0</span>]</span><br><span class="line">        ls_leftdata = []</span><br><span class="line">        ls_rightdata = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(data_count):</span><br><span class="line">            now_data = all_data[i]</span><br><span class="line">            <span class="keyword">if</span> now_data[self.split] &lt; self.<span class="built_in">range</span>:</span><br><span class="line">                ls_leftdata.append(now_data)</span><br><span class="line">            <span class="keyword">elif</span> now_data[self.split] == self.<span class="built_in">range</span> <span class="keyword">and</span> self.nodedata == <span class="literal">None</span>:</span><br><span class="line">                self.nodedata = now_data</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ls_rightdata.append(now_data)</span><br><span class="line">        self.leftdata = np.array(ls_leftdata)</span><br><span class="line">        self.rightdata = np.array(ls_rightdata)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">createNextNode</span>(<span class="params">self,all_data</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        迭代创建节点，生成kd树</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> all_data.shape[<span class="number">0</span>] == <span class="number">0</span>:</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;create kd tree finished!&quot;</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        self.split = self.getSplitAxis(all_data)</span><br><span class="line">        self.<span class="built_in">range</span> = self.getRange(self.split, all_data)</span><br><span class="line">        self.getNodeLeftRigthData(all_data)</span><br><span class="line">        <span class="keyword">if</span> self.leftdata.shape[<span class="number">0</span>] != <span class="number">0</span>:</span><br><span class="line">            self.left = kdTree(self)</span><br><span class="line">            self.left.createNextNode(self.leftdata)</span><br><span class="line">        <span class="keyword">if</span> self.rightdata.shape[<span class="number">0</span>] != <span class="number">0</span>:</span><br><span class="line">            self.right = kdTree(self)</span><br><span class="line">            self.right.createNextNode(self.rightdata)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">plotKdTree</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">        在图上画出来树形结构的递归迭代过程</span></span><br><span class="line"><span class="string">        &#x27;&#x27;&#x27;</span></span><br><span class="line">        <span class="keyword">if</span> self.parent == <span class="literal">None</span>:</span><br><span class="line">            plt.figure(dpi=<span class="number">300</span>)</span><br><span class="line">            plt.xlim([<span class="number">0.0</span>, <span class="number">10.0</span>])</span><br><span class="line">            plt.ylim([<span class="number">0.0</span>, <span class="number">10.0</span>])</span><br><span class="line">        color = np.random.random(<span class="number">3</span>)</span><br><span class="line">        <span class="keyword">if</span> self.left != <span class="literal">None</span>:</span><br><span class="line">            plt.plot([self.nodedata[<span class="number">0</span>], self.left.nodedata[<span class="number">0</span>]],[self.nodedata[<span class="number">1</span>], self.left.nodedata[<span class="number">1</span>]], <span class="string">&#x27;-o&#x27;</span>, color=color)</span><br><span class="line">            plt.arrow(x=self.nodedata[<span class="number">0</span>], y=self.nodedata[<span class="number">1</span>], dx=(self.left.nodedata[<span class="number">0</span>]-self.nodedata[<span class="number">0</span>])/<span class="number">2.0</span>, dy=(self.left.nodedata[<span class="number">1</span>]-self.nodedata[<span class="number">1</span>])/<span class="number">2.0</span>, color=color, head_width=<span class="number">0.2</span>)</span><br><span class="line">            self.left.plotKdTree()</span><br><span class="line">        <span class="keyword">if</span> self.right != <span class="literal">None</span>:</span><br><span class="line">            plt.plot([self.nodedata[<span class="number">0</span>], self.right.nodedata[<span class="number">0</span>]],[self.nodedata[<span class="number">1</span>], self.right.nodedata[<span class="number">1</span>]], <span class="string">&#x27;-o&#x27;</span>, color=color)</span><br><span class="line">            plt.arrow(x=self.nodedata[<span class="number">0</span>], y=self.nodedata[<span class="number">1</span>], dx=(self.right.nodedata[<span class="number">0</span>]-self.nodedata[<span class="number">0</span>])/<span class="number">2.0</span>, dy=(self.right.nodedata[<span class="number">1</span>]-self.nodedata[<span class="number">1</span>])/<span class="number">2.0</span>, color=color, head_width=<span class="number">0.2</span>)</span><br><span class="line">            self.right.plotKdTree()</span><br><span class="line">        <span class="comment"># if self.split == 0:</span></span><br><span class="line">        <span class="comment">#     x = self.range</span></span><br><span class="line">        <span class="comment">#     plt.vlines(x, 0, 10, color=color, linestyles=&#x27;--&#x27;)</span></span><br><span class="line">        <span class="comment"># else:</span></span><br><span class="line">        <span class="comment">#     y = self.range</span></span><br><span class="line">        <span class="comment">#     plt.hlines(y, 0, 10, color=color, linestyles=&#x27;--&#x27;)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">test_array = <span class="number">10.0</span>*np.random.random([<span class="number">30</span>,<span class="number">2</span>])</span><br><span class="line">my_kd_tree = kdTree(<span class="literal">None</span>)</span><br><span class="line">my_kd_tree.createNextNode(test_array)</span><br><span class="line">my_kd_tree.plotKdTree()</span><br></pre></td></tr></table></figure>
+<p>这里代码中使用了<a target="_blank" rel="noopener" href="https://www.runoob.com/python/python-object.html">Python面向对象</a>技术，kdTree类的重要参数和前面给出的参考文章中的参数大致相同，具体代码细节不再说明，这里随机生成了30个范围在0-10之内的2维数据作为测试数据，下图是一次运行得到的结果：<br />
+<img src="https://img-blog.csdnimg.cn/171987314e9b4f1f907af4686b507664.png#pic_center" alt="在这里插入图片描述" /><br />
+可以很容易看到中间橙色的点就是根节点，以及每个节点的迭代过程，运行过程无误。</p>
+<h1 id="三-kd树上的最近邻查找算法"><a class="markdownIt-Anchor" href="#三-kd树上的最近邻查找算法"></a> 三、kd树上的最近邻查找算法</h1>
+<p>加快对目标数据的最近邻数据的搜索过程，是kd树这种特殊存储结构的最主要功能，尤其是在数据量非常大时，其速度优势更加明显。kd树上的最近邻查找算法主要涉及两个过程，即：</p>
+<h2 id="1生成搜索路径"><a class="markdownIt-Anchor" href="#1生成搜索路径"></a> 1.生成搜索路径</h2>
+<p>这一过程相对容易，也很好理解。由于我们之前已经根据不同的切分线，生成了包含所有数据点的kd树，那么现在给我们一个新的数据，我们首先当然是根据这些切分线来判断待查找的数据是属于哪个分区的，我们当然有理由相信<strong>与这个数据同属一个分区的数据点(即某个叶节点)是其最近邻点的概率比不同分区的点的概率要大</strong>。因此，我们通过对目标数据的二叉查找，可以确定出<strong>一条搜索路径</strong>以及<strong>初始的最近邻点</strong>，但是要注意的是，通过二叉查找找到的叶节点是目标点的最近邻点的可能性较大，但<strong>不是一定</strong>的，如下图：<br />
+<img src="https://img-blog.csdnimg.cn/cfe767c596b04900b9494285edfb58c0.png" alt="在这里插入图片描述" /><br />
+目标点落在了y=4的上半平面，但是其最近邻点却在y=4的下半平面，所以这里我们初步搜索出来的一个叶节点并不一定是目标点的最近邻点，我们还需要<strong>不断地沿着搜索路径回溯</strong>，确定同一主节点的其它子节点中是否存在与目标点距离更近的点。</p>
+<h2 id="2搜索路径回溯"><a class="markdownIt-Anchor" href="#2搜索路径回溯"></a> 2.搜索路径回溯</h2>
+<p>为了实现<strong>路径回溯</strong>的功能，这里需要使用<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%A0%88/12808149?fr=aladdin">栈</a>来存储搜索路径，具体说来，当回溯到某一节点的父节点时，需要判断目标点到该父节点对应切分线的距离是否小于当前的最小距离，如果比最短距离还小，说明在该父节点对应的另一分支中有可能存在与目标点距离更小的点，因此就需要搜索该分支中的节点。<br />
+为了更加形象地说明，还是以上图为例。首先通过二分查找我们确定目标点与(4,7)点落在同一域内，因此将(4,7)作为初始最近邻点，然后向上回溯到(5,4)点，而(5,4)点对应的切分线是y=4，通过计算发现目标点到直线y=4的距离小于当前最短距离，因此在目标点的对侧即(5,4)节点的另一分支可能存在与目标点距离更近的点，因此我们需要跳到另一分支中重新检索，<strong>这里由于另一分支的深度不一定和前一分支相同，因此在跳到另一分支的头节点之后，我们还需要在此基础之上重复第1步中的路径搜索过程，到达该分支的叶节点，<strong>然后重复向上回溯查找直到将搜索路径全部回溯完成，我们就可以得到目标点的最近邻点。<br />
+这其中还有一个值得注意的地方，就是向上回溯时为了避免路径在两个分支之间来回跳跃导致死循环，需要将整个回溯过程中访问过的节点从路径中去掉，用一个标签来指示就可以，上述代码中使用的是</strong>isinvted</strong>来标记当前节点是否被访问过。</p>
+<h2 id="3最近邻查找算法代码"><a class="markdownIt-Anchor" href="#3最近邻查找算法代码"></a> 3.最近邻查找算法代码</h2>
+<p>具体代码实现是在以上kdTree类的基础上在添加几个内部函数就可以了，具体添加的函数为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">divDataToLeftOrRight</span>(<span class="params">self, find_data</span>):</span><br><span class="line">       <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">       根据传入的数据将其分给左节点(0)或右节点(1)</span></span><br><span class="line"><span class="string">       &#x27;&#x27;&#x27;</span></span><br><span class="line">       data_value = find_data[self.split]</span><br><span class="line">       <span class="keyword">if</span> data_value &lt; self.<span class="built_in">range</span>:</span><br><span class="line">           <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">       <span class="keyword">else</span>:</span><br><span class="line">           <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">getSearchPath</span>(<span class="params">self, ls_path, find_data</span>):</span><br><span class="line">       <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">       二叉查找到叶节点上</span></span><br><span class="line"><span class="string">       &#x27;&#x27;&#x27;</span></span><br><span class="line">       now_node = ls_path[-<span class="number">1</span>]</span><br><span class="line">       <span class="keyword">if</span> now_node == <span class="literal">None</span>:</span><br><span class="line">           <span class="keyword">return</span> ls_path</span><br><span class="line">       now_split = now_node.divDataToLeftOrRight(find_data)</span><br><span class="line">       <span class="keyword">if</span> now_split == <span class="number">0</span>:</span><br><span class="line">           next_node = now_node.left</span><br><span class="line">       <span class="keyword">else</span>:</span><br><span class="line">           next_node = now_node.right</span><br><span class="line">       <span class="keyword">while</span>(next_node!=<span class="literal">None</span>):</span><br><span class="line">           ls_path.append(next_node)</span><br><span class="line">           next_split = next_node.divDataToLeftOrRight(find_data)</span><br><span class="line">           <span class="keyword">if</span> next_split == <span class="number">0</span>:</span><br><span class="line">               next_node = next_node.left</span><br><span class="line">           <span class="keyword">else</span>:</span><br><span class="line">               next_node = next_node.right</span><br><span class="line">       <span class="keyword">return</span> ls_path</span><br><span class="line">           </span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">getNestNode</span>(<span class="params">self, find_data, min_dist, min_data</span>):</span><br><span class="line">       <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">       回溯查找目标点的最近邻距离</span></span><br><span class="line"><span class="string">       &#x27;&#x27;&#x27;</span></span><br><span class="line">       ls_path = []</span><br><span class="line">       ls_path.append(self)</span><br><span class="line">       self.getSearchPath(ls_path, find_data)</span><br><span class="line">       now_node = ls_path.pop()</span><br><span class="line">       now_node.isinvted = <span class="literal">True</span></span><br><span class="line">       min_data = now_node.nodedata</span><br><span class="line">       min_dist = np.linalg.norm(find_data-min_data)</span><br><span class="line">       <span class="keyword">while</span>(<span class="built_in">len</span>(ls_path)!=<span class="number">0</span>):</span><br><span class="line">           back_node = ls_path.pop()   <span class="comment">### 向上回溯一个节点</span></span><br><span class="line">           <span class="keyword">if</span> back_node.isinvted == <span class="literal">True</span>:</span><br><span class="line">               <span class="keyword">continue</span></span><br><span class="line">           <span class="keyword">else</span>:</span><br><span class="line">               back_node.isinvted = <span class="literal">True</span></span><br><span class="line">           back_dist = np.linalg.norm(find_data-back_node.nodedata)</span><br><span class="line">           <span class="keyword">if</span> back_dist &lt; min_dist:</span><br><span class="line">               min_data = back_node.nodedata</span><br><span class="line">               min_dist = back_dist</span><br><span class="line">           <span class="keyword">if</span> np.<span class="built_in">abs</span>(find_data[back_node.split]-back_node.<span class="built_in">range</span>) &lt; min_dist:</span><br><span class="line">               ls_path.append(back_node)</span><br><span class="line">               <span class="keyword">if</span> back_node.left.isinvted == <span class="literal">True</span>:</span><br><span class="line">                   <span class="keyword">if</span> back_node.right == <span class="literal">None</span>:</span><br><span class="line">                       <span class="keyword">continue</span></span><br><span class="line">                   ls_path.append(back_node.right)</span><br><span class="line">               <span class="keyword">else</span>:</span><br><span class="line">                   <span class="keyword">if</span> back_node.left == <span class="literal">None</span>:</span><br><span class="line">                       <span class="keyword">continue</span></span><br><span class="line">                   ls_path.append(back_node.left)</span><br><span class="line">               ls_path = back_node.getSearchPath(ls_path, find_data)</span><br><span class="line">               now_node = ls_path.pop()</span><br><span class="line">               now_node.isinvted = <span class="literal">True</span></span><br><span class="line">               now_dist = np.linalg.norm(find_data-now_node.nodedata)</span><br><span class="line">               <span class="keyword">if</span> now_dist &lt; min_dist:</span><br><span class="line">                   min_data = now_node.nodedata</span><br><span class="line">                   min_dist = now_dist</span><br><span class="line">       <span class="built_in">print</span>(<span class="string">&quot;min distance:&#123;&#125;  min data:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(min_dist, min_data))</span><br><span class="line">       <span class="keyword">return</span> min_dist</span><br><span class="line"></span><br><span class="line">   <span class="keyword">def</span> <span class="title function_">getNestDistByEx</span>(<span class="params">self, test_array, find_data, min_dist, min_data</span>):</span><br><span class="line">       <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">       穷举法得到目标点的最近邻距离</span></span><br><span class="line"><span class="string">       &#x27;&#x27;&#x27;</span></span><br><span class="line">       data_count = test_array.shape[<span class="number">0</span>]</span><br><span class="line">       min_data = test_array[<span class="number">0</span>]</span><br><span class="line">       min_dist = np.linalg.norm(find_data-min_data)</span><br><span class="line">       <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(data_count):</span><br><span class="line">           now_data = test_array[i]</span><br><span class="line">           now_dist = np.linalg.norm(find_data-now_data)</span><br><span class="line">           <span class="keyword">if</span> now_dist &lt; min_dist:</span><br><span class="line">               min_dist = now_dist</span><br><span class="line">               min_data = now_data</span><br><span class="line">       <span class="built_in">print</span>(<span class="string">&quot;min distance:&#123;&#125;  min data:&#123;&#125;&quot;</span>.<span class="built_in">format</span>(min_dist, min_data))</span><br><span class="line">       <span class="keyword">return</span> min_dist</span><br></pre></td></tr></table></figure>
+<p>代码的对齐格式是一致的，直接加入以上类中就可以，当然为了对比以及验证结果的正确性，在类中还实现了穷举查找算法。首先用50个点测试了一下回溯查找结果的正确性，绘制的结果如下：<br />
+<img src="https://img-blog.csdnimg.cn/f12a49e12c0a4422a948c480c0fc44f7.png#pic_center" alt="在这里插入图片描述" /><br />
+查找的目标点是(5.0, 5.0)，查找到的最近邻点在目标点左下角，从图上来看结果是正确的。为了对比穷举法和利用kd树回溯查找的速度，数据点设置为10000个，代码为:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">test_array = <span class="number">10.0</span>*np.random.random([<span class="number">10000</span>,<span class="number">2</span>])   <span class="comment">### 随机生成n个2维0-10以内的数据点</span></span><br><span class="line">my_kd_tree = kdTree(<span class="literal">None</span>)                    <span class="comment">### kd树实例化</span></span><br><span class="line">my_kd_tree.createNextNode(test_array)        <span class="comment">### 生成kd树</span></span><br><span class="line"><span class="comment"># my_kd_tree.plotKdTree()   </span></span><br><span class="line">find_data = np.array([<span class="number">5.0</span>, <span class="number">5.0</span>])             <span class="comment">### 待查找目标点</span></span><br><span class="line">min_dist = <span class="number">0</span>                                 <span class="comment">### 临时变量，存储最短距离</span></span><br><span class="line">min_data = np.array([<span class="number">0.0</span>, <span class="number">0.0</span>])              <span class="comment">### 临时变量，存储取到最短距离时对应的数据点</span></span><br><span class="line"></span><br><span class="line">%time min_dist = my_kd_tree.getNestNode(find_data, min_dist, min_data)        <span class="comment">### 利用kd树回溯查找</span></span><br><span class="line">%time min_dist = my_kd_tree.getNestDistByEx(test_array, find_data, min_dist, min_data)    <span class="comment">### 穷举法查找</span></span><br></pre></td></tr></table></figure>
+<p>用%time命令来显示单步运行查找算法所需的时间，运行结果如下：<br />
+<img src="https://img-blog.csdnimg.cn/8906f4ac24864a5d9ffcb7eba582c79a.png#pic_center" alt="在这里插入图片描述" /><br />
+可以看到两种算法最终查找到的最短距离以及最近邻数据点都是一样的，证明了算法的正确性。同时kd树查找过程只用了1ms左右，而穷举法查找用了70ms左右，二者相差了70倍，当然随着数据量增大这个差距还会继续增加的，最终应该会趋于某个极限值。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>￥打赏我￥</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/PayQRCode/wechat.png" alt="Jun WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/PayQRCode/alipay.jpg" alt="Jun Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/python3/" rel="tag"># python3</a>
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/19/Bash%E8%84%9A%E6%9C%AC%E8%8E%B7%E5%8F%96VASP%E8%83%BD%E5%B8%A6%E8%AE%A1%E7%AE%97%E6%95%B0%E6%8D%AE/" rel="prev" title="Bash脚本获取VASP能带计算数据">
+                  <i class="fa fa-chevron-left"></i> Bash脚本获取VASP能带计算数据
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/05/03/%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%B5%81%E7%A8%8B%E5%AE%9E%E7%8E%B0/" rel="next" title="一个简单的机器学习流程实现">
+                  一个简单的机器学习流程实现 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jun All Rights Reserved</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">151k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">2:17</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha256-TThEtR+XalhWKkfF383YLOrI50NGNeIqrzS+q08afrY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.css" integrity="sha256-Wk20U9mS/kHGcSgkjSiRezW5exqT6wAOKwySOaLotXM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.js","integrity":"sha256-etSqbSVF4+Lwe8MGk/Vanc1sR+mWv+qOG73fxWw9p94="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

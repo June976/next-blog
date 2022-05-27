@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+<link rel="preconnect" href="null//null" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#09E614","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="一、前言 在网上翻到一篇讲电子结构分析的文献，内容比较基础，但是把概念讲的比较清晰，这里打算把全文翻译一下，原文链接：https:&#x2F;&#x2F;onlinelibrary.wiley.com&#x2F;doi&#x2F;10.1002&#x2F;9783527671816.ch17">
+<meta property="og:type" content="article">
+<meta property="og:title" content="电子结构分析----文献翻译">
+<meta property="og:url" content="http://example.com/2021/11/23/%E7%94%B5%E5%AD%90%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90-%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/index.html">
+<meta property="og:site_name" content="Jun的博客">
+<meta property="og:description" content="一、前言 在网上翻到一篇讲电子结构分析的文献，内容比较基础，但是把概念讲的比较清晰，这里打算把全文翻译一下，原文链接：https:&#x2F;&#x2F;onlinelibrary.wiley.com&#x2F;doi&#x2F;10.1002&#x2F;9783527671816.ch17">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/electronic/charge.jpg">
+<meta property="og:image" content="http://example.com/images/electronic/dos.jpg">
+<meta property="article:published_time" content="2021-11-23T01:40:53.000Z">
+<meta property="article:modified_time" content="2022-04-04T14:08:52.637Z">
+<meta property="article:author" content="Jun">
+<meta property="article:tag" content="DFT">
+<meta property="article:tag" content="文献翻译">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/electronic/charge.jpg">
+
+
+<link rel="canonical" href="http://example.com/2021/11/23/%E7%94%B5%E5%AD%90%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90-%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/11/23/%E7%94%B5%E5%AD%90%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90-%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/","path":"2021/11/23/电子结构分析-文献翻译/","title":"电子结构分析----文献翻译"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>电子结构分析----文献翻译 | Jun的博客</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jun的博客</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">26</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">41</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80-%E5%89%8D%E8%A8%80"><span class="nav-text"> 一、前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C-%E6%AD%A3%E6%96%87%E9%83%A8%E5%88%86"><span class="nav-text"> 二、正文部分</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#center%E7%94%B5%E5%AD%90%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90center"><span class="nav-text"> 电子结构分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-text"> 引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E8%83%BD%E7%BA%A7%E5%92%8C%E8%83%BD%E5%B8%A6%E7%BB%93%E6%9E%84"><span class="nav-text"> 1.能级和能带结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E6%B3%A2%E5%87%BD%E6%95%B0%E5%92%8C%E5%8E%9F%E5%AD%90"><span class="nav-text"> 2.波函数和原子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E5%AE%9A%E5%9F%9F%E5%8C%96%E5%87%BD%E6%95%B0"><span class="nav-text"> 3.定域化函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%E6%80%81%E5%AF%86%E5%BA%A6%E6%8A%95%E5%BD%B1%E6%80%81%E5%AF%86%E5%BA%A6"><span class="nav-text"> 4.态密度，投影态密度</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jun"
+      src="/images/profile.jpg">
+  <p class="site-author-name" itemprop="name">Jun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/June976" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;June976" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/HelloWorldTM" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;HelloWorldTM" rel="noopener" target="_blank"><i class="fa fa-c fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/billboard" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;billboard" rel="noopener" target="_blank"><i class="fa fa-z fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://s.weibo.com/top/summary" title="Weibo → https:&#x2F;&#x2F;s.weibo.com&#x2F;top&#x2F;summary" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@jun997.xyz" title="E-Mail → mailto:admin@jun997.xyz" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mailchi.mp/78fbe8b89a13/juns-blog-subscribe" title="Subscribe → https:&#x2F;&#x2F;mailchi.mp&#x2F;78fbe8b89a13&#x2F;juns-blog-subscribe" rel="noopener" target="_blank"><i class="fab fa-mailchimp fa-fw"></i>Subscribe</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/June976" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/11/23/%E7%94%B5%E5%AD%90%E7%BB%93%E6%9E%84%E5%88%86%E6%9E%90-%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpg">
+      <meta itemprop="name" content="Jun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jun的博客">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="电子结构分析----文献翻译 | Jun的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          电子结构分析----文献翻译
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-11-23 09:40:53" itemprop="dateCreated datePublished" datetime="2021-11-23T09:40:53+08:00">2021-11-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-04-04 22:08:52" itemprop="dateModified" datetime="2022-04-04T22:08:52+08:00">2022-04-04</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>4.9k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="一-前言"><a class="markdownIt-Anchor" href="#一-前言"></a> 一、前言</h3>
+<p>在网上翻到一篇讲电子结构分析的文献，内容比较基础，但是把概念讲的比较清晰，这里打算把全文翻译一下，原文链接：<a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1002/9783527671816.ch17">https://onlinelibrary.wiley.com/doi/10.1002/9783527671816.ch17</a></p>
+<span id="more"></span>
+<h3 id="二-正文部分"><a class="markdownIt-Anchor" href="#二-正文部分"></a> 二、正文部分</h3>
+<h1 id="center电子结构分析center"><a class="markdownIt-Anchor" href="#center电子结构分析center"></a> <center>电子结构分析</center></h1>
+<h3 id="引言"><a class="markdownIt-Anchor" href="#引言"></a> 引言</h3>
+<p>你是否已经在你的模拟中使用过电子结构方法来计算你所选择的初始位置处原子的能量，并且当你移动原子到其它位置时，你也可以分析发生变化的电子结构。通过对电子结构的分析，你将更加深入地理解系统的化学键和稳定性。你也可以把你的把你的结果与很多实验结果对比，从而更好地理解甚至是解释实验结果。通常来讲，你会对扫描探针技术、光电发射、电子散射技术和磁共振等测试结果特别感兴趣。<br />
+<br/></p>
+<p>为了计算结果合理，做电子结构分析时系统必须处于一个收敛态：很多现代计算软件包会使用很多方法来增加结构弛豫和分子动力学过程的综合性能，包括波函数和电荷密度的预测，如果仅靠分析这些不会给出可靠的结果。原子发生任何形式的移动之后，在分析之前，非常重要的一点是去运行一次单点计算得出原子的固定位置和高精度的电子基态。<br/></p>
+<p>对于模拟参数的理解也很重要。在一次DFT计算中，正确的收敛电荷密度尤为重要：例如如果你对能带结构感兴趣，最好首先在完整的k点集上计算一次收敛的电荷密度，然后固定住这个电荷密度，在它的基础上重新计算特殊点本征态和电荷密度。相比于结构弛豫，为了产生更好的电子结构，电子结构计算中使用更好的k点网格和更高的平面波截断能是有必要的。<br/></p>
+<h3 id="1能级和能带结构"><a class="markdownIt-Anchor" href="#1能级和能带结构"></a> 1.能级和能带结构</h3>
+<p>在一个孤立系统中，例如，一个分子或者一个纳米晶体，能级大小与倒空间位置无关，因此只有一系列能级本身是我们所关心的。相反，在一个周期性系统中，根据凝聚态物理知识，你必须分析倒空间中不同位置处的能级。特别值得注意的是倒空间本身取决于原胞的大小和研究系统的性质。<br/></p>
+<p>实空间中一个高度定域化态，例如悬键或缺陷处的强束缚电子，在倒空间中将具有相应的平坦结构。物理上，这是讲得通的：实空间中的局域态说明和相邻晶胞之间相互作用很弱，因此波矢k的重叠很小。对于使用周期性边界条件来模拟非周期性系统，例如一个分子或者表面，这很重要：如果在某些物理上本应该是平的地方，能级随着倒空间位置发生剧烈变化，那么你应该检查你系统中所使用的原胞尺寸。<br/></p>
+<p>实空间中一个非定域化态将会产生显著的倒空间结构。最简单的例子是考虑一个自由电子金属，其能级下取决于倒格矢的平方，因为动能项包含k<sup>2</sup>因子。有一些金属已知是几乎近自由电子金属，尽管大体上是，但实际上它们更加复杂。注意半导体和绝缘体也有非定域态和可观的倒空间结构，并且仅需一点倒空间能带就能产生好的半导体模型。<br/></p>
+<p>实际上，我们已经接触到如何精确计算能带结构的问题。记住当你求解周期性系统的基态时，选取的离散k点集被用来近似计算能量的积分（这在能量最小迭代过程中是一个基础变量）。通过这样，能够产生一个良好收敛的基态电荷密度，你可以自信地用这个电荷密度很好地描述你的系统（前提你已经仔细地选取了相关参数）。这一步之后，电荷密度应该保持固定：如果你沿着特殊的k点集合计算能带结构，你不需要重复计算每个点的电荷密度（如果这样对基态电荷密度近似近似更差）。事实上，当你计算能级，你正在根据一个收敛的基态电荷密度，研究系统在倒空间中特定点的性质。使用哪种方法计算能带结构的问题应该是你计划阶段的一部分。一些能带结构是任何微扰计算（如GW）的必要部分，通常通过DFT执行，有时是Hartree-Fock方法。在执行计算之前，你必须确保输入的能带不包含任何严重的错误，包括输入文件的错误和使用的方法。对于DFT，通常会把带隙算的太窄，最需要检查的事情是本应该有带隙的体系，计算结果也应该有。<br />
+对于一个孤立系统，不需要考虑布里渊区采样点的问题，但是你仍然需要确保计算收敛到精确基态。这对于DFT和量子化学方法都是一样的，并且还需要仔细测试基组大小对能级的影响。<br/></p>
+<h3 id="2波函数和原子"><a class="markdownIt-Anchor" href="#2波函数和原子"></a> 2.波函数和原子</h3>
+<p>在分析电子结构计算结果时，将电荷和其它性质投影到单个原子是非常有吸引力的。这也遵循标准的化学反映描述。然而，需要非常小心的是：没有明确的方法将空间区域分配给原子，而这些区域是计算电荷所必须的，这个问题的答案将根据使用的方法而改变。此外，对于给定的方法，随着方法所使用的参数变化，答案也会变化。这不是说你不需要尝试去把电荷投影到原子：只是说你需要清楚自己在做什么和为什么做，并且对结果持谨慎态度。<br />
+为什么有这样的问题？最简单的出发点是询问关于怎样定义和每个原子相关的空间体积。最典型的回答是去使用一个球形，这很有道理，因为孤立原子具有球对称性。然而，从水果可以看出来，当你堆叠这些球时，它们周边存在间隙，你不能用球填满空间。因此，当使用球来填充空间时，我们将会损失间隙处的电荷密度，或者我们必须让球重叠并且将某些相同的电荷密度分配给不同的原子。<br/></p>
+<p>目前有一些方案来区分原子间的重叠区域，通过给定不同的权重，虽然这些都带有一定的经验注意。这其中两个最著名的方法是Hirshfeld方案和Becke方案。Hirshfeld方案提出了一种“promolecule”的电荷密度，它是指孤立原子基态下的电荷密度，然后对根据空间中每个点对电荷的贡献进行加权（因此我们可以得到原子A在r处的电荷比重为：w<sub>A</sub>®=ρ<sub>A</sub>®/∑<sub>B</sub>ρ<sub>B</sub>®）。Becke方案使用积分方案一部分作为权重，这在很多量子化学代码中已经是标准。它根据Voronoi多面体的推广定义了原子边界。它的主要优点是，它通常已经用于积分过程中，并且可以用于计算原子电荷，而无需额外的计算成本。<br/></p>
+<p>重叠球体的另一种选择是使用与球体不同形状，它可以完全填充空间。有很多方案来做这件事情，尽管同样的，由于划分的方法本身并不明确，因此不同的方案将会产生不同的结果。Bader atoms-in-molecules 方法根据电荷密度的拓扑结构确定原子间电荷过渡的位置。这需要完整的电子密度，如果使用赝势，必须要重构。这一方法主要是搜索沿着键的方向电荷密度最小，垂直键的方向最大的点的集合。这在计算上花费较大，并且有时会给出很难懂的结果，尽管非常有效并且被广泛应用。最常见的方法是使用Voronoi多面体方法，它们是用原子对之间的向量平分的平面来定义的。平面包围的空间指定给位于空间中心的原子。这种方法不像许多其他方法那样考虑不同的原子大小，尽管目前已经有引入原子大小的扩展。<br/></p>
+<p>可用于定域基组的最后一种方法是通过密度矩阵P，在原子轨道基组中，来分配电荷密度，尽管这种方法也需要特别注意处理重叠矩阵S。被广泛应用的Mulliken方法使用乘积元素PS，一个原子给定的电荷定义为：P<sub>ii</sub>S<sub>ii</sub>+1/2∑<sub>j</sub>(P<sub>ij</sub>S<sub>ij</sub>+P<sub>ji</sub>S<sub>ji</sub>),在原子上对基函数进行隐式求和。Mulliken方法的关键问题是其它元素的加和因子1/2：这是任意的。Lowdin方法转而使用正交基矢，并且使用生成的电荷密度矩阵S<sup>1/2</sup>PS<sup>1/2</sup>的自身元素计算。Mulliken方法对基组的依赖度很大，对于较大原子基组结果将变得不可靠并且不收敛。<br/></p>
+<p>如下表给出了一些使用不同方法计算得到的结果。很容易看到，不同的方法计算结果差距很大，并且受使用的基组影响很大，Mulliken方法改变符号随着随着基组增加，Bader电荷随着基组变化逐渐收敛，Hirshfeld方法和Voronoi方法几乎与基组选择无关。这一简单例子能够清晰的说明给原子分配电荷本质上是有风险的。<br/><br />
+<img src="/images/electronic/charge.jpg" alt="charge" /></p>
+<p>因此我们应该选择什么方法呢？我们不能给出具体的建议，因为这些方法都有弱点，在使用Mulliken方法的时候我们必须慎之又慎，因为它非常不可靠。如果你不使用原子中心化局域基组，你必须使用更多的方法来分割空间。无论使用何种方法，我们建议你做一下重要的检查：测试你的假设的效果；不同的计算结果自洽；不要过度解读。<br/></p>
+<h3 id="3定域化函数"><a class="markdownIt-Anchor" href="#3定域化函数"></a> 3.定域化函数</h3>
+<p>将一组扩展轨道转化为定域函数是电子结构方法中的一项重要技术。对于扩展系统，生成的函数称为Wannier函数，而对于孤立系统，一般称为局域分子轨道。然而，仅仅规定有一个幺正变换是不够的：必须提出一些更进一步的标准。对于扩展系统，一个非常成功的方案被提出来去生成最大定域Wannier函数，通过减少数目：Ω=Σ<sub>i</sub>&lt;Φ<sub>i</sub>|r<sup>2</sup>|Φ<sub>i</sub>&gt;-&lt;Φ<sub>i</sub>|r|Φ<sub>i</sub>&gt;<sup>2</sup>，其中沿着模拟晶胞中的能带求和。对于分子轨道适用的Foster-Boys定域标准可以证明形式上是一样的，尽管求和是沿着分子中的轨道。还有其它的标准定义，例如最大库伦相互作用或者轨道电荷重叠。都是后处理程序，需要从自洽的收敛电荷密度开始。<br/></p>
+<p>一旦创建了定域化轨道，它们可以被用作分析系统。最显而易见的和广泛的应用是分析化学键。一些程序中保留了σ键和pi键的成键特征，通过能量区分，而另外一些混合它们。然而，与原子间键相关的定域轨道可以被观察到并被用于理解分子和晶体中相互作用。在周期系统中，它们还可用于计算材料在外场作用下的极化，这是用非定域化函数无法实现的。<br/></p>
+<p>定域轨道也可以被用作计算电子输运的基函数，尽管一些方法简单地一开始就使用原子中心基函数，计算输运是一个广泛的领域，对于不同问题有很多不同的方法。在最简单的情况下，采用散射方法，利用非平衡态格林函数，可以扩展为自洽、存在电子传输的情况下来计算电荷密度。目前有很多程序能够将DFT计算结果与非平衡态格林函数方法提供接口计算输运性质。这种方法可以研究电子跃迁，而不是相干电子传输，但这涉及电子的定域化和计算Born–Oppenheimer表面之间的跃迁。<br/></p>
+<p>定域轨道也可以被用作计算相关性。在量子化学中，一些减少关联计算比例的方法涉及定域轨道，并且将这些方法应用于几十个原子已经成为可能。在扩展系统中，Wannier函数被用作哈密顿量模型用于强关联系统的计算。<br/></p>
+<h3 id="4态密度投影态密度"><a class="markdownIt-Anchor" href="#4态密度投影态密度"></a> 4.态密度，投影态密度</h3>
+<p>态密度(DOS)是一种测量在特定能量下，或更准确地说在特定能量窗口中有多少态，即电子结构计算中的本征态。DOS可以与实验技术关联，例如STM，也可以用于分析系统的电子结构。将DOS分解到原子或原子团也是有用的，尽管和向原子分配电荷一样，也有一样的困难，下面将详细讨论。形式上讲，我们可以写作：n(E)=Σ<sub>i</sub>δ(E-ε<sub>i</sub>)<br/></p>
+<p>在DFT计算之后，我们可以通过简单地将窗口划分为一组存储单元并计算每个存储单元中的状态数来评估能量窗口中的DOS。DFT处理有限数量的原子，因此最终DOS将会离散。对于这样的一个有限系统，DFT计算得到的DOS将只会简单地是一组竖线，与实验光谱几乎没有什么相似之处（但是对于0K下地分子系统是相似的）。<br/></p>
+<p>通常的做法是通过离散的本征值和用户指定宽度的高斯函数来加宽它们生成DOS图。这在物理上讲的通：热涨落将会拓宽系统的能级。然而，这意味着生成的DOS的整体外观可以取决于用户的输入。下图中说明了加宽效应对DFT计算的苯的DOS的影响。这里，我们可以看到非常小的宽化，非常窄的峰，但是保留了所有的系统能级的细节。随着宽度增加，可能在视觉上看起来更好，但是峰值开始合并。随着更大的展宽（smearing），两个峰可能会组合成一个。可以注意到垂直比例怎样随着展宽变化的：使用的约束条件是DOS积分得到总的态度米，增加展宽之后必然会降低峰值高度，因此在选择参数时需要谨慎。<br/><br />
+<img src="/images/electronic/dos.jpg" alt="dos" /></p>
+<p>当考虑具有局域特征的系统的物理或化学性质时，例如表面，缺陷，反应中心，整个系统的DOS常常不是很有用。在这种情况下，很自然地会想，与特定原子或原子组相关联的DOS可能是什么。将DOS投影到特定原子上的问题与前面讨论的将电荷分配给特定原子的问题完全相同：在DFT中，波函数是非定域的，没有明确的方法将波函数分配给特定的原子。最常用的方法是在原子周围定义一个球体，并将DOS投影到该球体上；重要的是要认识到，产生的DOS将取决于球体半径。这并不意味着你不应该这样做：简单地说，就像电荷一样，你需要测试你的假设的效果并保持自洽。<br/></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>￥打赏我￥</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/PayQRCode/wechat.png" alt="Jun WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/PayQRCode/alipay.jpg" alt="Jun Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/DFT/" rel="tag"># DFT</a>
+              <a href="/tags/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/" rel="tag"># 文献翻译</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/11/10/VASP%E7%9A%84%E8%AE%A1%E7%AE%97%E6%B5%81%E7%A8%8B/" rel="prev" title="VASP的计算流程">
+                  <i class="fa fa-chevron-left"></i> VASP的计算流程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/01/05/vasp%E4%BD%BF%E7%94%A8%E7%9A%84%E4%B8%80%E4%BA%9Btips%E6%80%BB%E7%BB%93-%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0/" rel="next" title="vasp使用的一些tips总结(持续更新)">
+                  vasp使用的一些tips总结(持续更新) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jun All Rights Reserved</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">151k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">2:17</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha256-TThEtR+XalhWKkfF383YLOrI50NGNeIqrzS+q08afrY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.css" integrity="sha256-Wk20U9mS/kHGcSgkjSiRezW5exqT6wAOKwySOaLotXM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.js","integrity":"sha256-etSqbSVF4+Lwe8MGk/Vanc1sR+mWv+qOG73fxWw9p94="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>
