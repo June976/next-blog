@@ -8,24 +8,24 @@
 
 <link rel="preconnect" href="null//null" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/next-blog/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/next-blog/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/next-blog/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/next-blog/images/favicon/safari-pinned-tab.svg" color="#222">
 
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/next-blog/css/main.css">
 
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#09E614","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.jun997.xyz","root":"/next-blog/","images":"/next-blog/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#09E614","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/next-blog/js/config.js"></script>
 
     <meta name="description" content="一、回归问题 回归问题是指研究某一因变量 y 与另一组变量（x1，x2，…，xk）之间的关系统计分析方法，在机器学习中，x 通常也被称为特征变量，特征变量的好坏对最终模型的准确性有较大的影响。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="matlab实现机器学习算法-回归分析">
-<meta property="og:url" content="http://example.com/2021/09/26/matlab%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/index.html">
+<meta property="og:url" content="https://www.jun997.xyz/next-blog/2021/09/26/matlab%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="Jun的博客">
 <meta property="og:description" content="一、回归问题 回归问题是指研究某一因变量 y 与另一组变量（x1，x2，…，xk）之间的关系统计分析方法，在机器学习中，x 通常也被称为特征变量，特征变量的好坏对最终模型的准确性有较大的影响。">
 <meta property="og:locale" content="en_US">
@@ -36,17 +36,17 @@
 <meta property="article:modified_time" content="2022-05-27T05:19:56.293Z">
 <meta property="article:author" content="Jun">
 <meta property="article:tag" content="算法">
-<meta property="article:tag" content="matlab">
 <meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="matlab">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/d2c9a56794b747c8914ff56f16489136.jpg?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA5ZOG5ZWmQeaiplBMVVM=,size_20,color_FFFFFF,t_70,g_se,x_16#pic_center">
 
 
-<link rel="canonical" href="http://example.com/2021/09/26/matlab%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/">
+<link rel="canonical" href="https://www.jun997.xyz/next-blog/2021/09/26/matlab%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/09/26/matlab%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/","path":"2021/09/26/matlab实现机器学习算法-回归分析/","title":"matlab实现机器学习算法-回归分析"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.jun997.xyz/next-blog/2021/09/26/matlab%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/","path":"2021/09/26/matlab实现机器学习算法-回归分析/","title":"matlab实现机器学习算法-回归分析"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>matlab实现机器学习算法-回归分析 | Jun的博客</title>
@@ -57,7 +57,7 @@
 
 
   <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
+    <link rel="stylesheet" href="/next-blog/css/noscript.css">
   </noscript>
 </head>
 
@@ -77,7 +77,7 @@
 
   <div class="site-meta">
 
-    <a href="/" class="brand" rel="start">
+    <a href="/next-blog/" class="brand" rel="start">
       <i class="logo-line"></i>
       <p class="site-title">Jun的博客</p>
       <i class="logo-line"></i>
@@ -93,7 +93,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">26</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">41</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/next-blog/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/next-blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/next-blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">26</span></a></li><li class="menu-item menu-item-archives"><a href="/next-blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">41</span></a></li><li class="menu-item menu-item-sitemap"><a href="/next-blog/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
   </ul>
 </nav>
 
@@ -131,20 +131,20 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Jun"
-      src="/images/profile.jpg">
+      src="/next-blog/images/profile.jpg">
   <p class="site-author-name" itemprop="name">Jun</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-        <a href="/archives/">
+        <a href="/next-blog/archives/">
           <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-          <a href="/tags/">
+          <a href="/next-blog/tags/">
         <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
@@ -210,10 +210,10 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/26/matlab%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/">
+    <link itemprop="mainEntityOfPage" href="https://www.jun997.xyz/next-blog/2021/09/26/matlab%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95-%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpg">
+      <meta itemprop="image" content="/next-blog/images/profile.jpg">
       <meta itemprop="name" content="Jun">
     </span>
 
@@ -348,11 +348,11 @@ y^{(n)} \\
   </button>
   <div class="post-reward">
       <div>
-        <img src="/images/PayQRCode/wechat.png" alt="Jun WeChat Pay">
+        <img src="/next-blog/images/PayQRCode/wechat.png" alt="Jun WeChat Pay">
         <span>WeChat Pay</span>
       </div>
       <div>
-        <img src="/images/PayQRCode/alipay.jpg" alt="Jun Alipay">
+        <img src="/next-blog/images/PayQRCode/alipay.jpg" alt="Jun Alipay">
         <span>Alipay</span>
       </div>
 
@@ -360,21 +360,21 @@ y^{(n)} \\
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
-              <a href="/tags/matlab/" rel="tag"># matlab</a>
-              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+              <a href="/next-blog/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/next-blog/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+              <a href="/next-blog/tags/matlab/" rel="tag"># matlab</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/09/08/%E8%A7%A3%E5%86%B3ShadowSocks%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E9%97%AE%E9%A2%98/" rel="prev" title="解决ShadowSocks端口占用问题">
+                <a href="/next-blog/2021/09/08/%E8%A7%A3%E5%86%B3ShadowSocks%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8%E9%97%AE%E9%A2%98/" rel="prev" title="解决ShadowSocks端口占用问题">
                   <i class="fa fa-chevron-left"></i> 解决ShadowSocks端口占用问题
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/10/12/%E6%9D%90%E6%96%99%E5%A4%9A%E5%B0%BA%E5%BA%A6%E8%AE%A1%E7%AE%97%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/" rel="next" title="材料多尺度计算资料汇总">
+                <a href="/next-blog/2021/10/12/%E6%9D%90%E6%96%99%E5%A4%9A%E5%B0%BA%E5%BA%A6%E8%AE%A1%E7%AE%97%E8%B5%84%E6%96%99%E6%B1%87%E6%80%BB/" rel="next" title="材料多尺度计算资料汇总">
                   材料多尺度计算资料汇总 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -425,7 +425,7 @@ y^{(n)} \\
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+<script src="/next-blog/js/comments.js"></script><script src="/next-blog/js/utils.js"></script><script src="/next-blog/js/motion.js"></script><script src="/next-blog/js/next-boot.js"></script><script src="/next-blog/js/bookmark.js"></script>
 
   
 
@@ -443,7 +443,7 @@ y^{(n)} \\
   <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha256-TThEtR+XalhWKkfF383YLOrI50NGNeIqrzS+q08afrY=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.css" integrity="sha256-Wk20U9mS/kHGcSgkjSiRezW5exqT6wAOKwySOaLotXM=" crossorigin="anonymous">
   <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.js","integrity":"sha256-etSqbSVF4+Lwe8MGk/Vanc1sR+mWv+qOG73fxWw9p94="}}</script>
-  <script src="/js/third-party/math/katex.js"></script>
+  <script src="/next-blog/js/third-party/math/katex.js"></script>
 
 
 

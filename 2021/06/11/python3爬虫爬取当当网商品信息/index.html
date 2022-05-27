@@ -8,24 +8,24 @@
 
 <link rel="preconnect" href="null//null" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/next-blog/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/next-blog/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/next-blog/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/next-blog/images/favicon/safari-pinned-tab.svg" color="#222">
 
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="/next-blog/css/main.css">
 
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#09E614","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.jun997.xyz","root":"/next-blog/","images":"/next-blog/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":true,"color":"#09E614","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/next-blog/js/config.js"></script>
 
     <meta name="description" content="一、环境搭建 使用到的环境：  python3.8.0 requests库 re库 bs4库 pycharm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python3爬虫爬取当当网商品信息">
-<meta property="og:url" content="http://example.com/2021/06/11/python3%E7%88%AC%E8%99%AB%E7%88%AC%E5%8F%96%E5%BD%93%E5%BD%93%E7%BD%91%E5%95%86%E5%93%81%E4%BF%A1%E6%81%AF/index.html">
+<meta property="og:url" content="https://www.jun997.xyz/next-blog/2021/06/11/python3%E7%88%AC%E8%99%AB%E7%88%AC%E5%8F%96%E5%BD%93%E5%BD%93%E7%BD%91%E5%95%86%E5%93%81%E4%BF%A1%E6%81%AF/index.html">
 <meta property="og:site_name" content="Jun的博客">
 <meta property="og:description" content="一、环境搭建 使用到的环境：  python3.8.0 requests库 re库 bs4库 pycharm">
 <meta property="og:locale" content="en_US">
@@ -41,11 +41,11 @@
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/2019112822563731.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hlbGxvV29ybGRUTQ==,size_16,color_FFFFFF,t_70">
 
 
-<link rel="canonical" href="http://example.com/2021/06/11/python3%E7%88%AC%E8%99%AB%E7%88%AC%E5%8F%96%E5%BD%93%E5%BD%93%E7%BD%91%E5%95%86%E5%93%81%E4%BF%A1%E6%81%AF/">
+<link rel="canonical" href="https://www.jun997.xyz/next-blog/2021/06/11/python3%E7%88%AC%E8%99%AB%E7%88%AC%E5%8F%96%E5%BD%93%E5%BD%93%E7%BD%91%E5%95%86%E5%93%81%E4%BF%A1%E6%81%AF/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2021/06/11/python3%E7%88%AC%E8%99%AB%E7%88%AC%E5%8F%96%E5%BD%93%E5%BD%93%E7%BD%91%E5%95%86%E5%93%81%E4%BF%A1%E6%81%AF/","path":"2021/06/11/python3爬虫爬取当当网商品信息/","title":"python3爬虫爬取当当网商品信息"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://www.jun997.xyz/next-blog/2021/06/11/python3%E7%88%AC%E8%99%AB%E7%88%AC%E5%8F%96%E5%BD%93%E5%BD%93%E7%BD%91%E5%95%86%E5%93%81%E4%BF%A1%E6%81%AF/","path":"2021/06/11/python3爬虫爬取当当网商品信息/","title":"python3爬虫爬取当当网商品信息"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>python3爬虫爬取当当网商品信息 | Jun的博客</title>
@@ -56,7 +56,7 @@
 
 
   <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
+    <link rel="stylesheet" href="/next-blog/css/noscript.css">
   </noscript>
 </head>
 
@@ -76,7 +76,7 @@
 
   <div class="site-meta">
 
-    <a href="/" class="brand" rel="start">
+    <a href="/next-blog/" class="brand" rel="start">
       <i class="logo-line"></i>
       <p class="site-title">Jun的博客</p>
       <i class="logo-line"></i>
@@ -92,7 +92,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">26</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">41</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/next-blog/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/next-blog/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/next-blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">26</span></a></li><li class="menu-item menu-item-archives"><a href="/next-blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">41</span></a></li><li class="menu-item menu-item-sitemap"><a href="/next-blog/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li>
   </ul>
 </nav>
 
@@ -130,20 +130,20 @@
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="Jun"
-      src="/images/profile.jpg">
+      src="/next-blog/images/profile.jpg">
   <p class="site-author-name" itemprop="name">Jun</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-        <a href="/archives/">
+        <a href="/next-blog/archives/">
           <span class="site-state-item-count">41</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-          <a href="/tags/">
+          <a href="/next-blog/tags/">
         <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
@@ -209,10 +209,10 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/11/python3%E7%88%AC%E8%99%AB%E7%88%AC%E5%8F%96%E5%BD%93%E5%BD%93%E7%BD%91%E5%95%86%E5%93%81%E4%BF%A1%E6%81%AF/">
+    <link itemprop="mainEntityOfPage" href="https://www.jun997.xyz/next-blog/2021/06/11/python3%E7%88%AC%E8%99%AB%E7%88%AC%E5%8F%96%E5%BD%93%E5%BD%93%E7%BD%91%E5%95%86%E5%93%81%E4%BF%A1%E6%81%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpg">
+      <meta itemprop="image" content="/next-blog/images/profile.jpg">
       <meta itemprop="name" content="Jun">
     </span>
 
@@ -322,11 +322,11 @@
   </button>
   <div class="post-reward">
       <div>
-        <img src="/images/PayQRCode/wechat.png" alt="Jun WeChat Pay">
+        <img src="/next-blog/images/PayQRCode/wechat.png" alt="Jun WeChat Pay">
         <span>WeChat Pay</span>
       </div>
       <div>
-        <img src="/images/PayQRCode/alipay.jpg" alt="Jun Alipay">
+        <img src="/next-blog/images/PayQRCode/alipay.jpg" alt="Jun Alipay">
         <span>Alipay</span>
       </div>
 
@@ -334,8 +334,8 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/python3/" rel="tag"># python3</a>
-              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫</a>
+              <a href="/next-blog/tags/python3/" rel="tag"># python3</a>
+              <a href="/next-blog/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫</a>
           </div>
 
         
@@ -344,7 +344,7 @@
             <div class="post-nav-item">
             </div>
             <div class="post-nav-item">
-                <a href="/2021/06/11/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8Bip%E5%8D%8F%E8%AE%AE/" rel="next" title="计算机网络之ip协议">
+                <a href="/next-blog/2021/06/11/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%B9%8Bip%E5%8D%8F%E8%AE%AE/" rel="next" title="计算机网络之ip协议">
                   计算机网络之ip协议 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
@@ -395,7 +395,7 @@
 
   
   <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+<script src="/next-blog/js/comments.js"></script><script src="/next-blog/js/utils.js"></script><script src="/next-blog/js/motion.js"></script><script src="/next-blog/js/next-boot.js"></script><script src="/next-blog/js/bookmark.js"></script>
 
   
 
@@ -413,7 +413,7 @@
   <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha256-TThEtR+XalhWKkfF383YLOrI50NGNeIqrzS+q08afrY=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.css" integrity="sha256-Wk20U9mS/kHGcSgkjSiRezW5exqT6wAOKwySOaLotXM=" crossorigin="anonymous">
   <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.js","integrity":"sha256-etSqbSVF4+Lwe8MGk/Vanc1sR+mWv+qOG73fxWw9p94="}}</script>
-  <script src="/js/third-party/math/katex.js"></script>
+  <script src="/next-blog/js/third-party/math/katex.js"></script>
 
 
 
