@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://next.jun997.xyz/images/aiida-errors/vasp-workchain.png">
 <meta property="og:image" content="https://next.jun997.xyz/images/aiida-errors/run.png">
 <meta property="article:published_time" content="2024-05-22T01:52:28.000Z">
-<meta property="article:modified_time" content="2024-05-22T02:42:48.580Z">
+<meta property="article:modified_time" content="2024-05-24T11:50:51.505Z">
 <meta property="article:author" content="Jun">
 <meta property="article:tag" content="VASP">
 <meta property="article:tag" content="python3">
@@ -247,9 +247,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-05-22 09:52:28 / Modified: 10:42:48" itemprop="dateCreated datePublished" datetime="2024-05-22T09:52:28+08:00">2024-05-22</time>
+      <time title="Created: 2024-05-22 09:52:28" itemprop="dateCreated datePublished" datetime="2024-05-22T09:52:28+08:00">2024-05-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-24 19:50:51" itemprop="dateModified" datetime="2024-05-24T19:50:51+08:00">2024-05-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -302,7 +308,7 @@
 <img src="/images/aiida-errors/error.png" alt="erros" /></p>
 <span id="more"></span>
 <h3 id="原因分析"><a class="markdownIt-Anchor" href="#原因分析"></a> 原因分析</h3>
-<p>出现这种情况的原因是由于端口冲突了，即是我们公开的子进程的端口与父工作链中的定义冲突了，具体问题在一下两行代码：</p>
+<p>出现这种情况的原因是由于端口冲突了，即是我们公开的子进程的端口与父工作链中的定义冲突了，具体问题在以下最后两行代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">EosDefWorkChain</span>(<span class="title class_ inherited__">WorkChain</span>):</span><br><span class="line"></span><br><span class="line">    _verbose = <span class="literal">False</span></span><br><span class="line">    _next_workchain_string = <span class="string">&#x27;vasp.vasp&#x27;</span></span><br><span class="line">    _next_workchain = WorkflowFactory(_next_workchain_string)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">define</span>(<span class="params">cls, spec</span>):</span><br><span class="line">        <span class="built_in">super</span>().define(spec)</span><br><span class="line">        spec.expose_inputs(cls._next_workchain, exclude=[<span class="string">&#x27;structure&#x27;</span>])</span><br><span class="line">        spec.input_namespace(<span class="string">&#x27;structures&#x27;</span>,</span><br><span class="line">                             valid_type=DataFactory(<span class="string">&#x27;core.structure&#x27;</span>),</span><br><span class="line">                             dynamic=<span class="literal">True</span>,</span><br><span class="line">                             <span class="built_in">help</span>=<span class="string">&#x27;a dictionary of structures to use&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p>在这里，我们公开了子进程 <a target="_blank" rel="noopener" href="https://aiida-vasp.readthedocs.io/en/latest/workchains/vasp.html#vasp-workchain">Vasp Workchain</a> 除了 structure 的输入，查看官方定义可以看到 <a target="_blank" rel="noopener" href="https://aiida-vasp.readthedocs.io/en/latest/workchains/vasp.html#vasp-workchain">Vasp Workchain</a> 还存在一个 dynamics 输入：</p>
 <p><img src="/images/aiida-errors/vasp-workchain.png" alt="vaspworkchain" /></p>
@@ -348,8 +354,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/05/19/cf3a92c5d86f.html" rel="prev" title="基于Aiida的循环累加器">
-                  <i class="fa fa-chevron-left"></i> 基于Aiida的循环累加器
+                <a href="/2024/05/19/cf3a92c5d86f.html" rel="prev" title="基于Aiida的串行和并行累加器">
+                  <i class="fa fa-chevron-left"></i> 基于Aiida的串行和并行累加器
                 </a>
             </div>
             <div class="post-nav-item">
@@ -384,13 +390,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Symbols count total">228k</span>
+    <span title="Symbols count total">232k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">3:27</span>
+    <span title="Reading time total">3:31</span>
   </span>
 </div>
 <div class="busuanzi-count">
