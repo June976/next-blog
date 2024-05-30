@@ -52,7 +52,119 @@
   <noscript>
     <link rel="stylesheet" href="/css/noscript.css">
   </noscript>
-</head>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
   <div class="headband"></div>
@@ -87,7 +199,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">5</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">34</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">56</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>Links</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">5</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">35</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">57</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>Links</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
   </ul>
 </nav>
 
@@ -132,7 +244,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -143,7 +255,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -206,7 +318,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/05/03/c672fa6cd432.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/05/03/cd4d7778e372.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -224,7 +336,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/05/03/c672fa6cd432.html" class="post-title-link" itemprop="url">python实现kd树以及最近邻查找算法</a>
+          <a href="/2022/05/03/cd4d7778e372.html" class="post-title-link" itemprop="url">一个简单的机器学习流程实现</a>
         </h2>
 
         <div class="post-meta-container">
@@ -235,14 +347,113 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-05-03 10:37:53" itemprop="dateCreated datePublished" datetime="2022-05-03T10:37:53+08:00">2022-05-03</time>
+      <time title="Created: 2022-05-03 19:19:23" itemprop="dateCreated datePublished" datetime="2022-05-03T19:19:23+00:00">2022-05-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Share-knowledges/" itemprop="url" rel="index"><span itemprop="name">Share knowledges</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>2.2k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>停工不停学，疫情给了我停下来好好学习的机会，值得好好地珍惜。但是，疫情也让我失去了很多，春光无限好，却没有机会领略，实验也搁置下来了。最近的我，对机器学习产生了浓厚的兴趣，跃跃欲试地想要利用机器学习在自己的方向上大干一场…
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/05/03/cd4d7778e372.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/05/03/7d5824b9bfd7.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpg">
+      <meta itemprop="name" content="Jun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/05/03/7d5824b9bfd7.html" class="post-title-link" itemprop="url">python实现kd树以及最近邻查找算法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-05-03 10:37:53" itemprop="dateCreated datePublished" datetime="2022-05-03T10:37:53+00:00">2022-05-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -275,7 +486,7 @@
 <p>kd树是一种<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7d45078b5cec">树形结构</a>，树的每个节点存放一个k维数据，某一节点的子节点可以看作是由<strong>过该节点</strong>一个平面切割后产生的（<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/53826008">想象一下切蛋糕的过程</a>），如此反复产生切割平面，就能为每个数据在空间中建立索引。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/05/03/c672fa6cd432.html#more" rel="contents">
+              <a class="btn" href="/2022/05/03/7d5824b9bfd7.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -306,7 +517,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/19/61701185fd17.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/19/60c98299440f.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -324,7 +535,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/19/61701185fd17.html" class="post-title-link" itemprop="url">Bash脚本获取VASP能带计算数据</a>
+          <a href="/2022/04/19/60c98299440f.html" class="post-title-link" itemprop="url">Bash脚本获取VASP能带计算数据</a>
         </h2>
 
         <div class="post-meta-container">
@@ -335,14 +546,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-04-19 21:24:43" itemprop="dateCreated datePublished" datetime="2022-04-19T21:24:43+08:00">2022-04-19</time>
+      <time title="Created: 2022-04-19 21:24:43" itemprop="dateCreated datePublished" datetime="2022-04-19T21:24:43+00:00">2022-04-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -374,7 +585,7 @@
           <p>由于天天蹲宿舍导致<strong>coding</strong>能力得到大大加成的我，又把之前用python写的获取vasp能带计算数据的脚本移植到了bash平台，没错，这就是天天蹲在宿舍无事可做的我的日常。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/04/19/61701185fd17.html#more" rel="contents">
+              <a class="btn" href="/2022/04/19/60c98299440f.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -405,7 +616,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/18/4ea3d8ef74d8.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/18/3c97dc7d7f77.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -423,7 +634,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/18/4ea3d8ef74d8.html" class="post-title-link" itemprop="url">使用Python脚本获取VASP能带计算数据</a>
+          <a href="/2022/04/18/3c97dc7d7f77.html" class="post-title-link" itemprop="url">使用Python脚本获取VASP能带计算数据</a>
         </h2>
 
         <div class="post-meta-container">
@@ -434,14 +645,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-04-18 15:35:08" itemprop="dateCreated datePublished" datetime="2022-04-18T15:35:08+08:00">2022-04-18</time>
+      <time title="Created: 2022-04-18 15:35:08" itemprop="dateCreated datePublished" datetime="2022-04-18T15:35:08+00:00">2022-04-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -473,7 +684,7 @@
           <p>由于在宿舍蹲，自己的Coding能力<strong>与日俱增</strong>。最近刚写了一份<strong>提取VASP能带数据</strong>的Python脚本，代码已经提交到了我的<a target="_blank" rel="noopener" href="https://github.com/June976/getVASPBandScripys">Github仓库</a>中，有需要的朋友自提。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/04/18/4ea3d8ef74d8.html#more" rel="contents">
+              <a class="btn" href="/2022/04/18/3c97dc7d7f77.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -504,7 +715,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/14/456c7cc4063e.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/14/ba8ff0b84c20.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -522,7 +733,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/14/456c7cc4063e.html" class="post-title-link" itemprop="url">VASP中POTCAR使用指南</a>
+          <a href="/2022/04/14/ba8ff0b84c20.html" class="post-title-link" itemprop="url">VASP中POTCAR使用指南</a>
         </h2>
 
         <div class="post-meta-container">
@@ -533,14 +744,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-04-14 10:21:55" itemprop="dateCreated datePublished" datetime="2022-04-14T10:21:55+08:00">2022-04-14</time>
+      <time title="Created: 2022-04-14 10:21:55" itemprop="dateCreated datePublished" datetime="2022-04-14T10:21:55+00:00">2022-04-14</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -572,7 +783,7 @@
           <p>POTCAR是VASP计算的四大输入文件之一（INCAR、POSCAR、POTCAR、KPOINTS)，官方一般会随着新版本的VASP软件包发布的同时提供相应的各个元素的POTCAR库，一般计算时直接根据元素类型组合一下使用就行了，使用并没有什么难度。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/04/14/456c7cc4063e.html#more" rel="contents">
+              <a class="btn" href="/2022/04/14/ba8ff0b84c20.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -603,7 +814,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/10/b438dad131c8.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/10/c5d3d018756a.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -621,7 +832,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/10/b438dad131c8.html" class="post-title-link" itemprop="url">新版和老版Materials Project API使用指南</a>
+          <a href="/2022/04/10/c5d3d018756a.html" class="post-title-link" itemprop="url">新版和老版Materials Project API使用指南</a>
         </h2>
 
         <div class="post-meta-container">
@@ -632,14 +843,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-04-10 17:42:47" itemprop="dateCreated datePublished" datetime="2022-04-10T17:42:47+08:00">2022-04-10</time>
+      <time title="Created: 2022-04-10 17:42:47" itemprop="dateCreated datePublished" datetime="2022-04-10T17:42:47+00:00">2022-04-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -672,7 +883,7 @@
 <p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Materials_Project">Materials Project</a>是一个开放的材料数据库，她提供了很多理论预测和实验上观察到的材料的<strong>计算性质</strong>，并且以网页的形式提供了查询的接口。最近Materials Project官方网站消息显示即将迎来新版本，同时也推出了新版本的预览版。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/04/10/b438dad131c8.html#more" rel="contents">
+              <a class="btn" href="/2022/04/10/c5d3d018756a.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -703,7 +914,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/05/5a4e29b6e47f.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/05/059c2c33a8da.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -721,7 +932,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/05/5a4e29b6e47f.html" class="post-title-link" itemprop="url">庆祝本站从Github Page绑定到新的域名</a>
+          <a href="/2022/04/05/059c2c33a8da.html" class="post-title-link" itemprop="url">庆祝本站从Github Page绑定到新的域名</a>
         </h2>
 
         <div class="post-meta-container">
@@ -732,14 +943,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-04-05 18:34:32" itemprop="dateCreated datePublished" datetime="2022-04-05T18:34:32+08:00">2022-04-05</time>
+      <time title="Created: 2022-04-05 18:34:32" itemprop="dateCreated datePublished" datetime="2022-04-05T18:34:32+00:00">2022-04-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -772,7 +983,7 @@
 <p>这几天趁着有空，重新又优化了一下博客。前几天主要做了以下几件事情：
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/04/05/5a4e29b6e47f.html#more" rel="contents">
+              <a class="btn" href="/2022/04/05/059c2c33a8da.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -803,7 +1014,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/04/16b79d457780.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/04/0ebc15095f7c.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -821,7 +1032,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/04/16b79d457780.html" class="post-title-link" itemprop="url">python实现共轭梯度算法</a>
+          <a href="/2022/04/04/0ebc15095f7c.html" class="post-title-link" itemprop="url">python实现共轭梯度算法</a>
         </h2>
 
         <div class="post-meta-container">
@@ -832,14 +1043,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-04-04 21:31:38" itemprop="dateCreated datePublished" datetime="2022-04-04T21:31:38+08:00">2022-04-04</time>
+      <time title="Created: 2022-04-04 21:31:38" itemprop="dateCreated datePublished" datetime="2022-04-04T21:31:38+00:00">2022-04-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -872,7 +1083,7 @@
 <p>共轭梯度(Conjugate Gradient)方法是一种迭代算法，可用于求解<strong>无约束</strong>的优化问题，例如能量最小化。常见的优化算法还有梯度下降法，相比于梯度下降法，共轭梯度法具有收敛更快，以及算法稳定性更好的优点。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/04/04/16b79d457780.html#more" rel="contents">
+              <a class="btn" href="/2022/04/04/0ebc15095f7c.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -903,7 +1114,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/01/1ca003d5e001.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/04/01/8ad3bb3658a1.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -921,7 +1132,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/04/01/1ca003d5e001.html" class="post-title-link" itemprop="url">三国中的那些[豪言壮语]</a>
+          <a href="/2022/04/01/8ad3bb3658a1.html" class="post-title-link" itemprop="url">三国中的那些[豪言壮语]</a>
         </h2>
 
         <div class="post-meta-container">
@@ -932,14 +1143,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-04-01 09:36:40" itemprop="dateCreated datePublished" datetime="2022-04-01T09:36:40+08:00">2022-04-01</time>
+      <time title="Created: 2022-04-01 09:36:40" itemprop="dateCreated datePublished" datetime="2022-04-01T09:36:40+00:00">2022-04-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -971,7 +1182,7 @@
           <p>  最近在刷b站时翻到很多三国题材的剪辑视频，包括新版和老版片段，作为一个老三国爱好者，感触颇多。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/04/01/1ca003d5e001.html#more" rel="contents">
+              <a class="btn" href="/2022/04/01/8ad3bb3658a1.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1002,7 +1213,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/03/19/e62b13aed44c.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/03/19/31413a911f16.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -1020,7 +1231,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/19/e62b13aed44c.html" class="post-title-link" itemprop="url">python环境下运行bash命令</a>
+          <a href="/2022/03/19/31413a911f16.html" class="post-title-link" itemprop="url">python环境下运行bash命令</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1031,14 +1242,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-03-19 19:26:03" itemprop="dateCreated datePublished" datetime="2022-03-19T19:26:03+08:00">2022-03-19</time>
+      <time title="Created: 2022-03-19 19:26:03" itemprop="dateCreated datePublished" datetime="2022-03-19T19:26:03+00:00">2022-03-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1071,106 +1282,7 @@
 <p>最近在写程序时遇到一个问题：即需要同时运行python代码和bash代码。本质来说，仅用bash脚本是可以实现的，但是程序涉及到向量、矩阵的运算，并且逻辑判断较为复杂，只使用bash脚本来实现会变得非常麻烦，同时仅仅使用python也是不行的，因为程序是在Linux超算上使用的，一些文本处理、文件（夹）操作以及提交作业都是bash语句更为方便，因此这里自然就需要能够同时使用bash命令和python代码。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/03/19/e62b13aed44c.html#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/03/18/40c86576ffde.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpg">
-      <meta itemprop="name" content="Jun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jun's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Jun's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/18/40c86576ffde.html" class="post-title-link" itemprop="url">关于cat特殊用法的一个小提示</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-03-18 21:55:42" itemprop="dateCreated datePublished" datetime="2022-03-18T21:55:42+08:00">2022-03-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Share-knowledges/" itemprop="url" rel="index"><span itemprop="name">Share knowledges</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>575</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>最近在写一个bash脚本时遇到一个需求，即是：<strong>在特定文件的文件头部插入一条语句</strong>，当然使用bash内置的<strong>sed命令</strong>可以完美地实现这一功能，
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/03/18/40c86576ffde.html#more" rel="contents">
+              <a class="btn" href="/2022/03/19/31413a911f16.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

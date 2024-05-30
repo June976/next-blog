@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+<link rel="preconnect" href="null//null" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"next.jun997.xyz","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#09E614","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="基于Aiida实现的整数循环累加器，以下为代码：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Aiida的串行和并行累加器">
+<meta property="og:url" content="https://next.jun997.xyz/2024/05/19/36bf29e39e54.html">
+<meta property="og:site_name" content="Jun&#39;s Blog">
+<meta property="og:description" content="基于Aiida实现的整数循环累加器，以下为代码：">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-05-19T09:31:46.000Z">
+<meta property="article:modified_time" content="2024-05-30T11:55:21.216Z">
+<meta property="article:author" content="Jun">
+<meta property="article:tag" content="python3">
+<meta property="article:tag" content="Aiida">
+<meta property="article:tag" content="workflow">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://next.jun997.xyz/2024/05/19/36bf29e39e54.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://next.jun997.xyz/2024/05/19/36bf29e39e54.html","path":"2024/05/19/36bf29e39e54.html","title":"基于Aiida的串行和并行累加器"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>基于Aiida的串行和并行累加器 | Jun's Blog</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?186341237944a73cf31cb41b84605669"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jun's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Share knowledges, Tell stories and Show something interesting!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">5</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">35</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">57</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>Links</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-text"> 参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jun"
+      src="/images/profile.jpg">
+  <p class="site-author-name" itemprop="name">Jun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/June976" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;June976" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/HelloWorldTM" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;HelloWorldTM" rel="noopener" target="_blank"><i class="fa fa-c fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/billboard" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;billboard" rel="noopener" target="_blank"><i class="fa fa-z fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://s.weibo.com/top/summary" title="Weibo → https:&#x2F;&#x2F;s.weibo.com&#x2F;top&#x2F;summary" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@jun997.xyz" title="E-Mail → mailto:admin@jun997.xyz" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mailchi.mp/78fbe8b89a13/juns-blog-subscribe" title="Subscribe → https:&#x2F;&#x2F;mailchi.mp&#x2F;78fbe8b89a13&#x2F;juns-blog-subscribe" rel="noopener" target="_blank"><i class="fab fa-mailchimp fa-fw"></i>Subscribe</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/June976" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2024/05/19/36bf29e39e54.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpg">
+      <meta itemprop="name" content="Jun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="基于Aiida的串行和并行累加器 | Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于Aiida的串行和并行累加器
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-05-19 09:31:46" itemprop="dateCreated datePublished" datetime="2024-05-19T09:31:46+00:00">2024-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Share-knowledges/" itemprop="url" rel="index"><span itemprop="name">Share knowledges</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>11k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>基于Aiida实现的整数循环累加器，以下为代码：</p>
+<span id="more"></span>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> aiida.orm <span class="keyword">import</span> AbstractCode, Int, <span class="type">List</span></span><br><span class="line"><span class="keyword">from</span> aiida.orm <span class="keyword">import</span> load_code</span><br><span class="line"><span class="keyword">from</span> aiida.plugins.factories <span class="keyword">import</span> CalculationFactory, DataFactory</span><br><span class="line"><span class="keyword">from</span> aiida <span class="keyword">import</span> load_profile</span><br><span class="line"><span class="keyword">from</span> aiida.engine <span class="keyword">import</span> ToContext, calcfunction, WorkChain, while_, append_, run</span><br><span class="line"><span class="keyword">from</span> aiida_vasp.utils.workchains <span class="keyword">import</span> prepare_process_inputs, compose_exit_code</span><br><span class="line"><span class="keyword">from</span> aiida.common.extendeddicts <span class="keyword">import</span> AttributeDict</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">ArithmeticAddCalculation = CalculationFactory(<span class="string">'core.arithmetic.add'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AddTwoIntsWorkChain</span>(<span class="title class_ inherited__">WorkChain</span>):</span><br><span class="line">    <span class="string">"""WorkChain to add two ints, for testing and demonstration purposes."""</span></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">define</span>(<span class="params">cls, spec</span>):</span><br><span class="line">        <span class="string">"""Specify inputs and outputs."""</span></span><br><span class="line">        <span class="built_in">super</span>().define(spec)</span><br><span class="line">        spec.<span class="built_in">input</span>(<span class="string">'x'</span>, valid_type=Int)</span><br><span class="line">        spec.<span class="built_in">input</span>(<span class="string">'y'</span>, valid_type=Int)</span><br><span class="line">        spec.<span class="built_in">input</span>(<span class="string">'code'</span>, valid_type=AbstractCode)</span><br><span class="line">        spec.outline(</span><br><span class="line">            cls.add,</span><br><span class="line">            cls.validate_result,</span><br><span class="line">            cls.result,</span><br><span class="line">        )</span><br><span class="line">        spec.output(<span class="string">'result'</span>, valid_type=Int)</span><br><span class="line">        spec.exit_code(<span class="number">400</span>, <span class="string">'ERROR_NEGATIVE_NUMBER'</span>, message=<span class="string">'The result is a negative number.'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">"""Add two numbers using the `ArithmeticAddCalculation` calculation job plugin."""</span></span><br><span class="line">        inputs = {<span class="string">'x'</span>: self.inputs.x, <span class="string">'y'</span>: self.inputs.y, <span class="string">'code'</span>: self.inputs.code}</span><br><span class="line">        future = self.submit(ArithmeticAddCalculation, **inputs)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ToContext(addition=future)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">validate_result</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">"""Make sure the result is not negative."""</span></span><br><span class="line">        result = self.ctx.addition.outputs.<span class="built_in">sum</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> result.value &lt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> self.exit_codes.ERROR_NEGATIVE_NUMBER</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">result</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">"""Add the result to the outputs."""</span></span><br><span class="line">        self.out(<span class="string">'result'</span>, self.ctx.addition.outputs.<span class="built_in">sum</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AddMultiIntsSerialWorkChain</span>(<span class="title class_ inherited__">WorkChain</span>):</span><br><span class="line">    <span class="string">"""Add Multiply Ints in a Serial way"""</span></span><br><span class="line"></span><br><span class="line">    _verbose = <span class="literal">False</span></span><br><span class="line">    _next_workchain = AddTwoIntsWorkChain</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">define</span>(<span class="params">cls, spec</span>):</span><br><span class="line">        <span class="built_in">super</span>().define(spec)</span><br><span class="line">        spec.expose_inputs(cls._next_workchain, exclude=[<span class="string">'x'</span>, <span class="string">'y'</span>])</span><br><span class="line">        spec.input_namespace(<span class="string">'ints'</span>,</span><br><span class="line">                             valid_type=DataFactory(<span class="string">'core.int'</span>),</span><br><span class="line">                             dynamic=<span class="literal">True</span>,</span><br><span class="line">                             <span class="built_in">help</span>=<span class="string">'a dictionary of ints to use'</span>)</span><br><span class="line">        spec.<span class="built_in">input</span>(<span class="string">'code'</span>, valid_type=AbstractCode)</span><br><span class="line">        spec.exit_code(<span class="number">0</span>, <span class="string">'NO_ERROR'</span>, message=<span class="string">'the sun is shining'</span>)</span><br><span class="line">        spec.exit_code(<span class="number">420</span>, <span class="string">'ERROR_NO_CALLED_WORKCHAIN'</span>, message=<span class="string">'no called workchain detected'</span>)</span><br><span class="line">        spec.exit_code(<span class="number">500</span>, <span class="string">'ERROR_UNKNOWN'</span>, message=<span class="string">'unknown error detected in the workchain'</span>)</span><br><span class="line">        spec.outline(</span><br><span class="line">            cls.initialize,</span><br><span class="line">            while_(cls.run_next_workchains)(</span><br><span class="line">                cls.init_next_workchain,</span><br><span class="line">                cls.run_next_workchain,</span><br><span class="line">                cls.verify_next_workchain,</span><br><span class="line">                cls.extract_result</span><br><span class="line">            ),</span><br><span class="line">            cls.finalize</span><br><span class="line">        )</span><br><span class="line">        spec.output(<span class="string">'final_result'</span>, valid_type=DataFactory(<span class="string">'core.array'</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">self</span>):</span><br><span class="line">        self._init_context()</span><br><span class="line">        self._init_inputs()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_init_context</span>(<span class="params">self</span>):</span><br><span class="line">        self.ctx.exit_code = self.exit_codes.ERROR_UNKNOWN</span><br><span class="line">        self.ctx.ints = <span class="built_in">dict</span>(self.inputs.ints)</span><br><span class="line">        self.ctx.is_finished = <span class="literal">False</span></span><br><span class="line">        self.ctx.iteration = <span class="number">0</span></span><br><span class="line">        self.ctx.inputs = AttributeDict()</span><br><span class="line">        self.ctx.add_rlts = [Int(<span class="number">0</span>)]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_init_inputs</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">"""Initialize inputs."""</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self._verbose = self.inputs.verbose.value</span><br><span class="line">        <span class="keyword">except</span> AttributeError:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run_next_workchains</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">not</span> self.ctx.is_finished</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">init_next_workchain</span>(<span class="params">self</span>):</span><br><span class="line">        self.ctx.iteration += <span class="number">1</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self.ctx.inputs</span><br><span class="line">        <span class="keyword">except</span> AttributeError:</span><br><span class="line">            <span class="keyword">raise</span> ValueError(<span class="string">'No input dictionary was defined in self.ctx.inputs'</span>)</span><br><span class="line">        self.ctx.inputs.update(self.exposed_inputs(self._next_workchain))</span><br><span class="line">        ls_keys = <span class="built_in">list</span>(self.ctx.ints.keys())</span><br><span class="line">        self.ctx.inputs.x = self.ctx.add_rlts[-<span class="number">1</span>]</span><br><span class="line">        self.ctx.inputs.y = self.ctx.ints.pop(ls_keys[<span class="number">0</span>])</span><br><span class="line">        self.ctx.inputs = prepare_process_inputs(self.ctx.inputs)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run_next_workchain</span>(<span class="params">self</span>):</span><br><span class="line">        inputs = self.ctx.inputs</span><br><span class="line">        running = self.submit(self._next_workchain, **inputs)</span><br><span class="line">        self.report(<span class="string">'launching {}&lt;{}&gt; iteration #{}'</span>.<span class="built_in">format</span>(self._next_workchain.__name__, running.pk, self.ctx.iteration))</span><br><span class="line">        self.to_context(workchains=append_(running))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">verify_next_workchain</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            workchain = self.ctx.workchains[-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">except</span> IndexError:</span><br><span class="line">            self.report(<span class="string">'There is no {} in the called workchain list.'</span>.<span class="built_in">format</span>(self._next_workchain.__name__))</span><br><span class="line">            <span class="keyword">return</span> self.exit_codes.ERROR_NO_CALLED_WORKCHAIN</span><br><span class="line">        next_workchain_exit_status = workchain.exit_status</span><br><span class="line">        next_workchain_exit_message = workchain.exit_message</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> next_workchain_exit_status:</span><br><span class="line">            self.ctx.exit_code = self.exit_codes.NO_ERROR </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            self.ctx.exit_code = compose_exit_code(next_workchain_exit_status, next_workchain_exit_message)</span><br><span class="line">            self.report(<span class="string">'The called {}&lt;{}&gt; returned a non-zero exit status. '</span></span><br><span class="line">                        <span class="string">'The exit status {} is inherited'</span>.<span class="built_in">format</span>(workchain.__class__.__name__, workchain.pk, self.ctx.exit_code))</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> self.ctx.ints:</span><br><span class="line">            self.ctx.is_finished = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> self.ctx.exit_code</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">extract_result</span>(<span class="params">self</span>):</span><br><span class="line">        workchain = self.ctx.workchains[-<span class="number">1</span>]</span><br><span class="line">        now_add_rlt = workchain.outputs.result</span><br><span class="line">        self.ctx.add_rlts.append(now_add_rlt)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">finalize</span>(<span class="params">self</span>):</span><br><span class="line">        dict_inputs = <span class="built_in">dict</span>(self.inputs.ints)</span><br><span class="line">        inputs = DataFactory(<span class="string">'core.list'</span>)(<span class="built_in">list</span>=[dict_inputs[key] <span class="keyword">for</span> key <span class="keyword">in</span> dict_inputs])</span><br><span class="line">        outputs = DataFactory(<span class="string">'core.list'</span>)(<span class="built_in">list</span>=self.ctx.add_rlts)</span><br><span class="line">        f_value = self.ctx.add_rlts[-<span class="number">1</span>]</span><br><span class="line">        final_data = ExtractFinalResult(inputs, f_value, total=outputs)</span><br><span class="line">        self.out(<span class="string">'final_result'</span>, final_data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AddMultiIntsParallelWorkChain</span>(<span class="title class_ inherited__">WorkChain</span>):</span><br><span class="line">    <span class="string">"""Add Multiply Ints in a Parallel way"""</span></span><br><span class="line"></span><br><span class="line">    _verbose = <span class="literal">False</span></span><br><span class="line">    _next_workchain = AddTwoIntsWorkChain</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">define</span>(<span class="params">cls, spec</span>):</span><br><span class="line">        <span class="built_in">super</span>().define(spec)</span><br><span class="line">        spec.expose_inputs(cls._next_workchain, exclude=[<span class="string">'x'</span>, <span class="string">'y'</span>])</span><br><span class="line">        spec.input_namespace(<span class="string">'ints'</span>,</span><br><span class="line">                             valid_type=DataFactory(<span class="string">'core.int'</span>),</span><br><span class="line">                             dynamic=<span class="literal">True</span>,</span><br><span class="line">                             <span class="built_in">help</span>=<span class="string">'a dictionary of ints to use'</span>)</span><br><span class="line">        spec.<span class="built_in">input</span>(<span class="string">'code'</span>, valid_type=AbstractCode)</span><br><span class="line">        spec.exit_code(<span class="number">0</span>, <span class="string">'NO_ERROR'</span>, message=<span class="string">'the sun is shining'</span>)</span><br><span class="line">        spec.exit_code(<span class="number">420</span>, <span class="string">'ERROR_NO_CALLED_WORKCHAIN'</span>, message=<span class="string">'no called workchain detected'</span>)</span><br><span class="line">        spec.exit_code(<span class="number">500</span>, <span class="string">'ERROR_UNKNOWN'</span>, message=<span class="string">'unknown error detected in the workchain'</span>)</span><br><span class="line">        spec.outline(</span><br><span class="line">            cls.initialize,</span><br><span class="line">            while_(cls.run_next_workchains)(</span><br><span class="line">                cls.init_and_run_next_workchains,</span><br><span class="line">                cls.verify_next_workchain,</span><br><span class="line">                cls.extract_result</span><br><span class="line">            ),</span><br><span class="line">            cls.finalize</span><br><span class="line">        )</span><br><span class="line">        spec.output(<span class="string">'final_result'</span>, valid_type=DataFactory(<span class="string">'core.array'</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">initialize</span>(<span class="params">self</span>):</span><br><span class="line">        self._init_context()</span><br><span class="line">        self._init_inputs()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_init_context</span>(<span class="params">self</span>):</span><br><span class="line">        self.ctx.exit_code = self.exit_codes.ERROR_UNKNOWN</span><br><span class="line">        now_ints = <span class="built_in">dict</span>(self.inputs.ints)</span><br><span class="line">        self.ctx.next_ints = [now_ints[key] <span class="keyword">for</span> key <span class="keyword">in</span> now_ints.keys()]</span><br><span class="line">        self.ctx.is_finished = <span class="literal">False</span></span><br><span class="line">        self.ctx.iteration = <span class="number">0</span></span><br><span class="line">        self.ctx.add_rlts = <span class="built_in">dict</span>()</span><br><span class="line">        self.ctx.add_rlts[<span class="string">'iteration{}'</span>.<span class="built_in">format</span>(self.ctx.iteration)] = <span class="type">List</span>(self.ctx.next_ints)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">_init_inputs</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="string">"""Initialize inputs."""</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            self._verbose = self.inputs.verbose.value</span><br><span class="line">        <span class="keyword">except</span> AttributeError:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">run_next_workchains</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">not</span> self.ctx.is_finished</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">init_and_run_next_workchains</span>(<span class="params">self</span>):</span><br><span class="line">        self.ctx.iteration +=<span class="number">1</span></span><br><span class="line">        ls_now_ints = self.ctx.next_ints.copy()</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(ls_now_ints)%<span class="number">2</span> ==<span class="number">1</span>:</span><br><span class="line">            ls_now_ints.append(Int(<span class="number">0</span>))</span><br><span class="line">        now_run_i = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">len</span>(ls_now_ints)!=<span class="number">0</span>):</span><br><span class="line">            now_run_i += <span class="number">1</span></span><br><span class="line">            inputs = AttributeDict()</span><br><span class="line">            inputs.update(self.exposed_inputs(self._next_workchain))</span><br><span class="line">            inputs.x = ls_now_ints.pop()</span><br><span class="line">            inputs.y = ls_now_ints.pop()</span><br><span class="line">            inputs = prepare_process_inputs(inputs)</span><br><span class="line">            running = self.submit(self._next_workchain, **inputs)</span><br><span class="line">            self.report(<span class="string">'launching {}&lt;{}&gt; iteration #{}'</span>.<span class="built_in">format</span>(self._next_workchain.__name__, running.pk, self.ctx.iteration))</span><br><span class="line">            future_name = <span class="string">'workchains.iteration{}.index{}'</span>.<span class="built_in">format</span>(self.ctx.iteration, now_run_i)</span><br><span class="line">            self.to_context(**{future_name:running})</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">verify_next_workchain</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            running_workchains = self.ctx.workchains.get(<span class="string">'iteration{}'</span>.<span class="built_in">format</span>(self.ctx.iteration))</span><br><span class="line">        <span class="keyword">except</span> AttributeError:</span><br><span class="line">            self.report(<span class="string">'There is no workchains iterations #{} in the called workchain list.'</span>.<span class="built_in">format</span>(self.iteration))</span><br><span class="line">            <span class="keyword">return</span> self.exit_codes.ERROR_NO_CALLED_WORKCHAIN</span><br><span class="line">        <span class="keyword">for</span> key <span class="keyword">in</span> running_workchains.keys():</span><br><span class="line">            workchain = running_workchains[key]</span><br><span class="line">            next_workchain_exit_status = workchain.exit_status</span><br><span class="line">            next_workchain_exit_message = workchain.exit_message</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> next_workchain_exit_status:</span><br><span class="line">                self.ctx.exit_code = self.exit_codes.NO_ERROR </span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                self.ctx.exit_code = compose_exit_code(next_workchain_exit_status, next_workchain_exit_message)</span><br><span class="line">                self.report(<span class="string">'The called {}&lt;{}&gt; returned a non-zero exit status. '</span></span><br><span class="line">                        <span class="string">'The exit status {} is inherited'</span>.<span class="built_in">format</span>(workchain.__class__.__name__, workchain.pk, self.ctx.exit_code))</span><br><span class="line">                <span class="keyword">return</span> self.ctx.exit_code</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(running_workchains)==<span class="number">1</span>:</span><br><span class="line">            self.ctx.is_finished = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> self.ctx.exit_code</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">extract_result</span>(<span class="params">self</span>):</span><br><span class="line">        ls_next_ints = []</span><br><span class="line">        running_workchains = self.ctx.workchains.get(<span class="string">'iteration{}'</span>.<span class="built_in">format</span>(self.ctx.iteration))</span><br><span class="line">        <span class="keyword">for</span> key <span class="keyword">in</span> running_workchains.keys():</span><br><span class="line">            workchain = running_workchains[key]</span><br><span class="line">            now_add_rlt = workchain.outputs.result</span><br><span class="line">            ls_next_ints.append(now_add_rlt)</span><br><span class="line">        self.ctx.next_ints = ls_next_ints</span><br><span class="line">        self.ctx.add_rlts[<span class="string">'iteration{}'</span>.<span class="built_in">format</span>(self.ctx.iteration)] = <span class="type">List</span>(self.ctx.next_ints)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">finalize</span>(<span class="params">self</span>):</span><br><span class="line">        inputs = [self.inputs.ints[key] <span class="keyword">for</span> key <span class="keyword">in</span> self.inputs.ints.keys()]</span><br><span class="line">        sum_value = <span class="built_in">int</span>(self.ctx.next_ints[-<span class="number">1</span>])</span><br><span class="line">        step_add_rlts = self.ctx.add_rlts</span><br><span class="line">        final_data = ExtractFinalResult(inputs, sum_value, **step_add_rlts)</span><br><span class="line">        self.out(<span class="string">'final_result'</span>, final_data)</span><br><span class="line"></span><br><span class="line"><span class="meta">@calcfunction</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">ExtractFinalResult</span>(<span class="params">inputs, sum_value, **kwargs</span>):</span><br><span class="line">    final_data = DataFactory(<span class="string">'core.array'</span>)()</span><br><span class="line">    final_data.set_array(<span class="string">'add_result'</span>, np.array([<span class="built_in">int</span>(sum_value)]))</span><br><span class="line">    final_data.set_array(<span class="string">'inputs_nums'</span>, np.array(inputs))</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> kwargs:</span><br><span class="line">        final_data.set_array(<span class="string">'step_'</span>+key, np.array(kwargs[key]))</span><br><span class="line">    <span class="keyword">return</span> final_data</span><br><span class="line"></span><br><span class="line">load_profile()</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_ints</span>(<span class="params">int_count</span>):</span><br><span class="line">    ints = {}</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(int_count):</span><br><span class="line">        ints[<span class="string">"int_at_{}"</span>.<span class="built_in">format</span>(i)] = Int(random.randint(<span class="number">1</span>, <span class="number">20</span>))</span><br><span class="line">    <span class="keyword">return</span> ints</span><br><span class="line"></span><br><span class="line">int_count = <span class="number">30</span></span><br><span class="line">add_code = load_code(<span class="string">'add@tutor'</span>)</span><br><span class="line">inputs = AttributeDict()</span><br><span class="line">inputs.ints = get_ints(int_count)</span><br><span class="line">inputs.code = add_code</span><br><span class="line"></span><br><span class="line"><span class="comment"># run(AddMultiIntsSerialWorkChain, **inputs)</span></span><br><span class="line">run(AddMultiIntsParallelWorkChain, **inputs)</span><br></pre></td></tr></table></figure>
+<h3 id="参考资料"><a class="markdownIt-Anchor" href="#参考资料"></a> 参考资料</h3>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://aiida.readthedocs.io/projects/aiida-core/en/stable/intro/tutorial.html">aiida basic tutorial</a></li>
+<li><a target="_blank" rel="noopener" href="https://aiida.readthedocs.io/projects/aiida-core/en/stable/howto/write_workflows.html">write and extend workflow</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/aiidateam/aiida-core">aiida source code</a></li>
+<li><a target="_blank" rel="noopener" href="https://plumpy.readthedocs.io/en/latest/">Plumpy</a></li>
+<li><a target="_blank" rel="noopener" href="https://aiida-vasp.readthedocs.io/en/latest/">aiida-vasp</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>￥打赏我￥</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/PayQRCode/wechat.png" alt="Jun WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/PayQRCode/alipay.jpg" alt="Jun Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/python3/" rel="tag"># python3</a>
+              <a href="/tags/Aiida/" rel="tag"># Aiida</a>
+              <a href="/tags/workflow/" rel="tag"># workflow</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/11/09/64599ce7cc29.html" rel="prev" title="vibration plot mode in vesta-2">
+                  <i class="fa fa-chevron-left"></i> vibration plot mode in vesta-2
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/05/22/6a6724115d1d.html" rel="next" title="aiida-vasp的一个bug修复">
+                  aiida-vasp的一个bug修复 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jun All Rights Reserved</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">232k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">3:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-629063e32c2b3670" async="async"></script>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha256-TThEtR+XalhWKkfF383YLOrI50NGNeIqrzS+q08afrY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.css" integrity="sha256-Wk20U9mS/kHGcSgkjSiRezW5exqT6wAOKwySOaLotXM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.js","integrity":"sha256-etSqbSVF4+Lwe8MGk/Vanc1sR+mWv+qOG73fxWw9p94="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

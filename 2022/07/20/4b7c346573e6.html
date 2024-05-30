@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+<link rel="preconnect" href="null//null" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"next.jun997.xyz","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#09E614","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="IBRION 参数是 VASP 计算中一个使用频率较高的参数，其功能涉及到离子弛豫、分子动力学和声子计算，同时 VASP Wiki上关于参数的使用给出了非常详细的说明，这里打算把官网的说明简单翻译一下，同时在适当地方可能加入一点注释，主要是为了加深自己的理解，这是原文地址：https:&#x2F;&#x2F;www.vasp.at&#x2F;wiki&#x2F;index.php&#x2F;IBRION。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VASP官网关于IBRION参数的说明">
+<meta property="og:url" content="https://next.jun997.xyz/2022/07/20/4b7c346573e6.html">
+<meta property="og:site_name" content="Jun&#39;s Blog">
+<meta property="og:description" content="IBRION 参数是 VASP 计算中一个使用频率较高的参数，其功能涉及到离子弛豫、分子动力学和声子计算，同时 VASP Wiki上关于参数的使用给出了非常详细的说明，这里打算把官网的说明简单翻译一下，同时在适当地方可能加入一点注释，主要是为了加深自己的理解，这是原文地址：https:&#x2F;&#x2F;www.vasp.at&#x2F;wiki&#x2F;index.php&#x2F;IBRION。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-07-20T13:39:09.000Z">
+<meta property="article:modified_time" content="2024-05-30T11:55:21.212Z">
+<meta property="article:author" content="Jun">
+<meta property="article:tag" content="DFT">
+<meta property="article:tag" content="VASP">
+<meta property="article:tag" content="提示">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://next.jun997.xyz/2022/07/20/4b7c346573e6.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://next.jun997.xyz/2022/07/20/4b7c346573e6.html","path":"2022/07/20/4b7c346573e6.html","title":"VASP官网关于IBRION参数的说明"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VASP官网关于IBRION参数的说明 | Jun's Blog</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?186341237944a73cf31cb41b84605669"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jun's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Share knowledges, Tell stories and Show something interesting!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">5</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">35</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">57</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>Links</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ibrion"><span class="nav-text"> IBRION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ibrion-1%E4%B8%8D%E6%9B%B4%E6%96%B0%E7%A6%BB%E5%AD%90%E5%9D%90%E6%A0%87"><span class="nav-text"> IBRION&#x3D;-1:不更新离子坐标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ibrion0%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6"><span class="nav-text"> IBRION&#x3D;0:分子动力学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E5%85%B3%E4%BA%8E-verlet-%E7%AE%97%E6%B3%95"><span class="nav-text"> 1.关于 Verlet 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2%E5%85%B3%E4%BA%8Evasp%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6%E8%AE%A1%E7%AE%97%E7%9A%84%E4%B8%80%E4%BA%9B%E6%8F%90%E7%A4%BA"><span class="nav-text"> 2.关于VASP分子动力学计算的一些提示</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ibrion1%E7%A6%BB%E5%AD%90%E5%BC%9B%E8%B1%ABrmm-diis"><span class="nav-text"> IBRION&#x3D;1:离子弛豫(RMM-DIIS)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ibrion2%E7%A6%BB%E5%AD%90%E5%BC%9B%E8%B1%AB%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="nav-text"> IBRION&#x3D;2:离子弛豫(共轭梯度算法)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ibrion3%E7%A6%BB%E5%AD%90%E5%BC%9B%E8%B1%AB%E9%98%BB%E5%B0%BC%E5%88%86%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6"><span class="nav-text"> IBRION&#x3D;3:离子弛豫(阻尼分子动力学)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ibrion5%E5%92%8C6%E4%BA%8C%E9%98%B6%E5%AF%BC%E6%95%B0-hessian-%E7%9F%A9%E9%98%B5%E5%92%8C%E5%A3%B0%E5%AD%90%E9%A2%91%E7%8E%87%E6%9C%89%E9%99%90%E5%B7%AE%E5%88%86"><span class="nav-text"> IBRION&#x3D;5和6：二阶导数， Hessian 矩阵和声子频率(有限差分)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1%E5%85%B3%E4%BA%8E-hessian-%E7%9F%A9%E9%98%B5"><span class="nav-text"> 1.关于 Hessian 矩阵</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ibrion7%E5%92%8C8%E4%BA%8C%E9%98%B6%E5%AF%BC%E6%95%B0hessian-%E7%9F%A9%E9%98%B5%E5%92%8C%E5%A3%B0%E5%AD%90%E9%A2%91%E7%8E%87%E5%BE%AE%E6%89%B0%E7%90%86%E8%AE%BA"><span class="nav-text"> IBRION&#x3D;7和8：二阶导数，Hessian 矩阵和声子频率(微扰理论)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ibrion44%E6%94%B9%E8%BF%9B%E7%9A%84%E4%BA%8C%E8%81%9A%E4%BD%93%E6%96%B9%E6%B3%95"><span class="nav-text"> IBRION&#x3D;44：改进的二聚体方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%AF%86"><span class="nav-text"> 一些常识</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jun"
+      src="/images/profile.jpg">
+  <p class="site-author-name" itemprop="name">Jun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/June976" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;June976" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/HelloWorldTM" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;HelloWorldTM" rel="noopener" target="_blank"><i class="fa fa-c fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/billboard" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;billboard" rel="noopener" target="_blank"><i class="fa fa-z fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://s.weibo.com/top/summary" title="Weibo → https:&#x2F;&#x2F;s.weibo.com&#x2F;top&#x2F;summary" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@jun997.xyz" title="E-Mail → mailto:admin@jun997.xyz" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mailchi.mp/78fbe8b89a13/juns-blog-subscribe" title="Subscribe → https:&#x2F;&#x2F;mailchi.mp&#x2F;78fbe8b89a13&#x2F;juns-blog-subscribe" rel="noopener" target="_blank"><i class="fab fa-mailchimp fa-fw"></i>Subscribe</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/June976" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/07/20/4b7c346573e6.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpg">
+      <meta itemprop="name" content="Jun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VASP官网关于IBRION参数的说明 | Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VASP官网关于IBRION参数的说明
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-20 13:39:09" itemprop="dateCreated datePublished" datetime="2022-07-20T13:39:09+00:00">2022-07-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Share-knowledges/" itemprop="url" rel="index"><span itemprop="name">Share knowledges</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>9.3k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>IBRION 参数是 VASP 计算中一个使用频率较高的参数，其功能涉及到离子弛豫、分子动力学和声子计算，同时 <a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/The_VASP_Manual">VASP Wiki</a>上关于参数的使用给出了非常详细的说明，这里打算把官网的说明简单翻译一下，同时在适当地方可能加入一点注释，主要是为了加深自己的理解，这是原文地址：<a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/IBRION">https://www.vasp.at/wiki/index.php/IBRION</a>。</p>
+<span id="more"></span>
+<h1 id="ibrion"><a class="markdownIt-Anchor" href="#ibrion"></a> IBRION</h1>
+<p>可选的设置值：IBRION = -1 | 0 | 1 | 2 | 3 | 5 | 6 | 7 | 8 | 44</p>
+<p>默认值：</p>
+<ul>
+<li>对于 NSW = -1 或者 0, IBRION = -1</li>
+<li>其它，IBRION = -1<br>
+描述： IBRION 参数决定了离子如何更新和移动</li>
+</ul>
+<hr>
+<p>对于 IBRION=0, 执行的是分子动力学模拟，所有其它算法的目标都是弛豫到局部最低能量。对于复杂的弛豫问题建议使用共轭梯度算法(IBRION=2)，这一方法拥有最可靠的备份路径。当初始的结构猜测非常糟糕时，阻尼分子动力学(IBRION=3)会很有用。对于接近局部最低能量的情况，RMM-DIIS(IBRION=1)通常是最好的选择。IBRION=5 和 IBRION=6 使用有限差分方法来计算二阶导数(厄米矩阵和声子频率)，而 IBRION=7 和 IBRION=8 使用密度泛函微扰理论来计算这些导数。</p>
+<h1 id="ibrion-1不更新离子坐标"><a class="markdownIt-Anchor" href="#ibrion-1不更新离子坐标"></a> IBRION=-1:不更新离子坐标</h1>
+<p>离子不移动，但是 <a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/NSW">NSW</a> 指定的外循环仍然会执行。在每个外循环中，电子的自由度被反复优化(除了测试的目的，这实际上不会起什么作用)。如果不需要更新离子位置，请使用 NSW=0。</p>
+<h1 id="ibrion0分子动力学"><a class="markdownIt-Anchor" href="#ibrion0分子动力学"></a> IBRION=0:分子动力学</h1>
+<p>标准的从头算分子动力学，使用 <strong>Verlet</strong> 算法(如果VASP与stepprecor.o文件链接，则使用四阶预测校正器)来积分求解牛顿运动方程，<a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/POTIM">POTIM</a> 参数指定以飞秒为单位的时间步长，[SMASS] 参数可以提供一些额外的控制参数。</p>
+<h2 id="1关于-verlet-算法"><a class="markdownIt-Anchor" href="#1关于-verlet-算法"></a> 1.关于 Verlet 算法</h2>
+<p><strong>Verlet</strong> 方法是一种用于积分求解牛顿运动方程(或者更高阶)的数值方法，它经常被用于分子动力学模拟中粒子运动轨迹的求解，对于牛顿运动方程，形式为：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>v</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mi>a</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mfrac><mrow><mi>d</mi><mi>x</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mi>v</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\frac{dv}{dt}=a(t),\frac{dx}{dt}=v(t)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.05744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.05744em;vertical-align:-0.686em;"></span><span class="mord mathnormal">a</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="mord mathnormal">x</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span></span></p>
+<p>其中<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mi>a</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>v</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">a(t)=a(x(t),v(t),t)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span>，我们知道，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">a(t)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span>、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">v(t)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span>和<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x(t)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">x</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span>都是关于t的连续函数，如果我们要实现数值求解，就必须离散化，因此可以把时间t划分成等长的时间间隔，来逐步求解，这样通过将<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>v</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">v_{n+1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.638891em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex">x_{n+1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.638891em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span></span></span></span>作泰勒展开即可得到：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>v</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>v</mi><mi>n</mi></msub><mo>+</mo><msub><mi>a</mi><mi>n</mi></msub><mi mathvariant="normal">Δ</mi><mi>t</mi><mo>+</mo><mi>O</mi><mo stretchy="false">[</mo><mo stretchy="false">(</mo><mi mathvariant="normal">Δ</mi><msup><mi>t</mi><mn>2</mn></msup><mo stretchy="false">)</mo><mo stretchy="false">]</mo><mspace linebreak="newline"></mspace><msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>x</mi><mi>n</mi></msub><mo>+</mo><msub><mi>v</mi><mi>n</mi></msub><mi mathvariant="normal">Δ</mi><mi>t</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msub><mi>a</mi><mi>n</mi></msub><mo stretchy="false">(</mo><mi mathvariant="normal">Δ</mi><mi>t</mi><msup><mo stretchy="false">)</mo><mn>2</mn></msup><mo>+</mo><mi>O</mi><mo stretchy="false">[</mo><mo stretchy="false">(</mo><mi mathvariant="normal">Δ</mi><mi>t</mi><msup><mo stretchy="false">)</mo><mn>3</mn></msup><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">v_{n+1}=v_n + a_n\Delta t+O[(\Delta t^2)] \\
+x_{n+1}=x_n + v_n\Delta t + \frac{1}{2}a_n(\Delta t)^2 + O[(\Delta t)^3]
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.638891em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">Δ</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">[</span><span class="mopen">(</span><span class="mord">Δ</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose">]</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.638891em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">Δ</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">Δ</span><span class="mord mathnormal">t</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.1141079999999999em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">O</span><span class="mopen">[</span><span class="mopen">(</span><span class="mord">Δ</span><span class="mord mathnormal">t</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span><span class="mclose">]</span></span></span></span></span></p>
+<p>对于 <strong>Verlet</strong> 算法，递推关系为：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><mn>2</mn><msub><mi>x</mi><mi>n</mi></msub><mo>−</mo><msub><mi>x</mi><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>a</mi><mi>n</mi></msub><mi mathvariant="normal">Δ</mi><msup><mi>t</mi><mn>2</mn></msup><mspace linebreak="newline"></mspace><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mi>a</mi><mo stretchy="false">(</mo><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">x_{n+1} = 2x_n - x_{n-1} + a_n\Delta t^2 \\
+a_n = a(x_n)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.638891em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.79444em;vertical-align:-0.15em;"></span><span class="mord">2</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.791661em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.0141079999999998em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">Δ</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">a</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></span></p>
+<p>可以看到，上式中并不包含速度项，另一种包含速度的是 <strong>Velocity-Verlet</strong> 算法，这一方法方法中包含速度项，迭代公式为：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>x</mi><mi>n</mi></msub><mo>+</mo><msub><mi>v</mi><mi>n</mi></msub><mi mathvariant="normal">Δ</mi><mi>t</mi><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msub><mi>a</mi><mi>n</mi></msub><mi mathvariant="normal">Δ</mi><msup><mi>t</mi><mn>2</mn></msup><mspace linebreak="newline"></mspace><msub><mi>v</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mi>v</mi><mi>n</mi></msub><mo>+</mo><mfrac><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>+</mo><msub><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msub></mrow><mn>2</mn></mfrac><mi mathvariant="normal">Δ</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">x_{n+1} = x_n + v_n\Delta t + \frac{1}{2}a_n\Delta t^2 \\
+v_{n+1} = v_n + \frac{a_n + a_{n+1}}{2}\Delta t
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.638891em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">Δ</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">Δ</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.638891em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.73333em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.9463300000000001em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.26033em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">n</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord">Δ</span><span class="mord mathnormal">t</span></span></span></span></span></p>
+<p>以上迭代公式中加入了速度项，使用更为广泛。</p>
+<p>参考资料：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Verlet_integration">https://en.wikipedia.org/wiki/Verlet_integration</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.physics.udel.edu/~bnikolic/teaching/phys660/numerical_ode/node5.html">https://www.physics.udel.edu/~bnikolic/teaching/phys660/numerical_ode/node5.html</a></li>
+</ul>
+<h2 id="2关于vasp分子动力学计算的一些提示"><a class="markdownIt-Anchor" href="#2关于vasp分子动力学计算的一些提示"></a> 2.关于VASP分子动力学计算的一些提示</h2>
+<p>这部分内容同样来自vaspwiki的官网：<a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/Molecular_dynamics_calculations">https://www.vasp.at/wiki/index.php/Molecular_dynamics_calculations</a>。<br>
+为了运行基本的分子动力学计算，需要执行以下步骤：</p>
+<ul>
+<li>选择一个足够大的超胞</li>
+<li>如果继续计算，则将 CONTCAR 复制到 POSCAR 或者在 POSCAR 文件中提供原子的初始速度，如果初始没有提供原子的速度，那么原子的初始速度将是随机的，这是完全可以的，但是用户必须知道由于初始速度是完全随机的，不同计算中原子的轨迹将很难进行对比</li>
+<li>INCAR 文件中主要需要设置的参数：
+<ul>
+<li>IBRION=0:执行分子动力学计算</li>
+<li>POTIM:分子动力学运行的时间步长</li>
+<li>NSW:分子动力学运行的步数</li>
+<li>TEBEG/TEEND:设置热浴的初始/结束温度</li>
+<li>ISIF:决定系综的类型</li>
+<li>MDALGO:决定了使用那种热浴，常规的分子动力学由一位数字决定，但是在有偏分子动力学中，对于vasp6和更高版本，同样是一位数字，但是在vasp5.X版本中用两位数字决定，第一位数字决定热浴类型，第二位决定分子动力学类型。</li>
+</ul>
+</li>
+<li>可选的系综和热浴类型：</li>
+</ul>
+<center><dd><table cellpadding="5" cellspacing="0" border="1">
+<tbody><tr>
+<td></td>
+<td colspan="4" style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/Category:Thermostats" title="Category:Thermostats">热浴</a>
+</td></tr>
+<tr>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/Category:Ensembles" title="Category:Ensembles">系综</a></td>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/Andersen_thermostat" title="Andersen thermostat">Andersen</a></td>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/Nose-Hoover_thermostat" title="Nose-Hoover thermostat">Nose-Hoover</a></td>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/Langevin_thermostat" title="Langevin thermostat">Langevin</a></td>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/MDALGO#MDALGO.3D13:_Multiple_Anderson_thermostats" title="MDALGO">Multiple Andersen</a>
+</td></tr>
+<tr>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/NVE_ensemble" title="NVE ensemble">NVE</a></td>
+<td colspan="4" style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/MDALGO" title="MDALGO">MDALGO</a>=1,  <a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/ANDERSEN_PROB" title="ANDERSEN PROB">ANDERSEN_PROB</a>=0.0
+</td></tr>
+<tr>
+<td rowspan="2" style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/NVT_ensemble" title="NVT ensemble">NVT</a></td>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/MDALGO" title="MDALGO">MDALGO</a>=1</td>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/MDALGO" title="MDALGO">MDALGO</a>=2</td>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/MDALGO" title="MDALGO">MDALGO</a>=3</td>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/MDALGO" title="MDALGO">MDALGO</a>=13
+</td></tr>
+<tr>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/ISIF" title="ISIF">ISIF</a>=2</td>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/ISIF" title="ISIF">ISIF</a>=2</td>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/ISIF" title="ISIF">ISIF</a>=2</td>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/ISIF" title="ISIF">ISIF</a>=2
+</td></tr>
+<tr>
+<td rowspan="2" style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/NpT_ensemble" title="NpT ensemble">NpT</a></td>
+<td rowspan="2" style="text-align: center;">not available</td>
+<td rowspan="2" style="text-align: center;">not available</td>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/MDALGO" title="MDALGO">MDALGO</a>=3</td>
+<td rowspan="2" style="text-align: center;">not available
+</td></tr>
+<tr>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/ISIF" title="ISIF">ISIF</a>=3
+</td></tr>
+<tr>
+<td style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/NpH_ensemble" title="NpH ensemble">NpH</a></td>
+<td colspan="4" style="text-align: center;"><a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/MDALGO" title="MDALGO">MDALGO</a>=3, <a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/ISIF" title="ISIF">ISIF</a>=3, <a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/LANGEVIN_GAMMA_L" title="LANGEVIN GAMMA L">LANGEVIN_GAMMA_L</a>=0.0
+</td></tr></tbody></table></dd></center>
+<h1 id="ibrion1离子弛豫rmm-diis"><a class="markdownIt-Anchor" href="#ibrion1离子弛豫rmm-diis"></a> IBRION=1:离子弛豫(RMM-DIIS)</h1>
+<p>对于 IBRION=1，准牛顿算法被用来将离子弛豫到基态，力和应力张量被用来确定寻找平衡位置的搜索方向(不考虑总能量)，这一算法在初始位置接近局部最小值时非常快和高效，但是如果初始猜测位置不好，则会失败(在这种情况下使用 IBRION=2)。由于该算法建立了Hessian矩阵的近似值，因此需要非常精确的力否则将无法收敛，一个有效的解决办法是把 NELMIN 参数的值设为4或8(对于简单体相材料4就足够，而对于电荷密度收敛非常缓慢的复杂表面，可能需要设置为8)。这样会强制在每个离子步之间最少有4到8个电子步，并保证力在每一(离子)步中都收敛。</p>
+<p>实现的算法被称作 RMM-DIIS 。它通过考虑来自先前迭代的信息隐式计算逆 Hessian 矩阵的近似值，刚开始时 Hessian 矩阵是对角的并且对角元等于 POTIM 。如果需要，来自旧步骤的信息(可能导致线性依赖)会自动从迭代历史记录中删除。保存在迭代历史中的向量数量对应于 Hessian 矩阵的秩不得超过的自由度，显然自由度的它的自由度是3*(NIONS-1)，但是对称性和约束可以降低这一自由度。</p>
+<p>有两种内置算法可以从迭代历史中删除信息：</p>
+<ol>
+<li>如果在INCAR中指定了 <a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/NFREE">NFREE</a> 参数，在迭代历史中仅保留了 NFREE 个离子步的迭代历史(近似 Hessian 矩阵的秩不超过 NFREE)。</li>
+<li>如果没有指定 NFREE 参数，是否从迭代历史中删除信息的标准是基于逆 Hessian 矩阵的特征值谱：如果逆 Hessian 矩阵的一个特征值大于8，则丢弃来自先前步骤的信息。</li>
+</ol>
+<p>对于复杂问题，NFREE 通常可以设置为一个很大的值(10-20)，但是低维系统需要小心地设置(或则最好是精确计算自由度的数量)。NFREE增加到超过20几乎不能提高收敛性，如果 NFREE 设得太大，RMM-DIIS算法可能会发散。</p>
+<p>一个合理的 POTIM 参数非常重要，并且对于计算的加速效果显著。我们建议使用 IBRION=2 或者运行一些测试计算来找到一个合适的 POTIM 参数。</p>
+<h1 id="ibrion2离子弛豫共轭梯度算法"><a class="markdownIt-Anchor" href="#ibrion2离子弛豫共轭梯度算法"></a> IBRION=2:离子弛豫(共轭梯度算法)</h1>
+<p>共轭梯度算法用来将离子弛豫到它们的基态上，在第一步离子(以及晶胞形状)沿着最陡的方向变化(如计算出的力或应力矩阵的方向)。共轭梯度算法需要一个线性优化器，它分为几个步骤执行：</p>
+<ol>
+<li>首先让离子向着搜索方向行进一个试验步，该步的长度由 POTIM 参数控制，然后重新计算能量和力。</li>
+<li>考虑到总能量和力的变化(3条信息)，通过三次(或者二次)插值计算总能量的近似最小值，然后执行一个到近似最低能量结构的修正步。</li>
+<li>执行修正步后，再重新计算能量和受力，并检查此时离子受力中是否还包含很多沿着搜索方向的成分，如果是，使用 Brent 算法的变体来进一步改进线优化器中的校正步。</li>
+</ol>
+<p>总的来说：在第一个离子步中，根据从 POSCAR 中读入的初始结构计算力，第二步时试验步(或预测步)，第三步是修正步。如果在这一步中线性最小化已经足够精确，那么就会开始下一个试验步。</p>
+<p>NSTEP:</p>
+<ul>
+<li>初始位置</li>
+<li>试验步</li>
+<li>修正步，即对应于预期最小值的位置</li>
+<li>试验步</li>
+<li>校正步</li>
+<li>…</li>
+</ul>
+<h1 id="ibrion3离子弛豫阻尼分子动力学"><a class="markdownIt-Anchor" href="#ibrion3离子弛豫阻尼分子动力学"></a> IBRION=3:离子弛豫(阻尼分子动力学)</h1>
+<p>如果在 INCAR 文件中通过 SMASS 标签指定了阻尼因子，那么阻尼二阶运动方程将用于更新离子的各个自由度：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mover accent="true"><mover accent="true"><mi>x</mi><mo>⃗</mo></mover><mo>¨</mo></mover><mo>=</mo><mo>−</mo><mn>2</mn><mi>α</mi><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mo>−</mo><mi>μ</mi><mover accent="true"><mover accent="true"><mi>x</mi><mo>⃗</mo></mover><mo>˙</mo></mover></mrow><annotation encoding="application/x-tex">\ddot{\vec{x}} = -2\alpha \vec{F}-\mu \dot{\vec{x}}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.95086em;vertical-align:0em;"></span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.95086em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">x</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.20772em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span></span></span></span><span style="top:-3.283em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.25em;"><span class="mord">¨</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.0496599999999998em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663299999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span></span></span><span style="top:-3.25233em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.15216em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.1453em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">μ</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.95086em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">x</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.20772em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span></span></span></span><span style="top:-3.283em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.13889em;"><span class="mord">˙</span></span></span></span></span></span></span></span></span></span></span></p>
+<p>其中 SMASS 指定阻尼因子μ，POTIM 控制 α。使用简单的 velocity verlet 算法来积分这个方程，离散的形式为：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mover accent="true"><mi>v</mi><mo>⃗</mo></mover><mrow><mi>N</mi><mo>+</mo><mn>1</mn><mi mathvariant="normal">/</mi><mn>2</mn></mrow></msub><mo>=</mo><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>μ</mi><mi mathvariant="normal">/</mi><mn>2</mn><mo stretchy="false">)</mo><msub><mover accent="true"><mi>v</mi><mo>⃗</mo></mover><mrow><mi>N</mi><mo>−</mo><mn>1</mn><mi mathvariant="normal">/</mi><mn>2</mn></mrow></msub><mo>−</mo><mn>2</mn><mi>α</mi><msub><mover accent="true"><mi>F</mi><mo>⃗</mo></mover><mi>N</mi></msub><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><mi>μ</mi><mi mathvariant="normal">/</mi><mn>2</mn><mo stretchy="false">)</mo><mspace linebreak="newline"></mspace><msub><mover accent="true"><mi>x</mi><mo>⃗</mo></mover><mrow><mi>N</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>=</mo><msub><mover accent="true"><mi>x</mi><mo>⃗</mo></mover><mi>N</mi></msub><mo>+</mo><msub><mover accent="true"><mi>v</mi><mo>⃗</mo></mover><mrow><mi>N</mi><mo>+</mo><mn>1</mn><mi mathvariant="normal">/</mi><mn>2</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\vec{v}_{N+1/2}=((1-\mu /2)\vec{v}_{N-1/2}-2\alpha \vec{F}_N)/(1+\mu /2) \\
+\vec{x}_{N+1}=\vec{x}_N + \vec{v}_{N+1/2}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0692em;vertical-align:-0.3551999999999999em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.20772em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mord mtight">/</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.1052em;vertical-align:-0.3551999999999999em;"></span><span class="mord mathnormal">μ</span><span class="mord">/</span><span class="mord">2</span><span class="mclose">)</span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.20772em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mbin mtight">−</span><span class="mord mtight">1</span><span class="mord mtight">/</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.21633em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.0037em;">α</span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.9663299999999999em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.13889em;">F</span></span></span><span style="top:-3.25233em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.15216em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mord">/</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">μ</span><span class="mord">/</span><span class="mord">2</span><span class="mclose">)</span></span><span class="mspace newline"></span><span class="base"><span class="strut" style="height:0.922331em;vertical-align:-0.208331em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">x</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.20772em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.328331em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mbin mtight">+</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.864em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">x</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.20772em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.0692em;vertical-align:-0.3551999999999999em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.714em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03588em;">v</span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.20772em;"><span class="overlay" style="height:0.714em;width:0.471em;"><svg width="0.471em" height="0.714em" style="width:0.471em" viewBox="0 0 471 714" preserveAspectRatio="xMinYMin"><path d="M377 20c0-5.333 1.833-10 5.5-14S391 0 397 0c4.667 0 8.667 1.667 12 5
+3.333 2.667 6.667 9 10 19 6.667 24.667 20.333 43.667 41 57 7.333 4.667 11
+10.667 11 18 0 6-1 10-3 12s-6.667 5-14 9c-28.667 14.667-53.667 35.667-75 63
+-1.333 1.333-3.167 3.5-5.5 6.5s-4 4.833-5 5.5c-1 .667-2.5 1.333-4.5 2s-4.333 1
+-7 1c-4.667 0-9.167-1.833-13.5-5.5S337 184 337 178c0-12.667 15.667-32.333 47-59
+H213l-171-1c-8.667-6-13-12.333-13-19 0-4.667 4.333-11.333 13-20h359
+c-16-25.333-24-45-24-59z"></path></svg></span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.34480000000000005em;"><span style="top:-2.5198em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">N</span><span class="mbin mtight">+</span><span class="mord mtight">1</span><span class="mord mtight">/</span><span class="mord mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3551999999999999em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p>可以立即想到，当μ=2时上式等价于一种简单的最速下降法(当然没有线性优化器)。因此，μ=2对应于最大阻尼，而μ=0对应于没有阻尼。最佳阻尼因子取决于 Hessian 矩阵(能量关于原子位置的二阶导数矩阵)。μ的一个合理的猜测通常是0.4。</p>
+<p>请注意，我们实现的算法对用户特别友好，因为更改μ通常不需要重新调整时间步长 POTIM。要选择最佳的时间步长和阻尼因子，我们建议采用以下两步程序：首先应该固定μ(例如为1)并调整 POTIM。POTIM 应选择尽可能大，而不会使总能量发散。然后减小μ并保持 POTIM 固定，如果 POTIM 和 SMASS 选择正确，阻尼分子动力学模式通常比共轭梯度法<strong>好两倍</strong>。</p>
+<p>如果 INCAR 文件中没有指定 SMASS 参数，那么会使用 velocity quench 算法。在这种情况下，离子的位置根据以下算法更新：<strong>F</strong> 是目前的受力，并且α等于 POTIM。这一方程表明，如果力的方向和速度的方向是反平行，速度将被将为0。否则速度将被调整为平行于当前的受力，并且其增量与力成正比。</p>
+<p>注意：对于 IBRION=3,需要通过 POTIM 参数来指定一个合理时间步，太大的时间步将导致不收敛，太小的时间步将降低收敛的速度，一个稳定的时间步通常是共轭梯度算法中线性优化步骤中的最小时间步。</p>
+<h1 id="ibrion5和6二阶导数-hessian-矩阵和声子频率有限差分"><a class="markdownIt-Anchor" href="#ibrion5和6二阶导数-hessian-矩阵和声子频率有限差分"></a> IBRION=5和6：二阶导数， Hessian 矩阵和声子频率(有限差分)</h1>
+<p>可以在这里找到如何从有限差分中计算声子：<a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/Phonons_from_finite_differences">有限差分声子</a>。</p>
+<p>IBRION=5 在 VASP4.5 版本及以上可用，IBRION=6 从 VASP5.1 版本开始。这两个参数都允许计算 Hessian 矩阵(能量对原子位置的二阶导数)和系统的振动频率。只有区域中心(<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">Γ</span></span></span></span>点)的频率会自动计算并在之后打印：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Eigenvectors and eigenvalues of the dynamical matrix</span><br></pre></td></tr></table></figure>
+<p>为了计算 Hessian 矩阵，需要使用有限差分，即每个离子在每个笛卡尔坐标的方向上位移，并根据力计算 Hessian 矩阵。这两种模式在考虑对称性的方式上有所不同。对于 IBRION=5, 所有的原子都在所有的三个笛卡尔坐标方向上位移，即使对于中等大小的高对称系统，也会导致非常大的计算量。对于 IBRION=6,仅考虑对称性上不等价的位移，并使用对称性来填充 Hessian 矩阵的剩余部分。</p>
+<p>Selective dynamics目前仅支持 IBRION=5 的情况。在这一情况下，仅仅计算那些在 POSCAR 文件中 Selective dynamic 标签设置为 .TRUE. 部分对应的 Hessian 矩阵的分量。例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Cubic BN</span><br><span class="line">   3.57</span><br><span class="line"> 0.0 0.5 0.5</span><br><span class="line"> 0.5 0.0 0.5</span><br><span class="line"> 0.5 0.5 0.0</span><br><span class="line">   1 1</span><br><span class="line">selective</span><br><span class="line">Direct</span><br><span class="line"> 0.00 0.00 0.00  F F F</span><br><span class="line"> 0.25 0.25 0.25  T F F</span><br></pre></td></tr></table></figure>
+<p>原子2仅在x方向上位移，仅计算 Hessian 矩阵的第二个原子的x分量。</p>
+<p>三个参数影响 Hessian 矩阵的计算：<a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/NFREE">NFREE</a> 参数决定了对于每个离子每个方向的计算选取多少个位移量，而 POTIM 指定位移的步长。如果在输入文件中设定的值太大，位移步长默认被设置为0.015A(从VASP5.1开始)。专业知识表明，这是一个合理的折衷方案。</p>
+<p>NFREE=2 使用中心差分，即每个离子被施加一个小的正位移和负位移，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>±</mo></mrow><annotation encoding="application/x-tex">\pm</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">±</span></span></span></span>POTIM，沿着每个笛卡尔方向。对于 NFREE=4，沿着每个笛卡尔坐标的方向施加四个位移量：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>±</mo></mrow><annotation encoding="application/x-tex">\pm</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">±</span></span></span></span>POTIM 和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>±</mo><mn>2</mn><mo>×</mo></mrow><annotation encoding="application/x-tex">\pm2\times</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">±</span><span class="mord">2</span><span class="mord">×</span></span></span></span>POTIM。</p>
+<p>对于 NFREE=1，只施加一个位移量(非常不建议使用NFREE=1)。</p>
+<p>最后，IBRION=6 和 ISIF <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≥</mo></mrow><annotation encoding="application/x-tex">\geq</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mrel">≥</span></span></span></span> 3允许计算弹性常数。弹性张量是通过对晶格进行六次有限变形并从应变——应力关系导出弹性常数来确定的。弹性张量的计算既适用于固定的离子，也适用于弛豫的离子，离子固定时计算的弹性模量信息在这一行之后：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SYMMETRIZED ELASTIC MODULI (kBar)</span><br></pre></td></tr></table></figure>
+<p>离子的贡献通过转置离子 Hessian 矩阵乘以内部应变张量来计算，相应的贡献写在以下行之后：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ELASTIC MODULI CONTR FROM IONIC RELAXATION (kBar)</span><br></pre></td></tr></table></figure>
+<p>最终的弹性模量包含离子固定时扭曲的贡献和离子弛豫的贡献，在最后可以总结为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TOTAL ELASTIC MODULI (kBar)</span><br></pre></td></tr></table></figure>
+<p>这种方法有一些注意事项，最值得注意的是平面波的截断能能需要足够大以使应力张量收敛，这通常只有在截断能增加到默认值的30%左右才能实现，但强烈建议系统地测试一下，逐步增加截断能(以15%的步长)，直到完全收敛。</p>
+<p>通过额外指定 LEPSILON=.TRUE.(线性相应理论)或 LCALCEPS=.TRUE.(有限外场)参数可以计算波恩有效电荷、压电常数和离子对介电张量的贡献。</p>
+<p>关于老版本(VASP.5.1之前)的注释：在一些老版本中，INCAR 文件中 NSW 必须设置为1，因为 NSW=0 会不管 INCAR 中 IBRION 的设置值而直接将其设置为-1。</p>
+<p>此外，尽管 VASP.4.6 支持 IBRION=5-6，VASP.4.6 不会自动改变k点集合(通常，结构施加位移之后需要使用不同的k点网格)。因此在 VASP.4.6 程序中有限差分方法可能会产生不正确的结果。</p>
+<h2 id="1关于-hessian-矩阵"><a class="markdownIt-Anchor" href="#1关于-hessian-矩阵"></a> 1.关于 Hessian 矩阵</h2>
+<p>在数学上，Hessian 矩阵是标量函数或标量场的二阶偏导数的方阵。在 DFT 中，Hessian 矩阵是能量对体系几何结构的二阶导数，在力的计算中应用非常重要，计算过程中使用的位移是笛卡尔位移，因此 Hessian 是基于笛卡尔坐标而不是分数坐标。</p>
+<p>Hessian 矩阵的元素定义为：</p>
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>H</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo>=</mo><mfrac><mrow><msup><mi>δ</mi><mn>2</mn></msup><mi>E</mi></mrow><mrow><mi>δ</mi><msub><mi>x</mi><mi>i</mi></msub><mi>δ</mi><msub><mi>x</mi><mi>j</mi></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">H_{ij} = \frac{\delta ^2E}{\delta x_i \delta x_j}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.08125em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.463216em;vertical-align:-0.972108em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.491108em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.972108em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<p>对于原子数量为N的体系，i的取值有3N个，通过对称性可以进一步减少自由度，详细的计算方法可以参考下面列出的参考文章2。</p>
+<p>参考文章：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Hessian_matrix">https://en.wikipedia.org/wiki/Hessian_matrix</a></li>
+<li><a target="_blank" rel="noopener" href="http://openmopac.net/manual/Hessian_Matrix.html">http://openmopac.net/manual/Hessian_Matrix.html</a></li>
+</ul>
+<h1 id="ibrion7和8二阶导数hessian-矩阵和声子频率微扰理论"><a class="markdownIt-Anchor" href="#ibrion7和8二阶导数hessian-矩阵和声子频率微扰理论"></a> IBRION=7和8：二阶导数，Hessian 矩阵和声子频率(微扰理论)</h1>
+<p>从 VASP.5.1 版本开始 IBRION=7 和 IBRION=8 都支持，它会用密度泛函微扰理论计算 Hessian 矩阵，IBRION=7 不会使用对称性，而 IBRION=8 会使用对称性来降低位移的数量，输出结果与 IBRION=5 和6类似。具体来说，有关于离子位移(原子间力常数)的二阶导数以及应变和离子位移(内部应变张量)的混合二阶导数。尽管计算了离子弛豫对弹性张量的贡献，但未确定钳制离子(离子固定)对弹性张量的贡献。如果在 INCAR 文件中指定了 LEPSILON=.TRUE.，波恩有效电荷、压电常数以及离子对介电张量的贡献都会计算。</p>
+<p>总的来说，VASP 实现的 DFPT 计算有一点初级，只支持与超胞对称性相同的位移，即使 q=0 的声子。换句话说，VASP 只能计算超胞在Γ点的声子频率，因此，与上面讨论的有限差分方法相比，这部分的代码几乎没有优势，特别是，线性相应仅限于 LDA 和 GGA 泛函，它不能确定弹性张量，因为还没有实现相对于应变张量的线性响应，线性响应方法的唯一优点是它们无需选择有限位移的大小，因此，首先使用线性响应计算声子频率然后切换到有限差分方法来确定最大位移，这样将会产生与线性响应精度相当的结果。</p>
+<p>这里需要知道一些技术细节。VASP 通过求解 Sternheimer 方程以确定轨道的线性响应。因此，不需要空轨道。在内部，VASP 的线性响应程序依赖于两个地方的有限差分：</p>
+<ol>
+<li>第一个地方是计算交换关联泛函的二阶导数：由于大多数泛函并不支持二阶导数的代数求解，VASP 总是通过有限差分来确定每个原子位移后的交换相关势的二阶变化和 PAW 的中心项。</li>
+<li>第二个地方，在 VASP 确定了轨道的一阶变化之后，它会用有限差分方法来计算所有的二阶导数。</li>
+</ol>
+<p>为此，VASP 在选定的方向上将位移施加到选定的原子上，将线性响应计算添加到轨道，最后确定正位移和负位移对力和应力张量作用的差异，可以证明，这分别准确地产生了二阶力常数和内部应变张量。此外，通过在“极化矢量”Eq上收缩轨道地线性响应来“解析地”确定波恩有效电荷。这些计算的结果应该与之前在计算相对于外部场的线性响应时确定的波恩有效电荷非常吻合(有两种不同的方法来计算混合导数)。OUTCAR 文件末尾的最终汇总输出写入了根据外部场的线性响应确定的波恩有效电荷。</p>
+<h1 id="ibrion44改进的二聚体方法"><a class="markdownIt-Anchor" href="#ibrion44改进的二聚体方法"></a> IBRION=44：改进的二聚体方法</h1>
+<p>参考这里：<a target="_blank" rel="noopener" href="https://www.vasp.at/wiki/index.php/Improved_Dimer_Method">https://www.vasp.at/wiki/index.php/Improved_Dimer_Method</a></p>
+<h1 id="一些常识"><a class="markdownIt-Anchor" href="#一些常识"></a> 一些常识</h1>
+<p>对于 IBRION=1、2和3，ISIF 标签决定晶胞的形状和离子的位置是否改变，在分子动力学模拟中(IBRION=0)只有在动力学模组使用 Tomas Bucko 时晶胞形状才被允许改变。</p>
+<p>所有的弛豫算法都需要在 INCAR 文件中指定 POTIM 的值。对于 IBRION&gt;0，在调用最小化程序之前，力在内部进行缩放，因此对于弛豫，POTIM 并没有物理意义并且只是一个缩放因子，对于很多系统，最佳的 POTIM 在0.5左右，由于准牛顿算法和阻尼算法对这个参数的选择较为敏感，因此如果你不确定最佳的 POTIM 参数应该设多大，使用 IBRION=2 。</p>
+<p>在这种情况下，OUTCAR 文件和标准输出设备中将包含一行显示可靠的 POTIM 。对于 IBRION=2，在每个校正步骤之后，以下行将被写入标准输出设备中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">trial: gam=  .00000 g(F)=   .152E+01 g(S)=  .000E+00 ort = .000E+00</span><br><span class="line">(trialstep = .82)</span><br></pre></td></tr></table></figure>
+<p>其中变量 gam 是上一步的共轭参数，g(F) 和 g(S) 分别是力和应力张量的模长，变量 ort 是一个指示器，表明当前的搜索方向与上一个搜索方向正交(对于最佳步长，该值应该远小于 g(F)+g(S) )。变量 trialstep 是当前试验步的步长。该值是使得上一个离子步中实现线最小化的平均步长，通过将当前 POTIM 参数与试验步长相乘，可以确定最佳的 POTIM 。</p>
+<p>在每个试验步结束之后，以下信息将被写入到标准输出设备：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">trial-energy change:   -1.153185  1.order   -1.133   -1.527  -.739</span><br><span class="line">step:   1.7275(harm=  2.0557)  dis=  .12277  </span><br><span class="line">                           next Energy= -1341.57 (dE= -.142E+01)</span><br></pre></td></tr></table></figure>
+<p>变量 trial-energy change 是试验步中能量的改变量，1.order 之后的第一个值是根据力计算得出的预期能量变化：(F(start)+F(trial))/2×change of positions.第二和第三个值对应于F(start)×change of positions, and F(trial)×change of positions。</p>
+<p>第二行中的第一个值是导致沿当前搜索方向的线最小化的步长。它是使用开始和试验步(力和能量变化)中的数据通过三阶插值公式计算得到的，harm 是使用二阶(或谐波)插值得到的最佳步长，在谐波插值中只使用了力的信息，当接近最小值时，两个值应该相似。dis 是离子在分数坐标中移动的最大距离。next Energy 指示下一个能量应该多大(线最小化优化时的能量)，dE是估算的能量改变值。</p>
+<p>在每个试验步结束时，OUTCAR 文件包含以下行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">trial-energy change:   -1.148928  1.order   -1.126  -1.518  -.735</span><br><span class="line"> (g-gl).g =  .152E+01      g.g   =  .152E+01  gl.gl    =  .000E+00</span><br><span class="line">g(Force)  =  .152E+01   g(Stress)=  .000E+00 ortho     =  .000E+00</span><br><span class="line">gamma     =    .00000</span><br><span class="line">opt step  =   1.72745  (harmonic =   2.05575) max dist = .12277085</span><br><span class="line">next E    = -1341.577507   (d E  =   1.42496)</span><br></pre></td></tr></table></figure>
+<p>trial-energy change 行前面已经提过. g(Force) 代表 g(F), g(Stress) 代表 g(S), ortho 代表 ort, gamma 代表 gam.第二行中 gamma 之后的值(step: …)之前也讨论过。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>￥打赏我￥</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/PayQRCode/wechat.png" alt="Jun WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/PayQRCode/alipay.jpg" alt="Jun Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/DFT/" rel="tag"># DFT</a>
+              <a href="/tags/VASP/" rel="tag"># VASP</a>
+              <a href="/tags/%E6%8F%90%E7%A4%BA/" rel="tag"># 提示</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/14/276373048e9d.html" rel="prev" title="vasp+phonopy计算声子谱">
+                  <i class="fa fa-chevron-left"></i> vasp+phonopy计算声子谱
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/09/22/c59c75865653.html" rel="next" title="高斯过程回归(Gaussian Processes Regression, GPR)简介">
+                  高斯过程回归(Gaussian Processes Regression, GPR)简介 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jun All Rights Reserved</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">232k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">3:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-629063e32c2b3670" async="async"></script>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha256-TThEtR+XalhWKkfF383YLOrI50NGNeIqrzS+q08afrY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.css" integrity="sha256-Wk20U9mS/kHGcSgkjSiRezW5exqT6wAOKwySOaLotXM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.js","integrity":"sha256-etSqbSVF4+Lwe8MGk/Vanc1sR+mWv+qOG73fxWw9p94="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

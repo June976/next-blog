@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.2.0">
+
+<link rel="preconnect" href="null//null" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css" integrity="sha256-DfWjNxDkM94fVBWx1H5BMMp0Zq7luBlV8QRcSES7s+0=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/themes/blue/pace-theme-minimal.css">
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"next.jun997.xyz","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#09E614","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="一、前言 最近在研究NEB方法，在网上找到一篇提出NEB方法的最原始文献，这里打算把整篇文献翻译一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NEB方法寻找过渡态和最低能量路径----文献翻译">
+<meta property="og:url" content="https://next.jun997.xyz/2022/03/03/85477791e5d1.html">
+<meta property="og:site_name" content="Jun&#39;s Blog">
+<meta property="og:description" content="一、前言 最近在研究NEB方法，在网上找到一篇提出NEB方法的最原始文献，这里打算把整篇文献翻译一下。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-1.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-2.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-3.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-4.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-5.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-6.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-7.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-8.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-9.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-10.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-11.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-12.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-13.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-14.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-15.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-16.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-17.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-18.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-19.jpg">
+<meta property="og:image" content="https://next.jun997.xyz/images/neb/figure-20.jpg">
+<meta property="article:published_time" content="2022-03-03T12:09:41.000Z">
+<meta property="article:modified_time" content="2024-05-30T11:55:21.212Z">
+<meta property="article:author" content="Jun">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="文献翻译">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://next.jun997.xyz/images/neb/figure-1.jpg">
+
+
+<link rel="canonical" href="https://next.jun997.xyz/2022/03/03/85477791e5d1.html">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://next.jun997.xyz/2022/03/03/85477791e5d1.html","path":"2022/03/03/85477791e5d1.html","title":"NEB方法寻找过渡态和最低能量路径----文献翻译"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>NEB方法寻找过渡态和最低能量路径----文献翻译 | Jun's Blog</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?186341237944a73cf31cb41b84605669"></script>
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jun's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Share knowledges, Tell stories and Show something interesting!</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">5</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">35</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">57</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>Links</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80-%E5%89%8D%E8%A8%80"><span class="nav-text"> 一、前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C-%E6%AD%A3%E6%96%87%E9%83%A8%E5%88%86"><span class="nav-text"> 二、正文部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#centerneb%E6%96%B9%E6%B3%95%E5%AF%BB%E6%89%BE%E8%BF%87%E6%B8%A1%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E6%9C%80%E4%BD%8E%E8%83%BD%E9%87%8F%E8%B7%AF%E5%BE%84center"><span class="nav-text"> NEB方法寻找过渡过程中的最低能量路径</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95"><span class="nav-text"> 目录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#span-id-jump11%E7%AE%80%E4%BB%8Bspan"><span class="nav-text"> 1.简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#span-id-jump22%E6%80%81%E9%93%BE%E6%96%B9%E6%B3%95span"><span class="nav-text"> 2.态链方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#span-id-jump33neb%E6%96%B9%E6%B3%95span"><span class="nav-text"> 3.NEB方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#span-id-jump44%E4%BD%BF%E7%94%A8neb%E6%96%B9%E6%B3%95span"><span class="nav-text"> 4.使用NEB方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#span-id-jump55%E5%90%B8%E9%99%84%E5%8E%9F%E5%AD%90%E5%9C%A8%E8%A1%A8%E9%9D%A2%E4%B8%8A%E8%BF%81%E7%A7%BB%E7%9A%84%E5%BA%94%E7%94%A8span"><span class="nav-text"> 5.吸附原子在表面上迁移的应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#span-id-jump66%E5%A6%82%E6%9E%9C%E5%BF%BD%E7%95%A5%E5%BC%B9%E7%B0%A7%E5%8A%9B%E5%B0%86%E4%BC%9A%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88span"><span class="nav-text"> 6.如果忽略弹簧力将会发生什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#span-id-jump77neb%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0span"><span class="nav-text"> 7.NEB目标函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#span-id-jump88%E6%80%BB%E7%BB%93span"><span class="nav-text"> 8.总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jun"
+      src="/images/profile.jpg">
+  <p class="site-author-name" itemprop="name">Jun</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/June976" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;June976" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://blog.csdn.net/HelloWorldTM" title="CSDN → https:&#x2F;&#x2F;blog.csdn.net&#x2F;HelloWorldTM" rel="noopener" target="_blank"><i class="fa fa-c fa-fw"></i>CSDN</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/billboard" title="Zhihu → https:&#x2F;&#x2F;www.zhihu.com&#x2F;billboard" rel="noopener" target="_blank"><i class="fa fa-z fa-fw"></i>Zhihu</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://s.weibo.com/top/summary" title="Weibo → https:&#x2F;&#x2F;s.weibo.com&#x2F;top&#x2F;summary" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:admin@jun997.xyz" title="E-Mail → mailto:admin@jun997.xyz" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://mailchi.mp/78fbe8b89a13/juns-blog-subscribe" title="Subscribe → https:&#x2F;&#x2F;mailchi.mp&#x2F;78fbe8b89a13&#x2F;juns-blog-subscribe" rel="noopener" target="_blank"><i class="fab fa-mailchimp fa-fw"></i>Subscribe</a>
+      </span>
+  </div>
+  <div class="cc-license site-overview-item animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/June976" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/03/03/85477791e5d1.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpg">
+      <meta itemprop="name" content="Jun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="NEB方法寻找过渡态和最低能量路径----文献翻译 | Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NEB方法寻找过渡态和最低能量路径----文献翻译
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-03 12:09:41" itemprop="dateCreated datePublished" datetime="2022-03-03T12:09:41+00:00">2022-03-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Tell-stories/" itemprop="url" rel="index"><span itemprop="name">Tell stories</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>8.6k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="一-前言"><a class="markdownIt-Anchor" href="#一-前言"></a> 一、前言</h3>
+<p>最近在研究NEB方法，在网上找到一篇提出NEB方法的最原始文献，这里打算把整篇文献翻译一下。</p>
+<span id="more"></span>
+<p>文献链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/17OXzwloZ5tWfboTzBOf9MA">百度网盘</a><br />
+提取码：vvpj</p>
+<h3 id="二-正文部分"><a class="markdownIt-Anchor" href="#二-正文部分"></a> 二、正文部分</h3>
+<h3 id="centerneb方法寻找过渡过程中的最低能量路径center"><a class="markdownIt-Anchor" href="#centerneb方法寻找过渡过程中的最低能量路径center"></a> <center>NEB方法寻找过渡过程中的最低能量路径</center></h3>
+<h4 id="目录"><a class="markdownIt-Anchor" href="#目录"></a> 目录</h4>
+<p><a href="#jump1">1.简介</a><br />
+<a href="#jump2">2.态链方法</a><br />
+<a href="#jump3">3.NEB方法</a><br />
+<a href="#jump4">4.使用NEB方法</a><br />
+<a href="#jump5">5.吸附原子在表面上迁移的应用</a><br />
+<a href="#jump6">6.如果忽略弹簧力将会发生什么？</a><br />
+<a href="#jump7">7.NEB的目标函数</a><br />
+<a href="#jump8">8.总结</a></p>
+<h4 id="span-id-jump11简介span"><a class="markdownIt-Anchor" href="#span-id-jump11简介span"></a> <span id = "jump1">1.简介</span></h4>
+<p>在凝聚态物理和理论化学中一个常见并且重要的问题是一群原子从一个稳定结构过渡到另一个稳定结构的最低能量路径，这一路径常被称为“minimum energy path”（MEP,最低能量路径）。在转变中，例如化学反应、分子变形或者固体中的扩散过程，它经常被定义为“reaction coordinate”（反应坐标）。沿着最低能量路径上的最大势能点就是鞍点能，它反映了反应能垒，在级数过渡态理论（TST）中，它对反应速率的估计至关重要。</br><br />
+已经提出了很多不同的寻找反应路径和鞍点的方法，一些方案从势能面上代表初态的局部最低点逐步前进，按顺序地，找到一条上升最慢地道路。然而，这条上升最慢的道路，不一定会通向鞍点。图1展示了这样一个系统的例子。<img src="/images/neb/figure-1.jpg" alt="figure1" />一种常用的方法是计算势能面局部级数近似的法向模，然后跟踪每一种模，直到找到鞍点，该过程中的每一步都需要对二阶导数矩阵进行求值和对角化，因此仅限于很小的系统和那些二阶导数矩阵容易获得的原子相互作用（例如，不包括基于平面波的密度泛函计算）。</br><br />
+其它方法使用两点边界条件，即是转变过程中的初始结构和最终结构都被给定。这些结构通常是多维势能面上的两个局部极小值，可以通过有限温度分子动力学或者蒙特卡罗模拟退火方法获得。这里我们将会聚焦在这一问题。我们还将重点讨论只需要势能面一阶导数的方法。其中最简单的是“阻力”法或者“反应坐标”方法，系统中的某些坐标子集用于定义进度变量，通常通过初始结构和最终结构线性插值获得。从初态到末态逐步改变这一自由度，同时每步中优化剩余的其它自由度（如果系统包含3维空间中N个原子，那么系统总共就有3N-1个自由度）。在简单系统中，这个方法可以正常工作，但是也有很多例子这个方法会失败，产生的路径可能不连续，这一过程非常取决于阻力的方向（hysteresis效应），尤其是，有些原子坐标可能会沿着鞍点边界滑行，因此会错过鞍点。图1中同样也有这样的例子。尽管初始直线插值非常接近鞍点，但剩余自由度的弛豫给出的结果于MEP相差甚远。对于阻力坐标上的一系列坐标值，事实上，有两个最低值。如果阻力坐标是通过使用上一步最小值作为下一步的初始猜测，逐步增加来推测下一步阻力坐标，那么根据计算是从初态或末态开始，将会得到两条不同的路径。这些路径“越过”鞍点，直到势能等值线与优化的自由度对应的线平行。</br><br />
+最近，另一种两点方法被提出来了。这里，产生了系统的一连串的图象（或称作“态”），终点结构和所有的中间结构协同通过某种方式优化。图2所示是一个计算例子。<img src="/images/neb/figure-2.jpg" alt="figure2" />这里，初始图象选定在一条连接着初始点和终点的线条上，但是同时对所有图象进行优化计算之后，图象位于MEP附近。图象的分布给出了路径的离散表示，可以进行控制，在这里能垒区域是末端区域的两倍。这类方法的一个重要方面是，于基于沿势能面顺序“行走”的方法相比，可以非常有效地使用并行计算机或网络及计算集群来寻找MEP。我们将在第2节中概述这些类型的方法。然后，在第3节，讨论一种我们称之为“轻推弹性带”（NEB)的方法。这一方法已经在其它文献中被简单提出来过了并且已经成功被应用在很多问题中，包括金属表面的扩散研究，溅射沉积中的多原子交换过程，分子在表面上的解理吸附，刚性水分子在冰中的扩散，金属团簇的预融，金属尖端和表面之间的接触形成，金属中螺位错的交滑移（该模拟需要在系统中超过100000个原子，在MEP计算中总共需要超过2000000个原子），以及金属原子在半导体表面的交换过程（使用基于DFT的平面波基组来计算原子力）。NEB方法非常简单和容易实现，我们将在第4节中给出实现该方法的详细描述。第5节中描述了一个关于原子在表面迁移的简单测试计算，表明了NEB计算的重要性。第6节指出了在图象之间包含弹簧相互作用的重要性。关于NEB方法的理论基础探讨以及可能的扩展将在第7节讨论。第8节将给出总结。</p>
+<h4 id="span-id-jump22态链方法span"><a class="markdownIt-Anchor" href="#span-id-jump22态链方法span"></a> <span id = "jump2">2.态链方法</span></h4>
+<p>在态链方法中，系统的一些图象（或者“态”）被连接在一起来寻找路径。如果图象之间被自然长度为0的弹簧连接，并且目标函数被定义为：<img src="/images/neb/figure-3.jpg" alt="figure3" />，那么这条链在数学上类似于描述量子粒子的密度矩阵的非对角元素的费曼路径积分。在为经典系统寻找MEP的背景下，可以通过保持R0和RP不变的情况下，改变中间图象设想最小化等式（1）中的目标函数。我们称之为平面弹性带（PEB)方法。下面，我们将会讨论实际上在大多数情况下怎么失败得到MEP的。我们也将提出对等式（1）的修改来解决这些问题。</br><br />
+早期是Pratt尝试在经典系统中用链态方法来分析过渡。他提出了一种统计程序，其中使用有限温度蒙特卡罗算法对系统的马尔可夫图象链进行采样，以找到过渡态区域。这一方法最近被Chandler和他的合作者进一步发展并且打开了分析在崎岖的势能地形中需要在速率计算中包含大量相关MEP的过渡的可能性。尽管实际上的系统很大并且过渡过程复杂，但是我们将把这里的讨论局限到需要找到一个或最多几个MEP的系统。</br><br />
+Elber和Karplus提出了一种基于优化一条离散路径线积分来寻找一条反应路径的算法，他们将目标函数定义为：<img src="/images/neb/figure-4.jpg" alt="figure4" />其中有<img src="/images/neb/figure-5.jpg" alt="figure5" />在这里，连接相邻图象之间的弹簧具有自然长度，等于沿当前最佳路径估计的图象之间的平均间隔。通过调节中间图象使目标函数最小化，R1，R2，…，RP-1使用非线性优化算法。该算法已经被应用于一些生物系统的过渡中。它可以很好地得到鞍点的位置，但正如作者所指出的，它不收敛于MEP，也不能很好地估计鞍点能量。通常，需要使用牛顿-拉斐逊法（需要二阶导数）或仅基于一阶导数地迭代法对结果进行细化。</br><br />
+Czerminski和Elber提出了一个改进的方法寻找大概的MEPs，自我惩罚的行走算法（SPW）。考虑到最小化SEK过程中可能会造成图象的聚集以及在靠近最小值附近区域路径交叉，它们在等式（2）的目标函数中添加了一个惩罚项来保持图象分开。</br><br />
+Ulitsky和Elber提出了一个不同的算法，它可以收敛到MEP但是相较于SPW有更小的收敛半径。Choi和Elber之后提出了改进的算法，它收敛得更l快，局域更新平面（LUP）算法。这里，通过首先估计路径的局部切线作为连接链中前一个和后一个图象的线段。这里，通过首先估计路径的局部切线，作为连接链中前一个和后一个图象的线段，改进了根据状态序列对MEP的初始猜测<img src="/images/neb/figure-6.jpg" alt="figure6" />然后在法线为qi的超平面内，最小化每个图象的能量，亦即根据下式弛豫系统<img src="/images/neb/figure-7.jpg" alt="figure7" />每弛豫M步（M量级在10左右）之后，局域切线qi将被更新。这一算法已经在很多背景下被使用，尤其是化学过程的大型DFT计算。由于图象没有连接起来，LUP算法给出的是沿着路径不均匀分布的图象。Choi和Elber指出从一个好的初始猜测来避免这些问题非常重要，例如可以使用通过SPW方法观察到的近似MEP。NEB方法，下面将讨论的，与LUP方法和弹性带方法密切相关，其中包含通过弹簧相互作用来保证路径的连续性，NEB方法结合了这些方法的有点。</br><br />
+Sevick，Bell和Theodorou提出了一种态链的方法寻找MEP，但是他们的优化方法包括严格固定图象之间距离的显式约束，需要计算势能面的二阶导数矩阵，因此，不适用于大型系统和复杂的相互作用。</br><br />
+态链方法同样被用来寻找经典动力学路径。Gillilan和Wilson建议使用类似于S<sup>PEB</sup>式子来寻找鞍点，但是这一方法造成的问题将会在下一节中阐明。</br></p>
+<h4 id="span-id-jump33neb方法span"><a class="markdownIt-Anchor" href="#span-id-jump33neb方法span"></a> <span id = "jump3">3.NEB方法</span></h4>
+<p>为了给出NEB方法的动机，我们首先讨论平面弹性带方法的缺点，其目标函数定义见等式（1）。图3展示了通过二维LEPS势计算的结果（基于PEB模型，左边弹簧常数k=1.0，右边弹簧常数k=0.1）。<img src="/images/neb/figure-8.jpg" alt="figure8" />在这一方法中，图象i上力被定义为：<img src="/images/neb/figure-9.jpg" alt="figure9" />图3中左图展示了所有弹簧的弹性系数k设置为1.0时的计算结果。这里，弹性带由于太硬，路径会切入拐角，因此错过了鞍点区域。图3右图展示了当使用更小的弹簧系数k=0.1时的结果，现在弹性带更靠近鞍点，但是图象偏向滑向下方并且避开了能垒区域，从而降低了最关键区域路径的分辨率，这些问题以前就被注意到了。在连续极限下，目标函数成为：<img src="/images/neb/figure-10.jpg" alt="figure10" />，图象数量P趋向于无穷，并且我们可以指定弹簧常数和图片数的依赖关系k(P)。如果随着图片数量增加，k(P)/2P趋向一个有限值（但非0），带的刚度会导致上面说的“切角”。但是，即使随着P逐渐变大k(P)/2P消失，结果路径也可能不会通过鞍点。注意到这一点可以看出，目标函数类似于单位质量的经典粒子在反转势能面上运动的行为，时间定义为τ=sqrt(P/k(P))λ，那么，最小化S<sup>PEB</sup>对应于动力学方程：d<sup>2</sup>R/dτ<sup>2</sup>=▽<br />
+V。当经典粒子通过鞍点区域时，它的速度是有限的。如果路径在那里是弯曲的，粒子将会受到与路径垂直的力的影响，即是粒子不能沿着MEP。</br><br />
+现在我们提出了一种利用平面弹性带法求解问题的一种简便方法，当弹性带中使用足够多的图象时，能够收敛到MEP。切角问题是由弹簧力的分量造成的，弹簧力垂直于路径，并倾向于将图象从MEP上拉下来。向下滑动的问题源于路径方向上的真实力▽V(Ri),图象之间的距离变得不均匀，因此净弹簧力可以平衡真实势能力的平行分量。</br><br />
+解决这个问题的方法很简单。在NEB方法中，弹性带的能量最小化是在弹簧力的平行分量和真实力的垂直分量被投影出来的情况下进行的，第i个图象上的力变为<img src="/images/neb/figure-11.jpg" alt="figure11" />我们将真实力的垂直分量和弹簧力的平行分量的投影量称为“轻推”量。这些力投影将路径本身的动力学与路径离散表示中选择的特定图象分布解耦。然而弹簧力不会干扰到垂直于路径的图象的弛豫，图象的弛豫结构满足▽V®=0，即位于MEP上。此外，由于弹簧力只影响路径内图象的分布，因此弹性常数的选择是相当随意的。这种路径弛豫和路径离散表示的解耦对于确保收敛到MEP至关重要。</br><br />
+当系统的能量沿着路径快速变化，但垂直于路径的图象上的回复力很弱时，例如共价键被破坏并形成时（如硅表面上硅原子的扩散），路径可能会变得“扭曲”，最小化的收敛速度会减慢。在平行力较大区域的图象试图向下滑动，但由于轻推的作用确保了图象的间距相等，这只能通过延长链来实现，从而使链在另一个几乎没有力的区域弯曲，同时局部切线的估计可能会出现问题。一个有效的补救办法是在当路径变得扭曲之后，引入一个平滑的切换函数来逐渐在路径变得扭曲的地方开启弹簧力的垂直部分。因此图象i上的力变成<img src="/images/neb/figure-12.jpg" alt="figure12" />如果相邻路径段之间的角度变为90°，则保持完全垂直弹簧力，但如果角度为0，则不保持任何垂直弹簧力（即是三个图象在一条直线上）。少量的垂直弹簧力通常足以拉直路径并显著提高收敛性。应注意不要包含太多的垂直弹簧力，因为当使用很少的图象来表示路径时，这可能会导致切角和高估鞍点能量。</br><br />
+图3中实线是利用NEB方法计算得到的LEPS问题的结果，模型1中很清楚的表明平面带方法中的切角和下滑问题都能被避免。在这些计算中，所有情况下弹簧常数都是相同的，因此沿着路径上图象是等间隙的。图2展示了模型2的结果，在鞍点附近区域，弹簧常数被设置成两倍来说明这一方法该方法在提供沿路径分布图象时的灵活性。因此，在最关键的区域，路径的分辨率是原来的两倍。</br></p>
+<h4 id="span-id-jump44使用neb方法span"><a class="markdownIt-Anchor" href="#span-id-jump44使用neb方法span"></a> <span id = "jump4">4.使用NEB方法</span></h4>
+<p>在分子动力学程序中使用NEB方法非常容易，特别是，我们在硅的多体势、刚性水分子的点电荷模型、金属的有效介质和嵌入原子势以及基于平面波的密度泛函理论计算实现了NEB。<u>对于第一性原理或经验力场计算，首先需要使用系统能量学的一些描述来计算弹性带中每个图象的能量和能量的梯度。然后，对于每个图象，需要两个相邻图象的坐标来估计路径的局部切线，投影出梯度的垂直分量，并添加弹簧力的平行分量（根据等式8）以及弹簧力的一些垂直分量（路径弯曲条件下，根据等式8和等式9）。我们将切线估计为向量Ri+1-Ri与Ri-Ri-1之间的角平分线向量。系统的不同图象的▽V的计算可以并行进行，例如使用单独的节点来处理每个图象。然后，每个节点只需要接收相邻图象的坐标即可评估弹簧力并执行投影。</u></br><br />
+使用系统的P+1个图象来表示由N个坐标描述的系统中端点之间的路径，力的大小需要在N(P-1)个自由度上进行优化。可以使用不同的技术来最小化。我们已经使用了一种简单但是非常有效的基于经典动力学模拟的速度-Verlet算法。在每个时间步，根据当前坐标处计算的力，从耦合的一阶运动方程更新坐标和速度。如果每一步的速度都为0，则该算法给出了最陡下降的最小值。一个更有效的方法是在当前步始终保持速度的分量与力平行，除非它指向与力相反的方向。更具体地说，如果F是N(P-1)维沿着力方向的单位矢量，u是N(P-1)维速度矢量，那么有<img src="/images/neb/figure-13.jpg" alt="figure13" />如果力始终指向相似的方向，系统就会加快速度，这相当于增加时间步长。当系统超过最小值时，速度为0。</br><br />
+要启动路径查找算法，需要对初值进行猜测。我们发现许多情况下初始点和终点之间的简单线性插值是足够的。当存在多个MEP时，优化会导致收敛到最接近初始猜测的MEP。在这种情况下，为了找到最佳的MEP，可能需要使用模拟退火程序，如第7节所述。一个典型的路径查找计算涉及10到30幅图象，需要几百次迭代才能收敛。</br><br />
+最后，在路径优化过程中，消除系统的整体平移和旋转非常重要。这可以通过在系统的每个图象中固定六个自由度来实现。我们通过固定一个原子，以一种简单的方式实现了这一点（亦即，将作用在系统中一个原子上的所有力归零），约束另一个原子仅沿直线移动（例如，将力的x和y分量归0），限制第三个原子只在平面内运动（例如，将力的x分量归0）</br></p>
+<h4 id="span-id-jump55吸附原子在表面上迁移的应用span"><a class="markdownIt-Anchor" href="#span-id-jump55吸附原子在表面上迁移的应用span"></a> <span id = "jump5">5.吸附原子在表面上迁移的应用</span></h4>
+<p>我们现在讨论该方法在一个简单系统中的另一个应用，以说明NEB方法的收敛性，并将其与平面弹性带方法进行对比。我们计算了铜原子在铜(100)表面桥位上扩散跃点的激活能量，使用了与各种铜晶体性质和铜二聚体相匹配的EAM型作用势。这是一个简单的测试用例，由于鞍点构型的对称性，可以很简单地计算鞍点的能量。</br><br />
+当系统中只有一小部分原子在过渡过程中发生了实质性地位移（就像这里的情况一样），并且当相互作用可以分解为两体、三体等贡献时，能量和力的计算就可以非常有效地进行。不是用弹性带中的P+1个图象来表示系统中的每个原子，在距离“活跃”区域（大致等于两体或三体相互作用势的范围）一定半径之外的原子可以有效地被认为在整个转变中处于相同的位置（即弹性带中所有图象中的相同坐标）。通过这种方法我们实现了EAM和Tersoff相互作用势。确定完整过渡路径所需的计算量与赝路径单个构型弛豫的计算量相当。例如，在计算一个金属原子在金属表面扩散的过程中（如下面所述），对于系统的每个构型需要500到1000个原子。通常在弹性带方法中只有30到50个原子需要用多个图象表示，即使在模拟复杂的交换过程时也是如此。弹性带中有20个图象（这通常足够了），整个过渡路径可以被视为一个原子数约为两倍的单一构型，那么MEP的确定只需要两倍多一点的时间来弛豫路径上的一个点，然而，要实现这一方法，在计算力的流程中往往需要额外的标记，如果系统的相互作用很复杂，这可能会很困难。</br><br />
+图4展示了一些用平面弹性带方法计算的结果。<img src="/images/neb/figure-14.jpg" alt="figure14" />。当链由20个图象组成时，随着弹簧的硬度增加，估计的能垒也增加，当弹簧的劲度系数k&lt;0.1eV/A<sup>2</sup>时，会高估能垒。原子没有足够的自由来弛豫它们的位置，因为弹簧把原子固定得太紧，另一方面，当k&lt;0.1eV/A<sup>2</sup>时，图象倾向于沿着势垒下滑，导致低估了能垒得高度以及在鞍点附近MEP较差得分辨率。这种下滑趋势在比较最高能量图象和下一个最高能量图象时很明显。最佳的弹簧常数是弹簧中的回复力和势垒曲率的向下拉力之间的平衡。将鞍点附近的势垒表示为V=V<sub>0</sub>-0.5Kx<sup>2</sup>，那么这里的K值非常接近于弹簧弹性常数k的选择。在这种特殊情况下，K=0.48eV/A<sup>2</sup>。当链中图象的数量增加到50时，能够得到更好势垒结果，注意这里k的最佳值仍然相同。随着k值在0.2-2.0eV/A<sup>2</sup>范围内以0.02eV宽度变化时，更长的链能够给出一个能垒高度的一个估计。</br><br />
+该测试问题的结果表明，在简单的情况下，如果选择常数k的值在正确的范围内，尽管无法保证收敛到MEP，但平面弹性带方法可以合理地近似鞍点处的能量。但是也有一些系统，平面弹性带方法会给出很差的结果。图3中的例子说明了这一点。在计算金属表面上更复杂的扩散过程和H2在Cu(110)面上的解理吸附的反应路径时，也证明了这一点。</br><br />
+图5展示了使用NEB方法计算的结果。<img src="/images/neb/figure-15.jpg" alt="figure15" />图象等间隙分布在N维构型空间中。即使在较低的k值下，也不会滑下能垒。此外，由于弹簧力的垂直分量为0，弹簧不会阻止原子向MEP弛豫。因此，计算的能垒高度不会随着k的增加而增加。实际上，在计算中使用的整个k值从0.01到20范围内，最高能量图象的收敛能量在5个有效数字以内是相同的。最终，当弹簧的劲度系数非常大时，问题就出现了，由于所需的时间步长非常小，因此非常大的弹簧力使得最小化方案效率低下。同时，一个极小的弹簧系数会使收敛到MEP的速度变得很慢。但是，当弹簧常数的值超过三个数量级时，计算效果很好，并且对势垒给出了很好的估计。由于我们故意在链中选择了偶数个图象，并且障碍是对称的，所以最高能量的图象永远不会位于鞍点。最高图象的能量是势垒高度的下限。通过计算最高图象和下一最高图象之间的差并进行外推，可以获得近似上限。如果想要更高的分辨率，链中需要包含更多图象，或者在能垒附近使用比路径末端更硬的弹簧。</br></p>
+<h4 id="span-id-jump66如果忽略弹簧力将会发生什么span"><a class="markdownIt-Anchor" href="#span-id-jump66如果忽略弹簧力将会发生什么span"></a> <span id = "jump6">6.如果忽略弹簧力将会发生什么？</span></h4>
+<p>由于弹簧的作用仅在路径上感觉得到，因此弹簧常数的值不是非常关键。例如，弹簧常数的任何非零常数值，将获得相等的图象分布。但是如果在NEB计算中将弹簧常数设置为0，则将失去图像分布的控制。图6显示了模型系统II的结果。<img src="/images/neb/figure-16.jpg" alt="figure16" />左图可以看到，在经历了时间步长为0.1的100次迭代后，图象已经弛豫到MEP附近，但路径扭曲，图象之间的间距变得不均匀。扭曲会随着时间而波动，力不会明显收敛。图像的这种永久运动会导致从高能垒区逐渐向下滑动。在200步之后，势垒区域有一个相当大的间隙（如右图），在1000步之后，大多数图象都滑入了势阱中。因此虽然加了弹簧力会大大增加计算量，但当存在两个或者更多的MEP时，这对于收敛到MEP和路径的连续性至关重要。</br></p>
+<h4 id="span-id-jump77neb目标函数span"><a class="markdownIt-Anchor" href="#span-id-jump77neb目标函数span"></a> <span id = "jump7">7.NEB目标函数</span></h4>
+<p>问题在于NEB优化过程是否可以写成某写目标函数的最小化过程。这尤其适用于将该方法扩展到有限温度模拟退火程序，允许在不同MEP之间搜索，以找到最佳的MEP，即具有最低鞍点能量的MEP，而不仅仅是收敛到最接近初始猜测的MEP。</br><br />
+我们现在考虑路径的连续表示，并考虑弛豫路径到MEP的过程。路径由R(λ)表示，它是一个由标量a=[0,1]参数化的N维位置向量。N是参与转变过程中的自由度（可能是系统中所有原子的坐标）。路径的任何属性都应该是“规范不变量”，即与描述中使用的特定参数无关，例如随着λ的变化路径R(λ)变化的速率。在寻找合适的作用时，即路径上的积分，可以作为优化的目标函数，我们可以选择势能V®和路径长度l<sub>0</sub>的任何函数。特别的，我们将选择（下面都是公式，直接贴图）<img src="/images/neb/figure-17.jpg" alt="figure17" /><img src="/images/neb/figure-18.jpg" alt="figure18" /><img src="/images/neb/figure-19.jpg" alt="figure19" />对于任何有限的V<sub>0</sub>，力只涉及到势能梯度的垂直分量，通过最小化S，就可以得到满足条件▽V|⊥=V<sub>0</sub>ω。通过使V0足够小，路径可以任意靠近MEP，即▽V|⊥=0.随着V0的降低，力通过越来越大的前置因子(v/V<sub>0</sub>)e<sup>V/V0</sup>进行缩放，这可以被认为是路径有效质量的重新缩放，但是没有任何的实际后果（它只是在最小化过程中确定适当的时间步长大小）。</br><br />
+因此，连续体公式可以直接导致系统的真实的“轻推”力，即移除了力的平行分量。对于实际的数值计算，需要对路径进行离散化，这意味着选择路径的特定表示形式。离散化中的每个点都是系统N个坐标中的完整图象副本。这些图象沿路径分布是一个问题，应该与路径本身的弛豫或动力学分离并完全解耦。通过在图象之间引入谐波弹簧相互作用并相应地选择相邻图象之间地弹簧常数，可以获得给定的分布，弹簧力的作用应仅与路径平行，因为其目的只是沿路径使图象均匀分布，因此，每幅图象j上的力变成：<img src="/images/neb/figure-20.jpg" alt="figure20" /></br><br />
+在大型复杂系统中，给定的初始点和终点之间可能存在两个或多个MEP。上述最小化的技术可能会收敛到最接近初始猜测的MEP，在这种情况下，可以通过运行模拟退火或有限温度分子动力学对各种路径进行采样。</p>
+<h4 id="span-id-jump88总结span"><a class="markdownIt-Anchor" href="#span-id-jump88总结span"></a> <span id = "jump8">8.总结</span></h4>
+<p>总的来说，NEB方法有很多理想的品质，包括（1）当路径的离散表示分辨率足够时，即链中包含足够多的图象，它收敛到MEP；（2）它只需要计算相互作用能和能量对坐标的一阶导数；（3）MEP的收敛与路径的离散表示解耦，使得前者鲁棒性更好，后者灵活性更好。（4）即使存在多个MEP，该方法也能保证提供连续路径。（5）该算法本身涉及并行计算，并且可以很容易地利用并行计算机，或者仅仅是一个连接地工作站集群，因为计算节点之间几乎不需要通信。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>￥打赏我￥</div>
+  <button>
+    Donate
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/PayQRCode/wechat.png" alt="Jun WeChat Pay">
+        <span>WeChat Pay</span>
+      </div>
+      <div>
+        <img src="/images/PayQRCode/alipay.jpg" alt="Jun Alipay">
+        <span>Alipay</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+              <a href="/tags/%E6%96%87%E7%8C%AE%E7%BF%BB%E8%AF%91/" rel="tag"># 文献翻译</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/02/15/41fb67c479d2.html" rel="prev" title="分享一个获取超算服务器信息的脚本">
+                  <i class="fa fa-chevron-left"></i> 分享一个获取超算服务器信息的脚本
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/03/17/4b9ce4f606c4.html" rel="next" title="git常用命令和github使用指南">
+                  git常用命令和github使用指南 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 2021 – 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jun All Rights Reserved</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Symbols count total">232k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">3:31</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+  <div class="addthis_inline_share_toolbox">
+    <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-629063e32c2b3670" async="async"></script>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="https://cdn.jsdelivr.net/npm/ribbon.js@1.0.2/dist/ribbon.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@next-theme/pjax@0.5.0/pjax.min.js" integrity="sha256-3NkoLDrmHLTYj7csHIZSr0MHAFTXth7Ua/DDt4MRUAg=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  
+
+
+
+
+  <script src="/js/third-party/pace.js"></script>
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha256-TThEtR+XalhWKkfF383YLOrI50NGNeIqrzS+q08afrY=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.css" integrity="sha256-Wk20U9mS/kHGcSgkjSiRezW5exqT6wAOKwySOaLotXM=" crossorigin="anonymous">
+  <script class="next-config" data-name="katex" type="application/json">{"copy_tex_js":{"url":"https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/contrib/copy-tex.min.js","integrity":"sha256-etSqbSVF4+Lwe8MGk/Vanc1sR+mWv+qOG73fxWw9p94="}}</script>
+  <script src="/js/third-party/math/katex.js"></script>
+
+
+
+</body>
+</html>

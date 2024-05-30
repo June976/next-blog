@@ -2012,11 +2012,6 @@ pre code {
     text-align: justify;
   }
 }
-.post-body a {
-  color: #428bca;
-  font-weight: bold;
-  text-decoration: none;
-}
 .post-body h1 .header-anchor,
 .post-body h2 .header-anchor,
 .post-body h3 .header-anchor,

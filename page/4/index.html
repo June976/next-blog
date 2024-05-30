@@ -87,7 +87,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">5</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">34</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">56</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>Links</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">5</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">35</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">57</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>Links</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
   </ul>
 </nav>
 
@@ -132,7 +132,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">56</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -143,7 +143,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-count">35</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -206,7 +206,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/03/17/71dcc77058d7.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/03/18/6cdec16d2dff.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -224,7 +224,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/17/71dcc77058d7.html" class="post-title-link" itemprop="url">git常用命令和github使用指南</a>
+          <a href="/2022/03/18/6cdec16d2dff.html" class="post-title-link" itemprop="url">关于cat特殊用法的一个小提示</a>
         </h2>
 
         <div class="post-meta-container">
@@ -235,14 +235,113 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-03-17 15:23:57" itemprop="dateCreated datePublished" datetime="2022-03-17T15:23:57+08:00">2022-03-17</time>
+      <time title="Created: 2022-03-18 21:55:42" itemprop="dateCreated datePublished" datetime="2022-03-18T21:55:42+00:00">2022-03-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Share-knowledges/" itemprop="url" rel="index"><span itemprop="name">Share knowledges</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>575</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近在写一个bash脚本时遇到一个需求，即是：<strong>在特定文件的文件头部插入一条语句</strong>，当然使用bash内置的<strong>sed命令</strong>可以完美地实现这一功能，
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/18/6cdec16d2dff.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/03/17/4b9ce4f606c4.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpg">
+      <meta itemprop="name" content="Jun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/03/17/4b9ce4f606c4.html" class="post-title-link" itemprop="url">git常用命令和github使用指南</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-03-17 15:23:57" itemprop="dateCreated datePublished" datetime="2022-03-17T15:23:57+00:00">2022-03-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -274,7 +373,7 @@
           <p>最近由于疫情，很多社区和学校都实行了封闭管理，学生只能待在宿舍内。由于办公室使用的是台式机，无法搬到宿舍，耽误了很多<strong>学习时间</strong>,所以决定详细学习一下git和github的用法，通过github管理代码，实现在不同电脑设备上代码能够共享和实时更新。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/03/17/71dcc77058d7.html#more" rel="contents">
+              <a class="btn" href="/2022/03/17/4b9ce4f606c4.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -305,7 +404,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/03/03/8e3434fd0234.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/03/03/85477791e5d1.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -323,7 +422,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/03/03/8e3434fd0234.html" class="post-title-link" itemprop="url">NEB方法寻找过渡态和最低能量路径----文献翻译</a>
+          <a href="/2022/03/03/85477791e5d1.html" class="post-title-link" itemprop="url">NEB方法寻找过渡态和最低能量路径----文献翻译</a>
         </h2>
 
         <div class="post-meta-container">
@@ -334,14 +433,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-03-03 12:09:41" itemprop="dateCreated datePublished" datetime="2022-03-03T12:09:41+08:00">2022-03-03</time>
+      <time title="Created: 2022-03-03 12:09:41" itemprop="dateCreated datePublished" datetime="2022-03-03T12:09:41+00:00">2022-03-03</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -374,7 +473,7 @@
 <p>最近在研究NEB方法，在网上找到一篇提出NEB方法的最原始文献，这里打算把整篇文献翻译一下。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/03/03/8e3434fd0234.html#more" rel="contents">
+              <a class="btn" href="/2022/03/03/85477791e5d1.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -405,7 +504,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/02/15/3f53609416d7.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/02/15/41fb67c479d2.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -423,7 +522,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/15/3f53609416d7.html" class="post-title-link" itemprop="url">分享一个获取超算服务器信息的脚本</a>
+          <a href="/2022/02/15/41fb67c479d2.html" class="post-title-link" itemprop="url">分享一个获取超算服务器信息的脚本</a>
         </h2>
 
         <div class="post-meta-container">
@@ -434,14 +533,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-02-15 09:47:58" itemprop="dateCreated datePublished" datetime="2022-02-15T09:47:58+08:00">2022-02-15</time>
+      <time title="Created: 2022-02-15 09:47:58" itemprop="dateCreated datePublished" datetime="2022-02-15T09:47:58+00:00">2022-02-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -473,7 +572,7 @@
           <p>使用过超算的同学应该知道，为了充分利用资源，避免浪费，超算服务器一般是采用提交作业的方式来供用户使用的，目前主流的作业管理系统有两个，即PBS和LSF作业管理系统，当作业数量较多，CPU资源较少时，如何有效地充分利用剩余地资源显得尤为重要。这里写了一个探测超算服务器剩余资源的bash脚本。服务器使用的是LSF作业管理系统，部分内容是针对本地服务器所优化的，但是也有一些泛式的内容，以下是脚本内容：</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/02/15/3f53609416d7.html#more" rel="contents">
+              <a class="btn" href="/2022/02/15/41fb67c479d2.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -504,7 +603,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/01/05/8b606fceb688.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/01/05/c7a263cf35bb.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -522,7 +621,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/05/8b606fceb688.html" class="post-title-link" itemprop="url">上海第二届WACG动漫游戏展之行</a>
+          <a href="/2022/01/05/c7a263cf35bb.html" class="post-title-link" itemprop="url">上海第二届WACG动漫游戏展之行</a>
         </h2>
 
         <div class="post-meta-container">
@@ -533,14 +632,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-01-05 17:53:12" itemprop="dateCreated datePublished" datetime="2022-01-05T17:53:12+08:00">2022-01-05</time>
+      <time title="Created: 2022-01-05 17:53:12" itemprop="dateCreated datePublished" datetime="2022-01-05T17:53:12+00:00">2022-01-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -573,7 +672,7 @@
 <p>在同学的<strong>怂恿</strong>下，购买了第二届WACG漫展的门票。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/05/8b606fceb688.html#more" rel="contents">
+              <a class="btn" href="/2022/01/05/c7a263cf35bb.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -604,7 +703,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/01/05/86770f3d0f2b.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2022/01/05/595859318717.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -622,7 +721,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/01/05/86770f3d0f2b.html" class="post-title-link" itemprop="url">vasp使用的一些tips总结(持续更新)</a>
+          <a href="/2022/01/05/595859318717.html" class="post-title-link" itemprop="url">vasp使用的一些tips总结(持续更新)</a>
         </h2>
 
         <div class="post-meta-container">
@@ -633,14 +732,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-01-05 16:27:37" itemprop="dateCreated datePublished" datetime="2022-01-05T16:27:37+08:00">2022-01-05</time>
+      <time title="Created: 2022-01-05 16:27:37" itemprop="dateCreated datePublished" datetime="2022-01-05T16:27:37+00:00">2022-01-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -672,7 +771,7 @@
           <h4 id="持续更新一些在vasp使用过程中的一些心得体会"><a class="markdownIt-Anchor" href="#持续更新一些在vasp使用过程中的一些心得体会"></a> 持续更新一些在vasp使用过程中的一些心得体会。</h4>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/01/05/86770f3d0f2b.html#more" rel="contents">
+              <a class="btn" href="/2022/01/05/595859318717.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -703,7 +802,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2021/11/23/6800f0e9812a.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2021/11/23/28174955f1f2.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -721,7 +820,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/11/23/6800f0e9812a.html" class="post-title-link" itemprop="url">电子结构分析----文献翻译</a>
+          <a href="/2021/11/23/28174955f1f2.html" class="post-title-link" itemprop="url">电子结构分析----文献翻译</a>
         </h2>
 
         <div class="post-meta-container">
@@ -732,14 +831,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-11-23 09:40:53" itemprop="dateCreated datePublished" datetime="2021-11-23T09:40:53+08:00">2021-11-23</time>
+      <time title="Created: 2021-11-23 09:40:53" itemprop="dateCreated datePublished" datetime="2021-11-23T09:40:53+00:00">2021-11-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -772,7 +871,7 @@
 <p>在网上翻到一篇讲电子结构分析的文献，内容比较基础，但是把概念讲的比较清晰，这里打算把全文翻译一下，原文链接：<a target="_blank" rel="noopener" href="https://onlinelibrary.wiley.com/doi/10.1002/9783527671816.ch17">https://onlinelibrary.wiley.com/doi/10.1002/9783527671816.ch17</a></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2021/11/23/6800f0e9812a.html#more" rel="contents">
+              <a class="btn" href="/2021/11/23/28174955f1f2.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -803,7 +902,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2021/11/10/61d157e1a6d8.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2021/11/10/c445558fb829.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -821,7 +920,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/11/10/61d157e1a6d8.html" class="post-title-link" itemprop="url">VASP的计算流程</a>
+          <a href="/2021/11/10/c445558fb829.html" class="post-title-link" itemprop="url">VASP的计算流程</a>
         </h2>
 
         <div class="post-meta-container">
@@ -832,14 +931,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-11-10 13:26:55" itemprop="dateCreated datePublished" datetime="2021-11-10T13:26:55+08:00">2021-11-10</time>
+      <time title="Created: 2021-11-10 13:26:55" itemprop="dateCreated datePublished" datetime="2021-11-10T13:26:55+00:00">2021-11-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -871,7 +970,7 @@
           <h3 id="分享一下vasp的计算流程"><a class="markdownIt-Anchor" href="#分享一下vasp的计算流程"></a> 分享一下VASP的计算流程</h3>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2021/11/10/61d157e1a6d8.html#more" rel="contents">
+              <a class="btn" href="/2021/11/10/c445558fb829.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -902,7 +1001,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2021/11/01/16cec52429d7.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2021/11/01/1c9ead5d9afd.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -920,7 +1019,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/11/01/16cec52429d7.html" class="post-title-link" itemprop="url">分享一些汪星人照片</a>
+          <a href="/2021/11/01/1c9ead5d9afd.html" class="post-title-link" itemprop="url">分享一些汪星人照片</a>
         </h2>
 
         <div class="post-meta-container">
@@ -931,14 +1030,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-11-01 12:48:03" itemprop="dateCreated datePublished" datetime="2021-11-01T12:48:03+08:00">2021-11-01</time>
+      <time title="Created: 2021-11-01 12:48:03" itemprop="dateCreated datePublished" datetime="2021-11-01T12:48:03+00:00">2021-11-01</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -970,7 +1069,7 @@
           <p>在网上冲浪时突然发现一个很有趣的照片系列：<strong>汪星人玩电脑</strong> ，感觉挺有意思的，快乐就是平凡生活中的一点亮光，这些照片就是我今天一天的快乐源泉，(0<sup>◇</sup>0)/</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2021/11/01/16cec52429d7.html#more" rel="contents">
+              <a class="btn" href="/2021/11/01/1c9ead5d9afd.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
@@ -1001,7 +1100,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2021/10/29/bc723db49fa7.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2021/10/29/d817f704866c.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -1019,7 +1118,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/29/bc723db49fa7.html" class="post-title-link" itemprop="url">我买的psp3000和一些psp游戏分享</a>
+          <a href="/2021/10/29/d817f704866c.html" class="post-title-link" itemprop="url">我买的psp3000和一些psp游戏分享</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1030,14 +1129,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-10-29 18:19:53" itemprop="dateCreated datePublished" datetime="2021-10-29T18:19:53+08:00">2021-10-29</time>
+      <time title="Created: 2021-10-29 18:19:53" itemprop="dateCreated datePublished" datetime="2021-10-29T18:19:53+00:00">2021-10-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
+      <time title="Modified: 2024-05-30 11:55:21" itemprop="dateModified" datetime="2024-05-30T11:55:21+00:00">2024-05-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1070,106 +1169,7 @@
 <p>最近闲得无聊，想要买个游戏机玩玩，看上了索尼psp游戏机，虽说机器已经落伍了，但是psp游戏的确是非常丰富的，加上性能也还可以，玩耍大型游戏完全没有压力，所以花血本再淘宝入手了，总共花费了<strong>RMB 628元</strong>，检查确实是3000（机器设置内有色彩空间），成色有95新，表面没有划痕，唯一美中不足的是机器按键按下后回弹力道有点不足，感觉可能有点老旧，随机还有128G的TF卡，主要用作下载游戏，另外还赠送充电器、数据线、卡套、水晶壳、读卡器和贴纸等。另外店家还赠送2T的百度云游戏资源，省了到处去找游戏的麻烦。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2021/10/29/bc723db49fa7.html#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2021/10/19/fa8dd53a80bb.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpg">
-      <meta itemprop="name" content="Jun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jun's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Jun's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/19/fa8dd53a80bb.html" class="post-title-link" itemprop="url">自动进行K点和ENCUT测试bash脚本</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-10-19 19:00:56" itemprop="dateCreated datePublished" datetime="2021-10-19T19:00:56+08:00">2021-10-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-06-08 12:28:13" itemprop="dateModified" datetime="2022-06-08T12:28:13+08:00">2022-06-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Share-knowledges/" itemprop="url" rel="index"><span itemprop="name">Share knowledges</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.9k</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>分享一个自己写的根据POSCAR和POTCAR自动进行K点和ENCUT收敛性测试的脚本。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/19/fa8dd53a80bb.html#more" rel="contents">
+              <a class="btn" href="/2021/10/29/d817f704866c.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
