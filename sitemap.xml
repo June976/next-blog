@@ -2,7 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://next.jun997.xyz/2024/06/23/563ae1201180.html</loc>
+    <loc>https://next.jun997.xyz/2024/06/23/0203f0e001f9.html</loc>
+    
+    <lastmod>2024-06-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://next.jun997.xyz/2024/06/23/75d2975d79e8.html</loc>
     
     <lastmod>2024-06-23</lastmod>
     
@@ -1040,6 +1049,20 @@
   
   <url>
     <loc>https://next.jun997.xyz/tags/%E5%8D%B7%E7%A7%AF/</loc>
+    <lastmod>2024-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://next.jun997.xyz/tags/Endnote/</loc>
+    <lastmod>2024-06-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://next.jun997.xyz/tags/word/</loc>
     <lastmod>2024-06-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
