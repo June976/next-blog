@@ -24,36 +24,30 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"next.jun997.xyz","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#09E614","save":"manual"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="一、简介 FTP是一种文件传输协议，用于互联网上文件在服务器和客户端之间的双向传输。FTP是基于TCP&#x2F;IP协议，默认情况下使用20和21端口，其中20端口用于传输数据，21端口用于传输控制信息。本文是在阿里云服务器ECS上面搭建FTP服务。">
+    <meta name="description" content="From https:&#x2F;&#x2F;dailybing.com&#x2F; --------------------- 6. 今天是2024年9月24号，介绍一位名人。  今天我要向大家介绍一位令人敬佩的名人──杰夫·贝索斯（Jeff Bezos）。  杰夫·贝索斯是一位美国企业家和慈善家，被广泛认为是亚马逊公司创始人之一，并在为亚马逊集团担任首席执行官期间将其发展成为世界上最大的电子商务和云计算公司之一。贝索斯在商">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在阿里云ECS服务器上搭建FTP服务">
-<meta property="og:url" content="https://next.jun997.xyz/2021/06/11/4d79dd3174ce.html">
+<meta property="og:title" content="20240924 Daily Post">
+<meta property="og:url" content="https://next.jun997.xyz/2024/09/24/447f7b39a54e.html">
 <meta property="og:site_name" content="Jun&#39;s Blog">
-<meta property="og:description" content="一、简介 FTP是一种文件传输协议，用于互联网上文件在服务器和客户端之间的双向传输。FTP是基于TCP&#x2F;IP协议，默认情况下使用20和21端口，其中20端口用于传输数据，21端口用于传输控制信息。本文是在阿里云服务器ECS上面搭建FTP服务。">
+<meta property="og:description" content="From https:&#x2F;&#x2F;dailybing.com&#x2F; --------------------- 6. 今天是2024年9月24号，介绍一位名人。  今天我要向大家介绍一位令人敬佩的名人──杰夫·贝索斯（Jeff Bezos）。  杰夫·贝索斯是一位美国企业家和慈善家，被广泛认为是亚马逊公司创始人之一，并在为亚马逊集团担任首席执行官期间将其发展成为世界上最大的电子商务和云计算公司之一。贝索斯在商">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020030316390637.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hlbGxvV29ybGRUTQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/2020030316440488.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hlbGxvV29ybGRUTQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200303171851315.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hlbGxvV29ybGRUTQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200303171901136.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hlbGxvV29ybGRUTQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200303174353612.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hlbGxvV29ybGRUTQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="https://img-blog.csdnimg.cn/20200303211502659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hlbGxvV29ybGRUTQ==,size_16,color_FFFFFF,t_70">
-<meta property="article:published_time" content="2021-06-11T14:08:56.000Z">
-<meta property="article:modified_time" content="2024-05-30T12:14:20.236Z">
+<meta property="og:image" content="https://next.jun997.xyz/images/bing-everyday-png/20240924.png">
+<meta property="article:published_time" content="2024-09-24T00:33:45.000Z">
+<meta property="article:modified_time" content="2024-09-24T00:33:45.378Z">
 <meta property="article:author" content="Jun">
-<meta property="article:tag" content="技术">
-<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="Daily sharing">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://img-blog.csdnimg.cn/2020030316390637.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hlbGxvV29ybGRUTQ==,size_16,color_FFFFFF,t_70">
+<meta name="twitter:image" content="https://next.jun997.xyz/images/bing-everyday-png/20240924.png">
 
 
-<link rel="canonical" href="https://next.jun997.xyz/2021/06/11/4d79dd3174ce.html">
+<link rel="canonical" href="https://next.jun997.xyz/2024/09/24/447f7b39a54e.html">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://next.jun997.xyz/2021/06/11/4d79dd3174ce.html","path":"2021/06/11/4d79dd3174ce.html","title":"在阿里云ECS服务器上搭建FTP服务"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://next.jun997.xyz/2024/09/24/447f7b39a54e.html","path":"2024/09/24/447f7b39a54e.html","title":"20240924 Daily Post"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>在阿里云ECS服务器上搭建FTP服务 | Jun's Blog</title>
+<title>20240924 Daily Post | Jun's Blog</title>
   
 
   <script src="/js/third-party/analytics/baidu-analytics.js"></script>
@@ -118,7 +112,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -131,7 +125,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E7%AE%80%E4%BB%8B"><span class="nav-text"> 一、简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E7%8E%AF%E5%A2%83%E7%AE%80%E4%BB%8B"><span class="nav-text"> 二、环境简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-%E6%90%AD%E5%BB%BAftp%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%AD%A5%E9%AA%A4"><span class="nav-text"> 三、搭建FTP服务器步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E9%85%8D%E7%BD%AEecs%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%AE%89%E5%85%A8%E7%BB%84%E7%AD%96%E7%95%A5"><span class="nav-text"> 1、配置ECS服务器的安全组策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85vsftpd%E8%BD%AF%E4%BB%B6"><span class="nav-text"> 2、服务器安装vsftpd软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text"> 3、修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%90%AF%E5%8A%A8ftp%E6%9C%8D%E5%8A%A1"><span class="nav-text"> 4、启动FTP服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-windows%E4%B8%8B%E7%99%BB%E5%BD%95%E5%88%B0ftp%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text"> 5、Windows下登录到FTP服务器</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -221,7 +214,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2021/06/11/4d79dd3174ce.html">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2024/09/24/447f7b39a54e.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/profile.jpg">
@@ -234,12 +227,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="在阿里云ECS服务器上搭建FTP服务 | Jun's Blog">
+      <meta itemprop="name" content="20240924 Daily Post | Jun's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          在阿里云ECS服务器上搭建FTP服务
+          20240924 Daily Post
         </h1>
 
         <div class="post-meta-container">
@@ -250,14 +243,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2021-06-11 14:08:56" itemprop="dateCreated datePublished" datetime="2021-06-11T14:08:56+00:00">2021-06-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-05-30 12:14:20" itemprop="dateModified" datetime="2024-05-30T12:14:20+00:00">2024-05-30</time>
+      <time title="Created: 2024-09-24 00:33:45" itemprop="dateCreated datePublished" datetime="2024-09-24T00:33:45+00:00">2024-09-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -265,7 +251,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Share-knowledges/" itemprop="url" rel="index"><span itemprop="name">Share knowledges</span></a>
+          <a href="/categories/Show-something-interesting/" itemprop="url" rel="index"><span itemprop="name">Show something interesting</span></a>
         </span>
     </span>
 
@@ -282,7 +268,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.2k</span>
+      <span>1.5k</span>
     </span>
 </div>
 
@@ -293,70 +279,39 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="一-简介"><a class="markdownIt-Anchor" href="#一-简介"></a> 一、简介</h1>
-<p><strong>FTP</strong>是一种文件传输协议，用于互联网上文件在服务器和客户端之间的双向传输。FTP是基于TCP/IP协议，默认情况下使用<strong>20</strong>和<strong>21</strong>端口，其中20端口用于传输数据，21端口用于传输控制信息。本文是在阿里云服务器ECS上面搭建FTP服务。</p>
+        <p><img src="/images/bing-everyday-png/20240924.png" alt="daily-bing" />From <a target="_blank" rel="noopener" href="https://dailybing.com/">https://dailybing.com/</a> ---------------------</p>
+<p><strong>6</strong>. <strong>今天是2024年9月24号，介绍一位名人。</strong></p>
+<blockquote>
+<p>今天我要向大家介绍一位令人敬佩的名人──杰夫·贝索斯（Jeff Bezos）。</p>
+</blockquote>
+<p>杰夫·贝索斯是一位美国企业家和慈善家，被广泛认为是亚马逊公司创始人之一，并在为亚马逊集团担任首席执行官期间将其发展成为世界上最大的电子商务和云计算公司之一。贝索斯在商业领域的成功使他成为21世纪最具影响力和富有的人之一。</p>
+<p>贝索斯于1964年1月12日出生在美国新墨西哥州的阿尔布开克市。他在普林斯顿大学取得计算机科学和电气工程的学士学位后，进入了金融界就职。然而，他很快就对互联网的潜力产生了浓厚兴趣。1994年，他离开自己的高薪工作，创立了亚马逊公司，该公司最初是一家在线书店。</p>
+<p>贝索斯的商业智慧和创新眼光使亚马逊公司逐渐发展壮大，从一家小小的在线书店成长为一个多元化的电子商务巨头。亚马逊公司不断推出新的产品和服务，包括电子书阅读器Kindle、智能音箱Echo和在线流媒体平台Prime Video等，均受到了广泛欢迎。贝索斯还通过收购整合了其他知名企业，如全食超市，进一步扩大了亚马逊的业务范围。</p>
+<p>除了商业成就，贝索斯还注重慈善事业。他和前妻麦肯齐·斯科特（MacKenzie Scott）一起设立了&quot;夸克基金（Day One Fund）&quot;，旨在资助与无家可归者和教育改革等社会问题相关的组织和项目。2021年，贝索斯宣布将辞去亚马逊首席执行官一职，以专注于慈善事业。</p>
+<p>杰夫·贝索斯以其对创新和商业的卓越贡献以及其对慈善事业的投入而备受赞誉。他的故事鼓舞了无数人追逐自己的梦想，并成为名副其实的现代商业巨子。</p>
+<p>                                                                                                    <em>by gpt-3.5-turbo</em></p>
+<p><strong>2</strong>. <strong>今天是2024年9月24号，讲个绝对好笑的笑话。</strong></p>
+<blockquote>
+<p>好的，听我给你讲个笑话吧：</p>
+</blockquote>
+<p>2024年的某一天，一只机器人和一只机械狗正闲逛在街上。突然，机械狗停下来，大呼小叫地朝天上指了指。机器人好奇地问：“嘿，怎么了，为什么那么兴奋？”机械狗兴奋地回答：“看啊，天上有一颗闪闪发光的卫星！”机器人不屑地哼了一声：“哼，那又有什么好稀奇的？我们机器人早就征服了太空，我们的同胞们已经在其他星球建立了机器人城市。”机械狗笑着说：“可是你不明白，这是狗星人的卫星，它们宣布来地球旅游了！”</p>
+<p>                                                                                                    <em>by gpt-3.5-turbo</em></p>
+<p><strong>4</strong>. <strong>今天是2024年9月24号，介绍并推荐一本书籍。</strong></p>
+<blockquote>
+<p>我推荐给你一本名为《未来世界的十大趋势》的书籍。</p>
+</blockquote>
+<p>《未来世界的十大趋势》是一本探索未来发展方向和趋势的非虚构作品。这本书由一位行业专家和趋势分析师撰写，通过对全球各个领域的研究和分析，揭示了下一个十年的重要发展趋势。</p>
+<p>在这本书中，作者提出了十个全球范围内的趋势，深入解析了每个趋势将如何影响我们的生活、工作和社会。其中一些趋势包括：</p>
+<ol>
+<li>技术驱动的革命：从人工智能到机器学习和区块链，技术的迅速发展将重塑我们的社会和经济。</li>
+<li>气候变化与可持续发展：探讨全球气候变化对人类的影响，以及如何通过可持续发展来解决这些挑战。</li>
+<li>城市化与人口增长：讨论全球城市化趋势和人口增长的影响，以及如何适应城市化带来的挑战。</li>
+<li>新兴市场的崛起：研究新兴市场国家如中国和印度在全球经济中的崛起，并探讨其对全球格局的影响。</li>
+</ol>
+<p>这本书以清晰的语言和深入的研究为特点，旨在帮助读者了解即将到来的未来，并为他们做出更明智的决策。如果你对未来发展的趋势和全球影响感兴趣，这本书将为你提供有价值的见解和启发。</p>
+<p>请记住，这只是一本推荐的书籍，在现实中可能不存在。</p>
+<p>                                                                                                    <em>by gpt-3.5-turbo</em></p>
 <span id="more"></span>
-<h1 id="二-环境简介"><a class="markdownIt-Anchor" href="#二-环境简介"></a> 二、环境简介</h1>
-<ul>
-<li>服务器的操作系统：<strong>Ubuntu 18.04 64位</strong></li>
-<li>使用的软件：是linux搭建ftp服务器的常用软件<strong>vsftpd</strong></li>
-</ul>
-<h1 id="三-搭建ftp服务器步骤"><a class="markdownIt-Anchor" href="#三-搭建ftp服务器步骤"></a> 三、搭建FTP服务器步骤</h1>
-<h2 id="1-配置ecs服务器的安全组策略"><a class="markdownIt-Anchor" href="#1-配置ecs服务器的安全组策略"></a> 1、配置ECS服务器的安全组策略</h2>
-<p>ECS服务器默认情况下并没有配置<mark>FTP使用端口20/21</mark>的安全策略，因此首先要添加对应端口的出入策略，这样就可以让客户端通过互联网连接到FTP服务器上面。<br />
-<img src="https://img-blog.csdnimg.cn/2020030316390637.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hlbGxvV29ybGRUTQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></p>
-<ul>
-<li>添加安全组规则，设置如下：<br />
-<img src="https://img-blog.csdnimg.cn/2020030316440488.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hlbGxvV29ybGRUTQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></li>
-<li>配置完成后重启服务器更新设置。</li>
-</ul>
-<h2 id="2-服务器安装vsftpd软件"><a class="markdownIt-Anchor" href="#2-服务器安装vsftpd软件"></a> 2、服务器安装vsftpd软件</h2>
-<ul>
-<li>用<strong>xshell</strong>以<strong>root</strong>身份（非root用户也可以，但是前提是用户属于sudo组，拥有root权限。）登录到服务器上，依次输入以下命令：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install vsftpd</span><br></pre></td></tr></table></figure>
-<p>执行以上命令即可完成安装vsftpd工具。<br />
-<strong>如果是非root用户，可以在上面命令的前面添加sudo暂时获得root权限。</strong></p>
-<h2 id="3-修改配置文件"><a class="markdownIt-Anchor" href="#3-修改配置文件"></a> 3、修改配置文件</h2>
-<p><strong>vsftpd工具的配置文件位于/etc目录，文件名为vsftpd.conf</strong>。</p>
-<ul>
-<li>用vi编辑器打开该文件，输入命令：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/vsftpd.conf</span><br></pre></td></tr></table></figure>
-<ul>
-<li>打开文件，可以修改服务器的一些基本配置，以下修改的一些基本设置：<br />
-<img src="https://img-blog.csdnimg.cn/20200303171851315.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hlbGxvV29ybGRUTQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><br />
-<img src="https://img-blog.csdnimg.cn/20200303171901136.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hlbGxvV29ybGRUTQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /></li>
-</ul>
-<h2 id="4-启动ftp服务"><a class="markdownIt-Anchor" href="#4-启动ftp服务"></a> 4、启动FTP服务</h2>
-<p>设置好了vsftpd工具的配置文件之后，就可以启动服务。<strong>这里建议不要使用root账号启动服务，因为root账号在/home目录下没有用户文件夹，直接启动会发生错误。</strong></p>
-<ul>
-<li>可以新建一个账号，然后赋予root权限，root账号执行以下命令：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adduser hello</span><br></pre></td></tr></table></figure>
-<ul>
-<li>然后根据提示输入密码就可以创建一个新的用户，此时用户还没有root权限，执行：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo  usermod -aG sudo hello</span><br></pre></td></tr></table></figure>
-<p><strong>就可以将hello账户分到sudo组，这样就可以使用sudo命令临时获得root权限。</strong></p>
-<ul>
-<li>然后切换到hello用户，执行：</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service vsftpd start</span><br></pre></td></tr></table></figure>
-<p>开启ftp服务就行了。</p>
-<h2 id="5-windows下登录到ftp服务器"><a class="markdownIt-Anchor" href="#5-windows下登录到ftp服务器"></a> 5、Windows下登录到FTP服务器</h2>
-<p><strong>由于ECS服务器仅支持以主动模式登录到服务器，因此首先要在电脑上面修改成以被动模式登录服务器。</strong></p>
-<ul>
-<li>
-<p>打开控制面板–&gt;Internet选项–&gt;高级，如下：<br />
-<img src="https://img-blog.csdnimg.cn/20200303174353612.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hlbGxvV29ybGRUTQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" /><br />
-找到使用被动FTP取消勾选，点击应用。</p>
-</li>
-<li>
-<p>下面打开windows资源管理器，在输入栏输入==<a href="ftp://x.x.x.x==">ftp://x.x.x.x==</a>（服务器ip地址），如下图：<br />
-<img src="https://img-blog.csdnimg.cn/20200303211502659.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0hlbGxvV29ybGRUTQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" />在当前页面单击鼠标右键–&gt;登录，<strong>输入启动FTP服务的账号和密码</strong>，就可以登录到服务器。<strong>如果前面配置了匿名登录，也可以输入账号：anonymous，密码为空，登录到匿名账号。</strong></p>
-</li>
-</ul>
 
     </div>
 
@@ -384,22 +339,18 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag"># 技术</a>
-              <a href="/tags/Linux/" rel="tag"># Linux</a>
+              <a href="/tags/Daily-sharing/" rel="tag"># Daily sharing</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/06/11/39ad9f3a4523.html" rel="prev" title="Windows编程捕获特定窗口及键盘鼠标消息模拟">
-                  <i class="fa fa-chevron-left"></i> Windows编程捕获特定窗口及键盘鼠标消息模拟
+                <a href="/2024/09/23/73f2b365da50.html" rel="prev" title="20240923 Daily Post">
+                  <i class="fa fa-chevron-left"></i> 20240923 Daily Post
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/06/11/0ece1c9bd1da.html" rel="next" title="python3爬虫爬取必应每日高清壁纸">
-                  python3爬虫爬取必应每日高清壁纸 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
