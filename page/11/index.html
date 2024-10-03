@@ -199,7 +199,7 @@ mjx-container[display="true"] + br {
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">3</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">38</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">186</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>Links</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories<span class="badge">3</span></a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">38</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">187</span></a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a></li><li class="menu-item menu-item-links"><a href="/links/" rel="section"><i class="fa fa-link fa-fw"></i>Links</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
   </ul>
 </nav>
 
@@ -244,7 +244,7 @@ mjx-container[display="true"] + br {
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">186</span>
+          <span class="site-state-item-count">187</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -309,6 +309,100 @@ mjx-container[display="true"] + br {
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2024/06/25/50a2cb11a62e.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/profile.jpg">
+      <meta itemprop="name" content="Jun">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Jun's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/06/25/50a2cb11a62e.html" class="post-title-link" itemprop="url">解决Aiida中提交WorkChain时的工作路径问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-06-25 16:39:44 / Modified: 10:57:39" itemprop="dateCreated datePublished" datetime="2024-06-25T16:39:44+00:00">2024-06-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Share-knowledges/" itemprop="url" rel="index"><span itemprop="name">Share knowledges</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>4.1k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Aiida 中有两种启动 WorkChain 的方式，一种是 <code>run</code>，还有一种是 <code>submit</code>。对于 <code>run</code> 提交方式，其运作原理是通过<strong>当前运行的终端对应的守护进程</strong>来处理提交的 WorkChain，运行时会阻塞终端，必须等到 WorkChain 结束后才能重新获得终端的控制权，在运行过程中，不能关闭终端，否则运行会直接被中断。在这种运行方式中，Python 解释器的搜索路径包含当前文件夹，并且 Python 的工作路径也是当前文件夹，因此不会出现太大问题，即使把运行代码和 WorkChain 的定义代码放在一个文件中，解释器同样可以找到 WorkChain 的定义。</p>
+<p>这其中比较复杂的是第二种提交方式，即通过 <code>submit</code> 将 WorkChain 提交给后台守护进程（daemon），其 Python 解释器的搜索路径和工作路径与上一种方式都有所差别，下面将详细介绍。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/06/25/50a2cb11a62e.html#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1320,117 +1414,6 @@ mjx-container[display="true"] + br {
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/06/19/2ffa9baf56db.html#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://next.jun997.xyz/2024/06/18/50f8fe493b66.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/profile.jpg">
-      <meta itemprop="name" content="Jun">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jun's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Jun's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/06/18/50f8fe493b66.html" class="post-title-link" itemprop="url">20240618 Daily Post</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-06-18 00:28:43" itemprop="dateCreated datePublished" datetime="2024-06-18T00:28:43+00:00">2024-06-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Show-something-interesting/" itemprop="url" rel="index"><span itemprop="name">Show something interesting</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>735</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="/images/bing-everyday-png/20240618.png" alt="daily-bing" />From <a target="_blank" rel="noopener" href="https://dailybing.com/">https://dailybing.com/</a> ---------------------</p>
-<p><strong>9</strong>. <strong>今天是2024年6月18号，生成一则科普，主题不限。</strong></p>
-<blockquote>
-<p>科普消息：飞速发展的人工智能技术正在逐渐影响我们日常生活的方方面面。人工智能在医疗诊断、交通管理、工业生产等领域都取得了重大突破，为人类的生活和工作带来了巨大便利。然而，我们也需要警惕人工智能可能带来的风险，如隐私泄露、失业风险等问题。因此，适当的监管和法律框架对人工智能的发展至关重要，以确保其良性发展，造福人类。</p>
-</blockquote>
-<p>                                                                                                    <em>by gpt-3.5-turbo</em></p>
-<p><strong>3</strong>. <strong>今天是2024年6月18号，说一句英语谚语（in English），主题不限。</strong></p>
-<blockquote>
-<p>Actions speak louder than words.</p>
-</blockquote>
-<p>                                                                                                    <em>by gpt-3.5-turbo</em></p>
-<p><strong>8</strong>. <strong>今天是2024年6月18号，介绍中国的一个著名景点。</strong></p>
-<blockquote>
-<p>中国有许多著名景点，其中之一就是位于北京市的故宫。故宫，又称紫禁城，是明清两代的皇家宫殿，被誉为世界五大宫之一，也是中国最为著名的皇家建筑群之一。</p>
-</blockquote>
-<p>故宫坐落在北京市中心，占地面积达到72万平方米，建筑规模宏大，气势恢宏。整个宫殿建筑群共有九百多间房屋，金碧辉煌，建筑风格独特，是中国古代宫廷建筑的典范之作。</p>
-<p>故宫内的建筑布局严谨，设计精巧，展现了中国传统宫廷建筑的高超技艺。漫步在故宫内，可以感受到悠久的历史文化底蕴，领略到中国古代帝王的豪华生活。</p>
-<p>故宫拥有丰富的文物收藏，收藏了大量珍贵的历史文物和艺术品，其中包括文物、绘画、书法、瓷器、典籍等，展示了中国古代文化的瑰宝。</p>
-<p>因其独特的建筑风格和丰富的文化内涵，故宫被列为世界文化遗产，吸引了无数游客前来观光游览。对于喜爱历史文化和建筑艺术的人来说，故宫绝对是一个不容错过的景点。</p>
-<p>                                                                                                    <em>by gpt-3.5-turbo</em></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/06/18/50f8fe493b66.html#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
